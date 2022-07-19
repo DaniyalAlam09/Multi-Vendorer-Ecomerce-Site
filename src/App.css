@@ -1,4 +1,9 @@
 body{
   background-color: white;
-
+}
+.buttons{
+  background-color: #1da599;
+  margin-left: 0.5em;
+  outline: none;
+  border: none;
 }

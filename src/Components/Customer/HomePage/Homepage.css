@@ -1,28 +1,126 @@
-.main{
-    display: flex;
-    flex-direction:row;
-    background-color:#EAEEF3;
+.main {
+  display: flex;
+  flex-direction: row;
+  background-color: #eaeef3;
 }
-.left, .right{
-    width: 50%;
-    
-
+.left,
+.right {
+  width: 50%;
 }
-.left{
-    margin-left: 7em;
-    margin-top: 5em;
-
+.left {
+  margin-left: 7em;
+  margin-top: 5em;
 }
-p{
-    margin-top:1em;
-    color: #1B1D21;
+p {
+  font-weight: 400;
+  margin-top: 1em;
+  color: #1b1d21;
 }
-.shop{
-    background-color: #1da599;
+.shop {
+  background-color: #1da599;
   margin-left: 0.5em;
   outline: none;
   border: none;
 }
-.shop:hover{
-    background-color: #0f615a;
+.shop:hover {
+  background-color: #0f615a;
 }
+
+.main-bestdeals {
+  margin-left: 7em;
+  margin-top: 3em;
+}
+.deals {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-deal {
+  background: rgb(26, 161, 149);
+  background: linear-gradient(
+    90deg,
+    rgba(26, 161, 149, 1) 0%,
+    rgb(51, 190, 179) 70%
+  );
+  height: 25em;
+  width: 50%;
+  margin-right: 2em;
+}
+.right-deal {
+  width: 35%;
+}
+.right1-deal {
+  background: rgb(0, 50, 95);
+  background: linear-gradient(90deg, rgb(0, 54, 102) 0%, rgb(1, 56, 107) 40%);
+  height: 12em;
+  padding: 1em;
+}
+.right2-deal {
+  background: rgb(251, 123, 5);
+  background: linear-gradient(
+    90deg,
+    rgb(233, 113, 0) 0%,
+    rgb(248, 134, 28) 87%
+  );
+  height: 11em;
+  margin-top: 2em;
+  padding: 1em;
+}
+
+.deal-details {
+  margin: 5em;
+}
+.deal-name {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.deal-year {
+  color: #fff;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+.price {
+  color: #fff;
+  font-size: 1.5em;
+}
+.price-range{
+    font-size: 1.6em;
+    color: #FFC513;
+}
+
+
+.deal-name-right {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 500;
+  }
+  .deal-year-right {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+  .price-right {
+    color: #fff;
+    font-size: 1em;
+  }
+  .price-range-right{
+    font-size: 1.1em;
+      color: #FFf;
+  }
+
+
+
+
+
+
+
+
+  .icons {
+    color: #1da599;
+    margin-left: 0.5em;
+    cursor: pointer;
+  }
+  .icons:hover{
+    color: #0f615a;
+  }

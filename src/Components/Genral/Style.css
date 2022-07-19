@@ -19,6 +19,9 @@ li {
   justify-content: center;
   margin-left: 0.5em;
 }
+li:hover{
+  color: #3cffef;
+}
 .icons {
   color: #1da599;
   margin-left: 0.5em;

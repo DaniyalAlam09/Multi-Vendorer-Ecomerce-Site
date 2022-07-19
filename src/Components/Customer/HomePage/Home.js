@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from '../../Genral/Navbar'
+import BestDeals from './BestDeals'
 import HeroSection from './HeroSection'
+import WorkDetails from './WorkDetails'
 
 
 function Home() {
@@ -8,6 +10,8 @@ function Home() {
     <div>
         <Navbar/>
         <HeroSection/>
+        <BestDeals/>
+        <WorkDetails/>
     </div>
   )
 }
