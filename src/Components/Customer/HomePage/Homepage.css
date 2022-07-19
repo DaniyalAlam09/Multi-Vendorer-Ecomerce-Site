@@ -1,0 +1,28 @@
+.main{
+    display: flex;
+    flex-direction:row;
+    background-color:#EAEEF3;
+}
+.left, .right{
+    width: 50%;
+    
+
+}
+.left{
+    margin-left: 7em;
+    margin-top: 5em;
+
+}
+p{
+    margin-top:1em;
+    color: #1B1D21;
+}
+.shop{
+    background-color: #1da599;
+  margin-left: 0.5em;
+  outline: none;
+  border: none;
+}
+.shop:hover{
+    background-color: #0f615a;
+}

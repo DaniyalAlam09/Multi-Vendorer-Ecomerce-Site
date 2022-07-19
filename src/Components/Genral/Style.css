@@ -1,0 +1,40 @@
+.navbar {
+  padding: 1em;
+  color: black;
+  background-color: white;
+}
+.ovm {
+  margin-left: 0.5em;
+}
+ul {
+  text-align: space-around;
+  justify-content: center;
+  margin-left: 2em;
+}
+.search {
+  width: 50px;
+}
+li {
+  text-align: center;
+  justify-content: center;
+  margin-left: 0.5em;
+}
+.icons {
+  color: #1da599;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+.icons:hover{
+  color: #0f615a;
+}
+.signin {
+  background-color: #1da599;
+  margin-left: 0.5em;
+  outline: none;
+  border: none;
+}
+
+.signin:hover {
+  background-color: #0f615a;
+
+}
