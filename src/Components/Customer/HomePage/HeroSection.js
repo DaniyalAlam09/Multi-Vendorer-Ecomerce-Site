@@ -5,8 +5,8 @@ import Hero from "../Images/Hero.png";
 function HeroSection() {
   return (
     <div className="hero">
-      <div className="main">
-        <div className="left rounded float-left">
+      <div className="main row">
+        <div className="left rounded float-left col-sm">
           <h1>
             {" "}
             <span> Introducing New Samsung </span>
@@ -20,8 +20,8 @@ function HeroSection() {
             Shop now
           </button>
         </div>
-        <div className="right rounded float-right">
-          <img  src={Hero} />
+        <div className=" right rounded float-right col-sm">
+          <img className="img-responsive hero-image"  src={Hero} />
           
         </div>
       </div>

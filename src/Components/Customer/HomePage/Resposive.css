@@ -1,0 +1,49 @@
+@media (max-width: 575.98px) {
+  .deals {
+    display: flex;
+    flex-direction: column;
+  }
+  .right-deal {
+    height: 20rem;
+    width: 90%;
+    margin-top: 2rem;
+  }
+  .left-deal {
+    width: 90%;
+  }
+  .deal-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .deal-year {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .price {
+    font-size: 1.3rem;
+  }
+  .price-range {
+    font-size: 1.4rem;
+  }
+  .divider {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .deal-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .deal-year {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .price {
+    font-size: 1.3rem;
+  }
+  .price-range {
+    font-size: 1.4rem;
+  }
+}
