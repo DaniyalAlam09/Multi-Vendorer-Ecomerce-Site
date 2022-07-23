@@ -1,14 +1,16 @@
 import React from "react";
 import { UilShoppingBag, UilHeart, UilSearch } from "@iconscout/react-unicons";
 import "./Style.css";
+import {Link} from "react-router-dom";
 
 function Navbar() {
   return (
     <div classNameName="navbar container">
       <nav className="navbar navbar-expand-lg navbar-light ovm">
-        <a className="navbar-brand" href="#">
+        {/* <a className="navbar-brand" href="#">
           OVM
-        </a>
+        </a> */}
+        <Link to="/" className="navbar-brand" >OVM</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -45,10 +47,7 @@ function Navbar() {
                 <a className="dropdown-item" href="#">
                   Laptops
                 </a>
-                {/* <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a> */}
+
               </div>
             </li>
             <li className="nav-item">

@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
   }
+  .featured, .main-bestdeals{
+    margin-left: 0rem;
+    margin-top: 0rem;
+  }
   .right-deal {
     height: 20rem;
     width: 90%;

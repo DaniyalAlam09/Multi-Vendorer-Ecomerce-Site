@@ -19,7 +19,7 @@ li {
   justify-content: center;
   margin-left: 0.5em;
 }
-li:hover{
+li:hover {
   color: #3cffef;
 }
 .icons {
@@ -27,17 +27,63 @@ li:hover{
   margin-left: 0.5em;
   cursor: pointer;
 }
-.icons:hover{
+.icons:hover {
   color: #0f615a;
 }
 .signin {
   background-color: #1da599;
-  margin-left: 0.5em;
+  /* margin-left: 0.5em; */
   outline: none;
   border: none;
 }
+.start {
+  background-color: #1da599;
+  color: #fff;
+  /* margin-left: 0.5em; */
+  outline: none;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+}
 
-.signin:hover {
+.signin:hover,
+.start:hover {
+  cursor: pointer;
   background-color: #0f615a;
+}
+/* ________________Subscribe */
 
+.subscribe-main {
+  margin-left: 7rem;
+  margin-top: 5rem;
+}
+/* .subscribe-left {
+  width: 50%;
+} */
+/* .subscribe-right {
+  width: 40%;
+  padding-top: 1em;
+} */
+/* .subscribe-main {
+  display: flex;
+  flex-direction: row;
+} */
+.email-icon {
+  margin-top: 1em;
+  margin-right: 0.5em;
+}
+
+
+
+
+/* _____________________footer */
+
+.footer-style{
+  margin-left: 7rem;
+  margin-top: 5rem;
+}
+.footer-info{
+  font-size:13px;
+  color: #1b1d21;
 }

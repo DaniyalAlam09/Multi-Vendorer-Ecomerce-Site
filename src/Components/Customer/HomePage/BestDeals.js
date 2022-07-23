@@ -3,14 +3,14 @@ import "./Resposive.css";
 
 function BestDeals() {
   return (
-    <div className=" main-bestdeals ">
+    <div className="container heading">
       <h3>Get Best Deals Now</h3>
       <p>
         Get Our best deals in with speciality price for supoer your activity
       </p>
-      <div className="deals bd-highlight">
-        <div className="left-deal col-sm rounded float-left">
-          <div className="deal-details px-md-16">
+      <div className="container row deals bd-highlight">
+        <div className="left-deal rounded col-md-6">
+          <div className="deal-details rounded px-md-16">
             <p className="h5 deal-name">Samsung YOGA</p>
             <p className="deal-year">Top Product 2021</p>
             <p className="price">
@@ -18,7 +18,7 @@ function BestDeals() {
             </p>
           </div>
         </div>
-        <div className="col-sm right-deal rounded float-right">
+        <div className="right-deal rounded col-md-5">
           <div className="rounded right1-deal ">
             <p className="h6 deal-name-right">Samsung YOGA</p>
             <p className="deal-year-right">Top Product 2021</p>

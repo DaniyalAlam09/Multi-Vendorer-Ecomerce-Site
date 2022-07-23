@@ -7,22 +7,22 @@ import {
 
 function WorkDetails() {
   return (
-    <div className=" main-bestdeals">
+    <div className="heading">
       <h3>How Its works</h3>
-      <div className="container divider">
-        <div className="shipping">
+      <div className="container row divider">
+        <div className="shipping col-md-4">
           <UilTruck className="icons" />
           <div className="ship-style">
             <h6>Shipping</h6>
             <p>
-              Shop Owners Provide Delivery <br /> Options as well.
+              Shop Owners Provide Delivery Options as well.
             </p>
             <a href="#" class="link-secondary learn-more">
               Learn more
             </a>
           </div>
         </div>
-        <div className="shipping">
+        <div className="shipping col-md-4">
           <UilTransaction className="icons" />
           <div className="ship-style">
             <h6>Safe Payment</h6>
@@ -32,12 +32,12 @@ function WorkDetails() {
             </a>
           </div>
         </div>
-        <div className="shipping">
+        <div className="shipping col-md-4">
           <UilHeadphonesAlt className="icons" />
           <div className="ship-style">
             <h6>Take Virtual Tour</h6>
             <p>
-              Shop Owners Provide Delivery <br /> Options as well.
+              Shop Owners Provide Delivery Options as well.
             </p>
             <a href="#" class="link-secondary learn-more">
               Learn more

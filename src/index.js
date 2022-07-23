@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// // E:\study\Web\ovm\node_modules\bootstrap\dist\css\bootstrap.min.css
+// import '../node.modules/bootstrap/dist/css/bundle.min.css';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
