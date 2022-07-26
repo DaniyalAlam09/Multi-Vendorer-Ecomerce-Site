@@ -7,7 +7,7 @@ function FeaturedProducts(newRating) {
   const { addItem } = useCart();
   const data = [
     {
-      id:1,
+      id: 1,
       img: HeadPhone,
       brand: "Dell",
       name: "Dell I7",
@@ -16,45 +16,47 @@ function FeaturedProducts(newRating) {
       quantity: 1,
     },
     {
-      id:2,
+      id: 2,
       img: HeadPhone,
       brand: "Apple ",
       name: "Macbook 2020",
-      price:1000,
-      quantity: 1
+      price: 1000,
+      quantity: 1,
     },
     {
-      id:3,
+      id: 3,
       img: HeadPhone,
       brand: "Samsung",
       name: "Samsung Note20 Ultra ",
       price: 30000,
-      quantity: 1
+      quantity: 1,
     },
 
-    {id:4,
+    {
+      id: 4,
       img: HeadPhone,
       brand: "JBL",
       name: "Contrller",
       price: 5000,
-      quantity: 1
+      quantity: 1,
     },
 
-    {id:5,
+    {
+      id: 5,
       img: HeadPhone,
       brand: "LG",
       name: "LG Smart Tv 4k",
       price: 50000,
     },
     {
-      id:6,
+      id: 6,
       img: HeadPhone,
       brand: "Watch ",
       name: "G-shock watch waterprof",
       price: 50000,
     },
     {
-      id:7,
+      id: 7,
       img: HeadPhone,
       brand: "Sony",
       name: "Sony Beat Ah100K",
@@ -62,7 +64,7 @@ function FeaturedProducts(newRating) {
     },
 
     {
-      id:9,
+      id: 9,
       img: HeadPhone,
       brand: "Apple",
       name: "Airpods Gen 3",
@@ -78,38 +80,50 @@ function FeaturedProducts(newRating) {
             All Offers
           </a>
         </div>
-        <div className="container row  products d-flex justify-content-around">
-          {data.filter(person => person.price < 40000).slice(0, 4).map((elem) => (
-            <div key={data.indexOf(elem)}>
-              <div className="thumbnail ">
-                <div className='bg-image hover-zoom' style={{ maxWidth: '22rem' }}>
-                <img className="product-image rounded " src={`${elem.img}`} />
-                {/* <button className="button" onClick={() => addItem(elem.id)}>Cart</button> */}
-                </div>
-
-                <div>
-                  <p className="brand-name">{`${elem.brand}`}</p>
-                  <p className="product-name">{`${elem.name}`}</p>
-                  <div className="row ">
-                    <p className="product-price">{`${elem.price}`}</p>
-                    <div className="rate">
-                      <ReactStars
-                        className=""
-                        count={5}
-                        size={15}
-                        isHalf={true}
-                        emptyIcon={<i className="far fa-star"></i>}
-                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                        fullIcon={<i className="fa fa-star"></i>}
-                        activeColor="#ffd700"
+        <div className="container heading2">
+          <div className="row text-center justify-content-around">
+            {data
+              .filter((person) => person.price < 40000)
+              .slice(0, 4)
+              .map((elem) => (
+                <div
+                  key={data.indexOf(elem)}
+                  className="col-xl-3 col-sm-6 mb-5"
+                >
+                  <div className="thumbnail ">
+                    <div
+                      className="bg-image hover-zoom"
+                      style={{ maxWidth: "22rem" }}
+                    >
+                      <img
+                        className="product-image rounded "
+                        src={`${elem.img}`}
                       />
                     </div>
+
+                    <div>
+                      <p className="brand-name">{`${elem.brand}`}</p>
+                      <p className="product-name">{`${elem.name}`}</p>
+                      <div className="row ">
+                        <p className="product-price">{`${elem.price}`}</p>
+                        <div className="rate">
+                          <ReactStars
+                            className=""
+                            count={5}
+                            size={15}
+                            isHalf={true}
+                            emptyIcon={<i className="far fa-star"></i>}
+                            halfIcon={<i className="fa fa-star-half-alt"></i>}
+                            fullIcon={<i className="fa fa-star"></i>}
+                            activeColor="#ffd700"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  
                 </div>
-              </div>
-            </div>
-          ))}
+              ))}
+          </div>
         </div>
       </div>
     </>

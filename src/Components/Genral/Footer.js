@@ -11,8 +11,8 @@ import {Link} from "react-router-dom";
 function Footer() {
   return (
     <div className="container footer-style">
-      <div className="row d-flex ">
-        <div className="col-md-3 justify-content-center">
+      <div className="row justify-content-around">
+        <div className="col-xl-3 col-sm-12 mb-3">
           <h5>Accessoriespace</h5>
           <p className="footer-info">
             This is the usefull template from Sebo. You can buy this on our

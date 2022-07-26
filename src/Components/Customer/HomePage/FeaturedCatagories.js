@@ -27,9 +27,10 @@ function FeaturedCatagories() {
           All Catagories
         </a>
       </div>
-      <div className="container row cat">
+      <div className="heading2">
+        <div className="row text-center justify-content-around">
         {data.map((elem) => (
-          <div key={data.indexOf(elem)}>
+          <div key={data.indexOf(elem)} className=" col-xl-3 col-sm-6 mb-5">
             <div className=" catagory-style row thumbnail d-flex justify-content-around">
               <div>
                 <h6 className="catagory">{`${elem.Catagory}`}</h6>
@@ -43,6 +44,7 @@ function FeaturedCatagories() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

@@ -86,3 +86,22 @@ li:hover {
   font-size:13px;
   color: #1b1d21;
 }
+
+
+
+
+.social-link {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.3s;
+  font-size: 1rem;
+}
+.hero {
+  /* display: flex;
+  flex-direction: row; */
+  background-color: #eaeef3;
+}

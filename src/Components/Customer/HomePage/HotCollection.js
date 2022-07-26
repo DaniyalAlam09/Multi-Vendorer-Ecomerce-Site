@@ -70,9 +70,10 @@ function HotCollection() {
             All Offers
           </a>
         </div>
-        <div className="container row  products d-flex justify-content-around">
+        <div className="container heading2">
+          <div className="row text-center justify-content-around">
           {data.slice(0,4).map((elem) => (
-            <div key={data.indexOf(elem)}>
+            <div key={data.indexOf(elem)} className=" col-xl-3 col-sm-6 mb-5">
               <div className="thumbnail ">
                 <img className="product-image rounded" src={`${elem.img}`} />
                 <div>
@@ -85,6 +86,7 @@ function HotCollection() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </>

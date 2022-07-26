@@ -8,8 +8,8 @@ function BestDeals() {
       <p>
         Get Our best deals in with speciality price for supoer your activity
       </p>
-      <div className="container row deals bd-highlight d-flex justify-content-center">
-        <div className="left-deal rounded col-md-6 ">
+      <div className="row justify-content-around">
+        <div className="left-deal rounded col-xl-6 col-sm-12 mb-12 ">
           <div className="deal-details rounded px-md-16">
             <p className="h3 deal-name">Samsung YOGA</p>
             <p className="deal-year">Top Product 2021</p>
@@ -18,7 +18,7 @@ function BestDeals() {
             </p>
           </div>
         </div>
-        <div className="right-deal rounded col-md-5">
+        <div className="right-deal rounded col-xl-5 col-sm-12 mb-12 ">
           <div className="rounded right1-deal ">
             <p className="h5 deal-name-right">Samsung YOGA</p>
             <p className="deal-year-right">Top Product 2021</p>
@@ -26,7 +26,7 @@ function BestDeals() {
               From <span className="price-range-right"> 820 $ .99</span>
             </p>
           </div>
-          <div className="rounded right2-deal">
+          <div className="rounded right2-deal  mb-12">
             <p className="h5 deal-name-right">Samsung YOGA</p>
             <p className="deal-year-right">Top Product 2021</p>
             <p className="price-right">

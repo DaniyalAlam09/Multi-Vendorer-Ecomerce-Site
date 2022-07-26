@@ -75,18 +75,11 @@ p {
     rgba(26, 161, 149, 1) 0%,
     rgb(51, 190, 179) 70%
   );
-  /* height: 25rem; */
-  /* width: 50%; */
-  /* margin-right: 2rem; */
-}
-.right-deal {
-  /* width: 30%; */
-  /* margin-right: 3rem; */
+  
 }
 .right1-deal {
   background: rgb(0, 50, 95);
   background: linear-gradient(90deg, rgb(0, 54, 102) 0%, rgb(1, 56, 107) 40%);
-  /* height: 12rem; */
   padding: 1rem;
 }
 .right2-deal {
@@ -96,8 +89,6 @@ p {
     rgb(233, 113, 0) 0%,
     rgb(248, 134, 28) 87%
   );
-  /* width: 100%; */
-  /* height: 11rem; */
   margin-top: 2rem;
   padding: 1rem;
 }
@@ -251,13 +242,13 @@ button {
   border: 1px solid rgb(94, 91, 91, 0.2);
   border-radius: 0.5rem;
   padding-left: 1rem;
-  width: 20rem;
+  width: 17rem;
 }
 .cat {
   margin-top: 2rem;
 }
 .empty {
-  margin-left: 7rem;
+  margin-left: 4rem;
 }
 
 .inner {

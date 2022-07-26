@@ -3,7 +3,6 @@ import { useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
 import "./ShopStyle.css";
 
-
 function Shops() {
   const data1 = [
     {
@@ -64,83 +63,12 @@ function Shops() {
     },
 
     {
-      id: 9,
+      id: 8,
       img: HeadPhone,
       brand: "Apple",
       name: "Airpods Gen 3",
       price: 2000,
     },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-    
   ];
 
   const [search, setSearch] = useState("");
@@ -155,8 +83,8 @@ function Shops() {
         }}
       />
 
-      <div className="container products">
-        <div className="row d-flex justify-content-between ">
+      <div className="container products ">
+        <div className="row text-center justify-content-around">
           {data1
 
             .filter((person) => {
@@ -171,13 +99,14 @@ function Shops() {
             .map((elem) => (
               <div
                 key={data1.indexOf(elem)}
-                className="heading col-md-2"
+                className="heading col-xl-3 col-sm-6 mb-5"
               >
                 <img
                   className=" rounded "
                   style={{ width: "10rem", height: "10rem" }}
                   src={`${elem.img}`}
                 />
+                <p className="brand-name">{`${elem.brand}`}</p>
 
                 <p className="product-name">{`${elem.name}`}</p>
               </div>
@@ -187,5 +116,4 @@ function Shops() {
     </div>
   );
 }
-
 export default Shops;
