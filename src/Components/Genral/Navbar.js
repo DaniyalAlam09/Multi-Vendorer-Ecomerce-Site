@@ -25,7 +25,7 @@ function Navbar() {
 
         <div
           className="collapse navbar-collapse menu"
-          id="navbarSupportedContent"
+          id="navbarSupportedContent  "
         >
           <ul className="navbar-nav mr-auto">
             <li className="nav-item dropdown">

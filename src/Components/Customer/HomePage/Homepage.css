@@ -2,15 +2,14 @@
   /* display: flex;
   flex-direction: row; */
   background-color: #eaeef3;
-  
 }
-.button{
+.button {
   background-color: #1da599;
   /* margin-left: 0.5em; */
   outline: none;
   border: none;
   color: #fff;
-  padding:0.2 0.5rem ;
+  padding: 0.2 0.5rem;
 }
 .button:hover {
   cursor: pointer;
@@ -29,15 +28,15 @@
   margin-left: 7rem;
   margin-top: 5rem;
 } */
-.main{
-  margin-left: 7rem;
+.main {
+  /* margin-left: 7rem; */
   padding-top: 5rem;
 }
 
 .hero-image {
-  text-align: center;
+  /* text-align: center;
   justify-content: center;
-  width: 100%;
+  width: ; */
 }
 p {
   font-weight: 400;
@@ -55,12 +54,18 @@ p {
 }
 
 .main-bestdeals {
-  margin-left: 7rem;
+  /* margin-left: 7rem; */
   margin-top: 5rem;
 }
 .deals {
   /* display: flex;
   flex-direction: row; */
+}
+.hero-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:50%;
 }
 
 .left-deal {
@@ -70,18 +75,18 @@ p {
     rgba(26, 161, 149, 1) 0%,
     rgb(51, 190, 179) 70%
   );
-  height: 25rem;
-  width: 50%;
-  margin-right: 2rem;
+  /* height: 25rem; */
+  /* width: 50%; */
+  /* margin-right: 2rem; */
 }
 .right-deal {
-  width: 30%;
-  margin-right: 3rem;
+  /* width: 30%; */
+  /* margin-right: 3rem; */
 }
 .right1-deal {
   background: rgb(0, 50, 95);
   background: linear-gradient(90deg, rgb(0, 54, 102) 0%, rgb(1, 56, 107) 40%);
-  height: 12rem;
+  /* height: 12rem; */
   padding: 1rem;
 }
 .right2-deal {
@@ -91,7 +96,8 @@ p {
     rgb(233, 113, 0) 0%,
     rgb(248, 134, 28) 87%
   );
-  height: 11rem;
+  /* width: 100%; */
+  /* height: 11rem; */
   margin-top: 2rem;
   padding: 1rem;
 }
@@ -101,17 +107,17 @@ p {
 }
 .deal-name {
   color: #fff;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
   font-weight: 500;
 }
 .deal-year {
   color: #fff;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
   font-weight: 600;
 }
 .price {
   color: #fff;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
 }
 .price-range {
   font-size: 1.6rem;
@@ -120,12 +126,12 @@ p {
 
 .deal-name-right {
   color: #fff;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   font-weight: 500;
 }
 .deal-year-right {
   color: #fff;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   font-weight: 600;
 }
 .price-right {
@@ -133,7 +139,7 @@ p {
   font-size: 1rem;
 }
 .price-range-right {
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
   color: #fff;
 }
 /* Responsiveess____________________________________________ */
@@ -181,46 +187,41 @@ margin-left: 3rem
   font-weight: 500;
 }
 
-.product-image{
+.product-image {
   width: 10rem;
   height: 10rem;
   cursor: pointer;
 }
-.tumbnail{
+.tumbnail {
   margin-left: 6rem;
 }
-.product-image:hover{
-   opacity: 0.35;
+/* .product-image:hover {
+  opacity: 0.35;
   filter: blur(0.08rem);
   opacity: 0.5;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
-
-}
-.brand-name{
+} */
+.brand-name {
   font-size: 10px;
   color: rgb(160, 158, 158);
   margin-left: 1rem;
-
 }
-.product-price{
+.product-price {
   font-size: 14px;
   font-weight: 500;
   color: #1da599;
   margin-left: 2rem;
-
 }
-.product-name{
+.product-name {
   font-weight: 500;
   cursor: pointer;
-
 }
-.product-name:hover{
+.product-name:hover {
   font-weight: 500;
   cursor: pointer;
-
 }
-.products{
+.products {
   margin-top: 2rem;
 }
 button {
@@ -235,33 +236,48 @@ button {
 .off {
   color: #ccc;
 }
-.rate{
-  margin-left:1.5rem;
-  margin-top:0.8rem;
+.rate {
+  margin-left: 1.5rem;
+  margin-top: 0.8rem;
 }
 /* _____________________________F */
 
-.catagory-image{
+.catagory-image {
   width: 5rem;
   height: 5rem;
   cursor: pointer;
-
 }
-.catagory-style{
+.catagory-style {
   border: 1px solid rgb(94, 91, 91, 0.2);
-  border-radius:0.5rem;
-  padding-left:1rem;
-  width:20rem;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  width: 20rem;
 }
-.cat{
+.cat {
   margin-top: 2rem;
 }
-.empty{
+.empty {
   margin-left: 7rem;
 }
-.thumbnail{
-  margin-left:3rem;
-}
-.inner{
+
+.inner {
   padding: 0.3rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

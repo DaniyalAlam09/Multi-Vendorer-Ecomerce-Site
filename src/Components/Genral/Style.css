@@ -7,8 +7,8 @@
   margin-left: 0.5em;
 }
 ul {
-  text-align: space-around;
-  justify-content: center;
+  /* text-align: space-around;
+  justify-content: center; */
   margin-left: 2em;
 }
 .search {
@@ -44,7 +44,6 @@ li:hover {
   border: none;
   width: 10rem;
   height: 3rem;
-  border-radius: 0.5rem;
 }
 
 .signin:hover,
@@ -55,7 +54,7 @@ li:hover {
 /* ________________Subscribe */
 
 .subscribe-main {
-  margin-left: 7rem;
+  /* margin-left: 7rem; */
   margin-top: 5rem;
 }
 /* .subscribe-left {
@@ -80,7 +79,7 @@ li:hover {
 /* _____________________footer */
 
 .footer-style{
-  margin-left: 7rem;
+  /* margin-left: 7rem; */
   margin-top: 5rem;
 }
 .footer-info{

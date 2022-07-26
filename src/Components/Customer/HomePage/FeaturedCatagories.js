@@ -20,7 +20,7 @@ function FeaturedCatagories() {
     },
   ];
   return (
-    <div className="heading">
+    <div className="heading container">
       <div className="featured-head">
         <h3>Featured Catagories</h3>
         <a href="#" class="link-secondary see-all">
@@ -30,7 +30,7 @@ function FeaturedCatagories() {
       <div className="container row cat">
         {data.map((elem) => (
           <div key={data.indexOf(elem)}>
-            <div className=" catagory-style row thumbnail">
+            <div className=" catagory-style row thumbnail d-flex justify-content-around">
               <div>
                 <h6 className="catagory">{`${elem.Catagory}`}</h6>
                 <p className="qty">{`${elem.qty}`}</p>

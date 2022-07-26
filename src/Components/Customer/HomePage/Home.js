@@ -9,11 +9,16 @@ import HotCollection from './HotCollection'
 import FeaturedCatagories from './FeaturedCatagories'
 
 
+
+
+import Hero from "../Images/Hero.png";
+
+
 function Home() {
   return (
     <div>
        
-        <HeroSection/>
+        <HeroSection Name1={"Introducing New Samsung "} Name2={"Camera Product"} ImageSource={Hero}/>
         <BestDeals/>
         <WorkDetails/>
         <FeaturedProducts/>

@@ -2,17 +2,17 @@ import React from "react";
 import "./Homepage.css";
 import Hero from "../Images/Hero.png";
 
-function HeroSection() {
+function HeroSection({Name1, Name2, ImageSource}) {
   return (
-    <div className="hero">
-      <div className="container main row">
+    <div className="hero ">
+      <div className="container main row d-flex justify-content-around">
         <div className="left rounded col-md-6">
-          <h1>
+          <div className="h3">
             {" "}
-            <span> Introducing New Samsung </span>
+            <span> {Name1}</span>
             <br/>
-            <span> Camera Product </span>{" "}
-          </h1>
+            <span> {Name2} </span>{" "}
+          </div>
           <p>
             <span>Samsung Galaxy S 20 pro max with camera 40 MP, get</span>{" "}
             <br />
@@ -23,7 +23,7 @@ function HeroSection() {
           </button>
         </div>
         <div className=" right rounded col-md-6">
-          <img className="img-responsive hero-image" src={Hero} />
+          <img className="img-fluid hero-img" src={ImageSource} />
         </div>
       </div>
     </div>

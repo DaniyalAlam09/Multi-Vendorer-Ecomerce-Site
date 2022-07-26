@@ -63,17 +63,17 @@ function HotCollection() {
   ];
   return (
     <>
-      <div className="heading">
+      <div className="heading container">
         <div className="featured-head">
           <h3>Hot Collection</h3>
           <a href="#" class="link-secondary see-all">
             All Offers
           </a>
         </div>
-        <div className="container row  products">
-          {data.map((elem) => (
+        <div className="container row  products d-flex justify-content-around">
+          {data.slice(0,4).map((elem) => (
             <div key={data.indexOf(elem)}>
-              <div className="tumbnail">
+              <div className="thumbnail ">
                 <img className="product-image rounded" src={`${elem.img}`} />
                 <div>
                   <p className="brand-name">{`${elem.title}`}</p>

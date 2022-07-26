@@ -11,8 +11,8 @@ import {Link} from "react-router-dom";
 function Footer() {
   return (
     <div className="container footer-style">
-      <div className="row">
-        <div className="col-md-3">
+      <div className="row d-flex ">
+        <div className="col-md-3 justify-content-center">
           <h5>Accessoriespace</h5>
           <p className="footer-info">
             This is the usefull template from Sebo. You can buy this on our
@@ -24,7 +24,7 @@ function Footer() {
           <UilYoutube className="icons"/>
           <UilGithub  className="icons"/>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 ">
           <h6>Product</h6>
           <p className="footer-info">Features</p>
           <p className="footer-info">Enterpise</p>
@@ -51,7 +51,7 @@ function Footer() {
           <p className="footer-info">Career</p>
           <p className="footer-info">Documentation</p>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 ">
           <h6>Address</h6>
           <p className="footer-info">
             Gg. Sadewa No.RT 03, Druwo, Bangunharjo, Kec. Sewon, Bantul, Daerah
