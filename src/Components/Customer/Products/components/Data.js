@@ -47,7 +47,7 @@ export const dataList = [
     brand: "american",
     rating: 5,
     price: 2500,
-    coverSrc: "/images/Laptopss/ameri.jpg",
+    coverSrc: "/images/Laptops/HeadPhone.png",
   },
   {
     id: 2,
