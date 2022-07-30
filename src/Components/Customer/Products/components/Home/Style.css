@@ -1,0 +1,74 @@
+.label {
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+  .input-group {
+    margin-bottom: 2rem;
+  }
+  .label-range {
+    margin-bottom: 2.5rem;
+  }
+  .list-wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+  }
+  .listItem-wrap img {
+    /* width: 100%; */
+    /* border-radius: 15px; */
+    /* height: 200px; */
+    object-fit: cover;
+  }
+  .listItem-wrap header {
+    /* font-weight: 500; */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.1em 0 0.1rem 0;
+    align-items: center;
+  }
+  
+  .listItem-wrap header span {
+    font-size: 0.7rem;
+    padding: 0.2rem;
+    border-radius: 10px;
+  }
+  .listItem-wrap footer {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .listItem-wrap footer p:first-child span {
+    color: rgba(0, 0, 0, 0.26);
+    font-weight: 600;
+  }
+  .searchBar-wrap {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.26);
+    padding: 1.5rem 1rem;
+  }
+  .searchBar-icon {
+    color: rgba(0, 0, 0, 0.26);
+    margin-right: 2rem;
+  }
+  
+  .searchBar-wrap input {
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+    width: 100%;
+  }
+  
+  .searchBar-wrap input::placeholder {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  
+  .product-image {
+    width: 10rem;
+    height: 10rem;
+    cursor: pointer;
+  }
+  
+    

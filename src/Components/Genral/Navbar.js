@@ -3,7 +3,7 @@ import { UilShoppingBag, UilHeart, UilSearch } from "@iconscout/react-unicons";
 import "./Style.css";
 import {Link} from "react-router-dom";
 
-function Navbar() {
+function Navbar({size}) {
   return (
     <div classNameName="navbar container">
       <nav className="navbar navbar-expand-lg navbar-light ovm">
@@ -51,9 +51,9 @@ function Navbar() {
               </div>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link to="products" className="nav-link">
                 Special Price <span className="sr-only">(current)</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/shops" className="nav-link">
@@ -71,9 +71,9 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link to="/contact" className="nav-link" >
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
           <form className="form-inline">
@@ -85,13 +85,18 @@ function Navbar() {
             />
           </form>
           <div className="icon">
-            <UilSearch className="icons" />
-            <UilShoppingBag className="icons" />
+            <Link to="/search">
+            <UilSearch className="icons" /></Link>
+            <Link to="/cart">
+            <UilShoppingBag className="icons" /></Link>
+            <span>{size}</span>
             <UilHeart className="icons" />
           </div>
-          <button class="btn btn-primary signin" type="submit">
+          <Link to="/account"  type="submit">
+            <button class="btn btn-primary signin">
             Sign-in
-          </button>
+            </button>
+          </Link>
         </div>
       </nav>
     </div>

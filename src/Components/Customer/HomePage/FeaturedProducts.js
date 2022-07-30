@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
 import ReactStars from "react-rating-stars-component";
 import { CartProvider, useCart } from "react-use-cart";
+import { Link } from "react-router-dom";
 
-function FeaturedProducts(newRating) {
-  const { addItem } = useCart();
+function FeaturedProducts() {
+  // const { addItem } = useCart();
   const data = [
     {
       id: 1,
@@ -95,10 +96,12 @@ function FeaturedProducts(newRating) {
                       className="bg-image hover-zoom"
                       style={{ maxWidth: "22rem" }}
                     >
-                      <img
-                        className="product-image rounded "
-                        src={`${elem.img}`}
-                      />
+                      <Link to="/singleProduct">
+                        <img
+                          className="product-image rounded "
+                          src={`${elem.img}`}
+                        />
+                      </Link>
                     </div>
 
                     <div>
@@ -120,6 +123,7 @@ function FeaturedProducts(newRating) {
                         </div>
                       </div>
                     </div>
+                    {/* <button onClick={() => handleClick(item)}>Add to Cart</button> */}
                   </div>
                 </div>
               ))}

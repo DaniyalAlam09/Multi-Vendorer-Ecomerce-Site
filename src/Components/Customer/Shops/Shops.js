@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
+import SearchIcon from "@material-ui/icons/Search";
 import "./ShopStyle.css";
 
 function Shops() {
@@ -74,14 +75,17 @@ function Shops() {
   const [search, setSearch] = useState("");
   return (
     <div className="container heading ">
-      <input
-        type="text"
-        className="form-control "
-        placeholder="Search Here"
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-      />
+      <div className="searchBar-wrap">
+        <SearchIcon className="searchBar-icon" />
+        <input
+          type="text"
+          className="form-control "
+          placeholder="Search Here"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </div>
 
       <div className="container products ">
         <div className="row text-center justify-content-around">

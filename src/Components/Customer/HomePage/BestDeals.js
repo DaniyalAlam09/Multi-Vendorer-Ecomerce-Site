@@ -19,14 +19,14 @@ function BestDeals() {
           </div>
         </div>
         <div className="right-deal rounded col-xl-5 col-sm-12 mb-12 ">
-          <div className="rounded right1-deal ">
+          <div className="rounded right1-deal col-xl-12 col-sm-12 mb-6">
             <p className="h5 deal-name-right">Samsung YOGA</p>
             <p className="deal-year-right">Top Product 2021</p>
             <p className="price-right">
               From <span className="price-range-right"> 820 $ .99</span>
             </p>
           </div>
-          <div className="rounded right2-deal  mb-12">
+          <div className="rounded right2-deal col-xl-12 col-sm-12 mb">
             <p className="h5 deal-name-right">Samsung YOGA</p>
             <p className="deal-year-right">Top Product 2021</p>
             <p className="price-right">
