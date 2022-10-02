@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import Home from "./Components/Customer/HomePage/Home";
 import Login from "./Components/Customer/Login";
 import Footer from "./Components/Genral/Footer";
@@ -13,23 +14,41 @@ import Contact from "./Components/Genral/Contact";
 import Search from "./Components/Customer/HomePage/Search/Search";
 import Detail from "./Components/Customer/SingleProduct/Detail";
 import CheckOut from "./Components/Customer/Cart/CheckOut";
-import Products from "./Components/Customer/Products/components/Products";
+import Products from "./Components/Customer/Products/Products";
+import data from "./Components/Customer/HomePage/Data";
+import Signup from "./Components/Customer/Signup";
 
 function App() {
+  const { productItem } = data;
+  const [cartItems, setCartItems] = useState([]);
+  const handleAddProduct = (product) => {
+    const ProductExist = cartItems.find((item) => item.id === product.id);
+    if (ProductExist) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id
+            ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
   return (
     <Router>
       <div className="App">
-        {/* <Login /> */}
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route productItem={productItem} exact path="/" element={<Home />} />
           <Route path="/shops" element={<ShopsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/account" element={<Login />} />
+          <Route path="/create-account" element={<Signup/>} />
           <Route path="/search" element={<Search />} />
           <Route path="/singleProduct" element={<Detail />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route  path="/cart" element={<CartPage />} />
           <Route path="/products" element={<Products />} />
         </Routes>
 

@@ -11,16 +11,15 @@ const useStyles = makeStyles({
   },
   checked: {},
   wrap: {
-    width: '100%',
+    // width: '100%',
     display: 'flex',
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 0,
+    flexDirection: 'column',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
+    // marginLeft: 0,
   },
   label: {
     fontSize: '.8rem',
-    fontFamily: `'Raleway', sans-serif`,
   },
 });
 
@@ -29,13 +28,18 @@ const CheckboxProton = ({ changeChecked, brand }) => {
   const { checked, label, id } = brand;
   return (
     <div>
+       <br/>
+       <br/>
       <FormControlLabel
         classes={{
           label: classes.label,
-          root: classes.wrap,
+          // root: classes.wrap,
         }}
+       
         control={
+          
           <Checkbox
+          
             classes={{
               checked: classes.checked,
               root: classes.root,
@@ -46,7 +50,9 @@ const CheckboxProton = ({ changeChecked, brand }) => {
             inputProps={{ 'aria-label': 'checkbox with small size' }}
           />
         }
+      
         label={label}
+        
       />
     </div>
   );

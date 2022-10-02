@@ -14,14 +14,14 @@ import FeaturedCatagories from './FeaturedCatagories'
 import Hero from "../Images/Hero.png";
 
 
-function Home() {
+function Home({productItem}) {
   return (
     <div>
        
         <HeroSection Name1={"Introducing New Samsung "} Name2={"Camera Product"} ImageSource={Hero}/>
         <BestDeals/>
         <WorkDetails/>
-        <FeaturedProducts/>
+        <FeaturedProducts productItem={productItem}/>
         <FeaturedCatagories/>
         <HotCollection/>
         <Subscribe/>

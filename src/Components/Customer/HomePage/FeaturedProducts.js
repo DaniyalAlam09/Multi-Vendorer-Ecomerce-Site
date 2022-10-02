@@ -1,77 +1,26 @@
 import React, { useEffect, useState } from "react";
-import HeadPhone from "../Images/HeadPhone.png";
+
 import ReactStars from "react-rating-stars-component";
 import { CartProvider, useCart } from "react-use-cart";
 import { Link } from "react-router-dom";
+import data from "./Data";
 
-function FeaturedProducts() {
-  // const { addItem } = useCart();
-  const data = [
-    {
-      id: 1,
-      img: HeadPhone,
-      brand: "Dell",
-      name: "Dell I7",
-      price: 500,
-      rating: 2,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      img: HeadPhone,
-      brand: "Apple ",
-      name: "Macbook 2020",
-      price: 1000,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      img: HeadPhone,
-      brand: "Samsung",
-      name: "Samsung Note20 Ultra ",
-      price: 30000,
-      quantity: 1,
-    },
-
-    {
-      id: 4,
-      img: HeadPhone,
-      brand: "JBL",
-      name: "Contrller",
-      price: 5000,
-      quantity: 1,
-    },
-
-    {
-      id: 5,
-      img: HeadPhone,
-      brand: "LG",
-      name: "LG Smart Tv 4k",
-      price: 50000,
-    },
-    {
-      id: 6,
-      img: HeadPhone,
-      brand: "Watch ",
-      name: "G-shock watch waterprof",
-      price: 50000,
-    },
-    {
-      id: 7,
-      img: HeadPhone,
-      brand: "Sony",
-      name: "Sony Beat Ah100K",
-      price: 50000,
-    },
-
-    {
-      id: 9,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-  ];
+function FeaturedProducts({productItem}) {
+  const [cartItems, setCartItems] = useState([]);
+  const handleAddProduct = (product) => {
+    const ProductExist = cartItems.find((item) => item.id === product.id);
+    if (ProductExist) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id
+            ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
   return (
     <>
       <div className="heading container">
@@ -123,7 +72,7 @@ function FeaturedProducts() {
                         </div>
                       </div>
                     </div>
-                    {/* <button onClick={() => handleClick(item)}>Add to Cart</button> */}
+                    <button onClick={() => handleAddProduct(data)} className="btn button addcart">Add to Cart</button>
                   </div>
                 </div>
               ))}

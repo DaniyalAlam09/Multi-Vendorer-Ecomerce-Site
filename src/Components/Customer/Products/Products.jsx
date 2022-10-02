@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import HeroSection from "../../HomePage/HeroSection";
+import HeroSection from "../HomePage/HeroSection";
 import EmptyView from "./common/EmptyView";
 import FilterPanel from "./Home/FilterPanel";
 import List from "./Home/List";
 import SearchBar from "./Home/SearchBar";
 import { dataList } from "./Data";
 import "./styles.css";
-import Hero from "../../Images/Hero.png";
+import Hero from "../Images/Hero.png";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -14,9 +14,9 @@ const Products = () => {
   const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
   const [brands, setbrands] = useState([
-    { id: 1, checked: false, label: "American" },
-    { id: 2, checked: false, label: "Chinese" },
-    { id: 3, checked: false, label: "Italian" },
+    { id: 1, checked: false, label: "Apple" },
+    { id: 2, checked: false, label: "Huawei" },
+    { id: 3, checked: false, label: "Acer" },
   ]);
 
   const [list, setList] = useState(dataList);
@@ -100,15 +100,15 @@ const Products = () => {
       <HeroSection
         Name1={"All Products are available "}
         Name2={"Camera Product"}
-        ImageSource={Hero}
+        ImageSource="/images/ProductsHero.png"
       />
-      <div className="container">
+      <div className="container heading">
         {/* Search Bar */}
         <SearchBar
           value={searchInput}
           changeInput={(e) => setSearchInput(e.target.value)}
         />
-        <div className="home_panelList-wrap">
+        <div className="home_panelList-wrap heading">
           {/* Filter Panel */}
           <div className="home_panel-wrap">
             <FilterPanel

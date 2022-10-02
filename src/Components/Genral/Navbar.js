@@ -10,7 +10,10 @@ function Navbar({size}) {
         {/* <a className="navbar-brand" href="#">
           OVM
         </a> */}
-        <Link to="/" className="navbar-brand" >OVM</Link>
+        <Link to="/" className="navbar-brand" >
+        <img src="/images/logo.jpg" alt="" width="100" height="40"/>
+        
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

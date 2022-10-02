@@ -11,6 +11,10 @@ body{
   outline: none;
   border: none;
 }
+.buttons:hover {
+  cursor: pointer;
+  background-color: #0f615a;
+}
 a{
   color:#1da599;
 }

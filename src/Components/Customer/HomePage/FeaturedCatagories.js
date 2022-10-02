@@ -4,19 +4,19 @@ import HeadPhone from "../Images/HeadPhone.png";
 function FeaturedCatagories() {
   const data = [
     {
-      img: HeadPhone,
-      qty: "128 Products",
-      Catagory: "Tabletes",
-    },
-    {
-      img: HeadPhone,
+      img: "/images/Laptops/Laptop1.jpg",
       qty: "128 Products",
       Catagory: "Laptops",
     },
     {
+      img: "/images/Mobiles/Mobile1.webp",
+      qty: "128 Products",
+      Catagory: "Mobiles",
+    },
+    {
       img: HeadPhone,
       qty: "128 Products",
-      Catagory: "Laptops",
+      Catagory: "Headphones",
     },
   ];
   return (

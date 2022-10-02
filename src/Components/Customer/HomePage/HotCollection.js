@@ -10,7 +10,7 @@ function HotCollection() {
 
   const data = [
     {
-        img: HeadPhone,
+        img: "/images/Mobiles/Mobile1.webp",
         title: "Dell",
         description: "Dell I7",
         price: 50000,
@@ -22,14 +22,14 @@ function HotCollection() {
         price: 50000,
       },
       {
-        img: HeadPhone,
+        img: "/images/Laptops/Laptop1.jpg",
         title: "Samsung",
         description: "Samsung Note20 Ultra ",
         price: 50000,
       },
   
       {
-        img: HeadPhone,
+        img: "/images/Mobiles/Mobile1.webp",
         title: "JBL",
         description: "Contrller",
         price: 50000,
