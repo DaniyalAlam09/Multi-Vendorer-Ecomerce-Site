@@ -59,8 +59,9 @@ export const dataList = [
     price: 4350,
     coverSrc: "/images/Mobiles/Mobile1.webp",
   },
-  
-    {id: 3,
+
+  {
+    id: 3,
     title: "Macbook 2020",
 
     category: "Laptops",
@@ -89,7 +90,7 @@ export const dataList = [
     price: 2000,
     coverSrc: "/images/Laptops/Laptop1.jpg",
   },
-  
+
   {
     id: 6,
     title: "Redmi Note 9",
@@ -120,7 +121,7 @@ export const dataList = [
     price: 2750,
     coverSrc: "/images/Mobiles/Mobile1.webp",
   },
-  
+
   {
     id: 9,
     title: "Relame 31",
@@ -139,7 +140,7 @@ export const dataList = [
     brand: "huawei",
     rating: 2,
     price: 4100,
-    coverSrc:"/images/Mobiles/Mobile1.webp",
+    coverSrc: "/images/Mobiles/Mobile1.webp",
   },
   {
     id: 11,
@@ -161,5 +162,4 @@ export const dataList = [
     price: 1000,
     coverSrc: "/images/Laptops/Laptop1.jpg",
   },
-  
 ];

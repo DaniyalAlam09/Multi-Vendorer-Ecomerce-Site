@@ -17,6 +17,18 @@ import CheckOut from "./Components/Customer/Cart/CheckOut";
 import Products from "./Components/Customer/Products/Products";
 import data from "./Components/Customer/HomePage/Data";
 import Signup from "./Components/Customer/Signup";
+import ForgotPassword from "./Components/Customer/ForgotPassword";
+import CustomerAccount from "./Components/Customer/userDetails";
+import Logout from "./Components/Customer/Logout";
+import Sidebar from "./Components/Customer/Account/components/Sidebar";
+import Dashboard from "./Components/Customer/Account/pages/Dashboard";
+// import About from "./Components/Customer/Account//pages/About.jsx";
+import Analytics from "./Components/Customer/Account//pages/Analytics.jsx";
+import Comment from "./Components/Customer/Account//pages/Comment.jsx";
+import Product from "./Components/Customer/Account//pages/Product.jsx";
+import ProductList from "./Components/Customer/Account//pages/ProductList.jsx";
+import SignUp from "./Components/ShopOwner/Signup";
+
 
 function App() {
   const { productItem } = data;
@@ -44,13 +56,28 @@ function App() {
           <Route path="/shops" element={<ShopsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/userDetails" element={<CustomerAccount />} />
+          {/* <Route path="/logout" element={<Logout />} /> */}
           <Route path="/account" element={<Login />} />
-          <Route path="/create-account" element={<Signup/>} />
+          <Route path="/create-account" element={<Signup />} />
+          <Route path="//reset-password" element={<ForgotPassword />} />
           <Route path="/search" element={<Search />} />
           <Route path="/singleProduct" element={<Detail />} />
-          <Route  path="/cart" element={<CartPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/shopowner-account" element={<SignUp/>} />
         </Routes>
+        <Sidebar>
+          <Routes>
+            {/* <Route path="/" element={<Dashboard />} /> */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/about" element={<About />} /> */}
+            <Route path="/comment" element={<Comment />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/productList" element={<ProductList />} />
+          </Routes>
+        </Sidebar>
 
         <Footer />
       </div>

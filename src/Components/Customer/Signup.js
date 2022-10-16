@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -15,6 +18,15 @@ export default class SignUp extends Component {
     e.preventDefault();
     const { fname, lname, email, password } = this.state;
     console.log(fname, lname, email, password);
+    const { value } = this.state;
+    const re = new RegExp("(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
+    const isOk = re.test(value);
+
+    console.log(isOk);
+
+    // if (!isOk) {
+    //   return alert("weak!");
+    // }
     fetch("http://localhost:5000/register", {
       method: "POST",
       crossDomain: true,
@@ -33,6 +45,10 @@ export default class SignUp extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
+
+        toast("Successfull Registered");
+        window.localStorage.setItem("token", data.data);
+        window.location.href = "/account";
       });
   }
   render() {
@@ -48,7 +64,10 @@ export default class SignUp extends Component {
                 {" "}
                 Become member of <strong>OVM</strong>
               </h3>
-              <div class="form-group">
+              <Link className="" to="/shopowner-account">
+                Register as Shop Owner?
+              </Link>
+              <div class="form-group mt-2">
                 <div class="form-wrapper mb-2">
                   <label for="">First Name</label>
                   <input
@@ -99,6 +118,17 @@ export default class SignUp extends Component {
               >
                 Register Now
               </button>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </form>
           </div>
         </div>
