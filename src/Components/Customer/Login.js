@@ -51,9 +51,9 @@ export default function Login() {
         if (user.message == "success") {
           toast("Successfull Logged in");
           window.localStorage.setItem("token", user.data);
-          window.location.href = "./dashboard";
-        } else if (user.status == "error") {
-          toast.error("InvAlid Password", {
+          // window.location.href = "./dashboard";
+        } else if (user.message == "Incorrect Password") {
+          toast.error("Invalid Password", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
