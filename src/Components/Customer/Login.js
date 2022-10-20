@@ -24,57 +24,57 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleChange = event => {
-
-    console.log(state);
-    setState(event.target.value);
-  }
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const { email, password } = state;
-    console.log(state);
-    // fetch("http://localhost:5000/login", {
-    //   method: "POST",
-    //   crossDomain: true,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify({
-    //     email,
-    //     password,
-    //   }),
-    // }).then((data) => {
-    //   console.log(data, "userRegister");
-    //   if (data.status == "ok") {
-    //     toast("Successfull Logged in");
-    //     window.localStorage.setItem("token", data.data);
-    //     window.location.href = "./dashboard";
-    //   } else if (data.status == "error") {
-    //     toast.error("InvAlid Password", {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //     });
-    //   } else {
-    //     console.log("ok");
-    //     toast.error("User Doesnt exist", {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //     });
-    //   }
-    // });
+    const { email, password } = state;
+    console.log(email, password);
+    fetch("http://localhost:4000/users/login", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        console.log(user);
+        if (user.message == "success") {
+          toast("Successfull Logged in");
+          window.localStorage.setItem("token", user.data);
+          window.location.href = "./dashboard";
+        } else if (user.status == "error") {
+          toast.error("InvAlid Password", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          // console.log("ok");
+          toast.error("User Doesnt exist", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      });
   };
   return (
     <div className="content heading">
@@ -99,6 +99,7 @@ export default function Login() {
                   <div className="form-group first">
                     <label>Email</label>
                     <input
+                      name="email"
                       type="email"
                       className="form-control"
                       onChange={handleChange}
@@ -106,11 +107,14 @@ export default function Login() {
                     />
                   </div>
                   <div className=" last mb-4">
-                    <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="standard-adornment-password">
+                      Password
+                    </InputLabel>
                     <Input
                       type={state.showPassword ? "text" : "password"}
                       className="form-control"
-                      onChange={(e) => setState({ password: e.target.value })}
+                      name="password"
+                      onChange={handleChange}
                       value={state.password}
                       endAdornment={
                         <InputAdornment position="end">

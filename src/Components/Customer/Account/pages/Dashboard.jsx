@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:5000/userData", {
+    fetch("http://localhost:4000/users/user", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -30,9 +30,9 @@ export default class Dashboard extends Component {
     return (
       <div className="">
         <h6> First Name </h6>
-        <p>{this.state.userData.fname}</p>
+        <p>{this.state.userData.firstName}</p>
         <h6> Last Name </h6>
-        <p>{this.state.userData.lname}</p>
+        <p>{this.state.userData.lastName}</p>
         <h6> Email </h6> <p>{this.state.userData.email}</p>
       </div>
     );

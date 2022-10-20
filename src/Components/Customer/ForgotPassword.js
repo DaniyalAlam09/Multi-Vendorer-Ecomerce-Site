@@ -16,7 +16,7 @@ export default class ForgotPassword extends Component {
     e.preventDefault();
     const { email } = this.state;
     console.log(email);
-    fetch("http://localhost:5000/forgot-password", {
+    fetch("http://localhost:4000/users/forgot-password", {
       method: "POST",
       crossDomain: true,
       headers: {

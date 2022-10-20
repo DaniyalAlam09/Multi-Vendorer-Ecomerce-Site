@@ -4,8 +4,6 @@ import { useState } from "react";
 export default function CartPage() {
   const [cartItems, setCartItems] = useState([]);
 
-  
-
   return (
     <div className="cart">
       <div className="cart-header">Cart</div>

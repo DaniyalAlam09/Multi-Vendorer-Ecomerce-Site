@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { Component } from "react";
 
 export default class Navbar extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +15,8 @@ export default class Navbar extends Component {
     this.logout = this.logout.bind(this);
   }
   componentDidMount() {
-    console.log(localStorage.getItem('token'))
-    fetch("http://localhost:5000/userData", {
+    console.log(localStorage.getItem("token"));
+    fetch("http://localhost:4000/users/user", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -31,7 +30,7 @@ export default class Navbar extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "userData");
+        console.log("user");
         this.setState({ userData: data.data });
       });
   }
@@ -39,9 +38,8 @@ export default class Navbar extends Component {
     console.log("clicked");
     // const navigate = useNavigate();
     localStorage.clear();
-   
-    window.location.href = "/account"; 
-    
+
+    window.location.href = "/account";
   };
   render() {
     return (
@@ -136,37 +134,43 @@ export default class Navbar extends Component {
               <UilHeart className="icons" />
             </div>
 
-            {localStorage.getItem("token")?<div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                {this.state.userData.fname}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <Link to="/dashboard" type="submit">
-                  <button class="">Profile</button>
-                </Link>{" "}
-                <br />
-                {/* <Link to="/logout" type="submit" class=""> */}
-                <button class="" onClick={this.logout}>
-                  Logout
+            {localStorage.getItem("token") ? (
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {this.state.userData.firstName}
                 </button>
-                {/* </Link> */}
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <Link to="/dashboard" type="submit">
+                    <button class="">Profile</button>
+                  </Link>{" "}
+                  <br />
+                  {/* <Link to="/logout" type="submit" class=""> */}
+                  <button class="" onClick={this.logout}>
+                    Logout
+                  </button>
+                  {/* </Link> */}
+                </div>
               </div>
-            </div>:""}
+            ) : (
+              ""
+            )}
 
-            
             {/* : */}
             <Link to="/account" type="submit">
-              {localStorage.getItem("token")?"":<button class="btn btn-primary signin ml-2">Sign IN</button>}
-              
+              {localStorage.getItem("token") ? (
+                ""
+              ) : (
+                <button class="btn btn-primary signin ml-2">Sign IN</button>
+              )}
             </Link>
-  {/* } */}
+            {/* } */}
             {/* <Link to="/userDetails" type="submit">
             <button class="btn btn-primary signin">{this.state.userData.fname}</button>
           </Link>

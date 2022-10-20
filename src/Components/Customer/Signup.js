@@ -16,18 +16,18 @@ export default class SignUp extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const { fname, lname, email, password } = this.state;
-    console.log(fname, lname, email, password);
+    const { firstName, lastName, email, password } = this.state;
+    console.log(firstName, lastName, email, password);
     const { value } = this.state;
-    const re = new RegExp("(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
-    const isOk = re.test(value);
+    // const re = new RegExp("(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
+    // const isOk = re.test(value);
 
-    console.log(isOk);
+    // console.log(isOk);
 
     // if (!isOk) {
     //   return alert("weak!");
     // }
-    fetch("http://localhost:5000/register", {
+    fetch("http://localhost:4000/users/registration", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -36,16 +36,15 @@ export default class SignUp extends Component {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        fname,
-        lname,
+        firstName,
+        lastName,
         email,
         password,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "userRegister");
-
+        console.log(data);
         toast("Successfull Registered");
         window.localStorage.setItem("token", data.data);
         window.location.href = "/account";
@@ -73,7 +72,9 @@ export default class SignUp extends Component {
                   <input
                     type="text"
                     class="form-control"
-                    onChange={(e) => this.setState({ fname: e.target.value })}
+                    onChange={(e) =>
+                      this.setState({ firstName: e.target.value })
+                    }
                   />
                 </div>
                 <div class="form-wrapper mb-2">
@@ -81,7 +82,9 @@ export default class SignUp extends Component {
                   <input
                     type="text"
                     class="form-control"
-                    onChange={(e) => this.setState({ lname: e.target.value })}
+                    onChange={(e) =>
+                      this.setState({ lastName: e.target.value })
+                    }
                   />
                 </div>
               </div>

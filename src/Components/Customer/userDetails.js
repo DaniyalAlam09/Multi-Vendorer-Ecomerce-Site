@@ -8,7 +8,7 @@ export default class CustomerAccount extends Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:5000/userData", {
+    fetch("http://localhost:4000/user/user", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -30,9 +30,9 @@ export default class CustomerAccount extends Component {
     return (
       <div className="container">
         <h4> First Name </h4>
-        <h6>{this.state.userData.fname}</h6>
+        <h6>{this.state.userData.firstName}</h6>
         <h4> Last Name </h4>
-        <h6>{this.state.userData.lname}</h6>
+        <h6>{this.state.userData.lastName}</h6>
         <h4> Email </h4> <h6>{this.state.userData.email}</h6>
       </div>
     );

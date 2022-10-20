@@ -5,11 +5,13 @@ import { CartProvider, useCart } from "react-use-cart";
 import { Link } from "react-router-dom";
 import data from "./Data";
 
-function FeaturedProducts({productItem}) {
+function FeaturedProducts({ productItem }) {
   const [cartItems, setCartItems] = useState([]);
   const handleAddProduct = (product) => {
     const ProductExist = cartItems.find((item) => item.id === product.id);
+    console.log(ProductExist);
     if (ProductExist) {
+      console.log("hello");
       setCartItems(
         cartItems.map((item) =>
           item.id === product.id
@@ -18,6 +20,7 @@ function FeaturedProducts({productItem}) {
         )
       );
     } else {
+      console.log("hellow");
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
   };
@@ -72,7 +75,12 @@ function FeaturedProducts({productItem}) {
                         </div>
                       </div>
                     </div>
-                    <button onClick={() => handleAddProduct(data)} className="btn button addcart">Add to Cart</button>
+                    <button
+                      onClick={() => handleAddProduct(data)}
+                      className="btn button addcart"
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               ))}
