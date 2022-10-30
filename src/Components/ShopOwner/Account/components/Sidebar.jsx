@@ -15,18 +15,18 @@ const Sidebar = ({ children }) => {
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
     {
-      path: "customer-dashboard",
+      path: "shoponwer-dashboard",
       name: "Dashboard",
       icon: <FaTh />,
     },
-    // {
-    //     path:"/about",
-    //     name:"About",
-    //     icon:<FaUserAlt/>
-    // },
     {
-      path: "customer-orders",
-      name: "Your Orders",
+      path: "manage-orders",
+      name: "Manage Orders",
+      icon: <FaUserAlt />,
+    },
+    {
+      path: "shoponwer-analytics",
+      name: "Analytics",
       icon: <FaRegChartBar />,
     },
     {
@@ -35,15 +35,20 @@ const Sidebar = ({ children }) => {
       icon: <FaCommentAlt />,
     },
     {
-      path: "logout",
-      name: "Logout",
+      path: "addproduct",
+      name: "Add Product",
       icon: <FaShoppingBag />,
     },
-    // {
-    //     path:"/productList",
-    //     name:"Product List",
-    //     icon:<FaThList/>
-    // }
+    {
+      path: "product-list",
+      name: "Products",
+      icon: <FaShoppingBag />,
+    },
+    {
+      path: "logout",
+      name: "Logout",
+      icon: <FaThList />,
+    },
   ];
   return (
     <div className="sidebyside">

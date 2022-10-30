@@ -1,11 +1,12 @@
 import "./App.css";
 import { useState } from "react";
+import { CartProvider, useCart } from "react-use-cart";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Home from "./Components/Customer/HomePage/Home";
 import Login from "./Components/Customer/Login";
 import Footer from "./Components/Genral/Footer";
 import Navbar from "./Components/Genral/Navbar";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { CartProvider, useCart } from "react-use-cart";
 import CartPage from "./Components/Customer/Cart/CartPage";
 import Cart from "./Components/Customer/Cart/Cart";
 import ShopsPage from "./Components/Customer/Shops/ShopsPage";
@@ -19,16 +20,21 @@ import data from "./Components/Customer/HomePage/Data";
 import Signup from "./Components/Customer/Signup";
 import ForgotPassword from "./Components/Customer/ForgotPassword";
 import CustomerAccount from "./Components/Customer/userDetails";
-import Logout from "./Components/Customer/Logout";
-import Sidebar from "./Components/Customer/Account/components/Sidebar";
 import Dashboard from "./Components/Customer/Account/pages/Dashboard";
-// import About from "./Components/Customer/Account//pages/About.jsx";
-import Analytics from "./Components/Customer/Account//pages/Analytics.jsx";
-import Comment from "./Components/Customer/Account//pages/Comment.jsx";
-import Product from "./Components/Customer/Account//pages/Product.jsx";
-import ProductList from "./Components/Customer/Account//pages/ProductList.jsx";
-import SignUp from "./Components/ShopOwner/Signup";
-
+import ShopOwnerSignUp from "./Components/ShopOwner/Signup";
+import ShopOwnerLogin from "./Components/ShopOwner/Login";
+import Homex from "./Components/Customer/Account/pages/Homex";
+import EditProfile from "./Components/Customer/Account/pages/EditProfile";
+import Orders from "./Components/Customer/Account/pages/Orders";
+import Logout from "./Components/Customer/Account/pages/Logout";
+import Homey from "./Components/ShopOwner/Account/pages/Homey";
+import AddProduct from "./Components/ShopOwner/Account/pages/AddProduct";
+import ShopOwnerEditProfile from "./Components/ShopOwner/Account/pages/ShopOwnerEditProfile";
+import ManageOrders from "./Components/ShopOwner/Account/pages/ManageOrders";
+import ShopOwnerAnalytics from "./Components/ShopOwner/Account/pages/ShopOwnerAnalytics";
+import ShopOwnerDashboard from "./Components/ShopOwner/Account/pages/ShopOwnerDashboard";
+import ShopOwnerLogout from "./Components/ShopOwner/Account/pages/ShopOwnerLogout";
+import ShopOwnerProductList from "./Components/ShopOwner/Account/pages/ShopOwnerProductList";
 
 function App() {
   const { productItem } = data;
@@ -48,45 +54,61 @@ function App() {
     }
   };
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route productItem={productItem} exact path="/" element={<Home />} />
-          <Route path="/shops" element={<ShopsPage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/userDetails" element={<CustomerAccount />} />
-          {/* <Route path="/logout" element={<Logout />} /> */}
-          <Route path="/account" element={<Login />} />
-          <Route path="/create-account" element={<Signup />} />
-          <Route path="//reset-password" element={<ForgotPassword />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/singleProduct" element={<Detail />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/shopowner-account" element={<SignUp/>} />
-        </Routes>
-        <Sidebar>
+    <>
+      <Router>
+        <div className="App">
+          <Navbar />
           <Routes>
-            {/* <Route path="/" element={<Dashboard />} /> */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/about" element={<About />} /> */}
-            <Route path="/comment" element={<Comment />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/productList" element={<ProductList />} />
+            <Route
+              productItem={productItem}
+              exact
+              path="/"
+              element={<Home />}
+            />
+            <Route path="home" element={<Home />} />
+            <Route path="/shops" element={<ShopsPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/userDetails" element={<CustomerAccount />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
+            <Route path="/account" element={<Login />} />
+            <Route path="/create-account" element={<Signup />} />
+            <Route path="/reset-password" element={<ForgotPassword />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/singleProduct" element={<Detail />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/products" element={<Products />} />
+
+            <Route path="/shopowner-account" element={<ShopOwnerSignUp />} />
+            <Route path="/shopowner-login" element={<ShopOwnerLogin />} />
+            <Route path="user" element={<Homex />}>
+              <Route path="edit-profile" element={<EditProfile />} />
+              <Route path="customer-orders" element={<Orders />} />
+              <Route path="customer-dashboard" element={<Dashboard />} />
+              <Route path="logout" element={<Logout />} />
+              {/*   <Route path="/productList" element={<ProductList />} /> */}
+            </Route>
+
+            <Route path="shopowner" element={<Homey />}>
+              <Route path="addproduct" element={<AddProduct />} />
+              <Route path="edit-profile" element={<ShopOwnerEditProfile />} />
+              <Route path="manage-orders" element={<ManageOrders />} />
+              <Route
+                path="shoponwer-analytics"
+                element={<ShopOwnerAnalytics />}
+              />
+              <Route
+                path="shoponwer-dashboard"
+                element={<ShopOwnerDashboard />}
+              />
+              <Route path="product-list" element={<ShopOwnerProductList />} />
+              <Route path="logout" element={<ShopOwnerLogout />} />
+            </Route>
           </Routes>
-        </Sidebar>
-
-        <Footer />
-      </div>
-    </Router>
-
-    // <CartProvider>
-    //   <CartPage/>
-    //   <Cart/>
-    // </CartProvider>
+          <Footer />
+        </div>
+      </Router>
+    </>
   );
 }
 

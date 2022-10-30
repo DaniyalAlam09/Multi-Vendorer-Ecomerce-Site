@@ -18,15 +18,6 @@ export default class SignUp extends Component {
     e.preventDefault();
     const { firstName, lastName, email, password } = this.state;
     console.log(firstName, lastName, email, password);
-    const { value } = this.state;
-    // const re = new RegExp("(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
-    // const isOk = re.test(value);
-
-    // console.log(isOk);
-
-    // if (!isOk) {
-    //   return alert("weak!");
-    // }
     fetch("http://localhost:4000/users/registration", {
       method: "POST",
       crossDomain: true,
@@ -43,11 +34,64 @@ export default class SignUp extends Component {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast("Successfull Registered");
-        window.localStorage.setItem("token", data.data);
-        window.location.href = "/account";
+      .then((user) => {
+        console.log(user);
+        if (user.message == "success") {
+          toast("Successfull Registered");
+          window.localStorage.setItem("token", user.data);
+          console.log(user.password);
+          // window.location.href = "/account";
+        } else if (user.message == "user Already exist") {
+          toast.error("User Already exist", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (user.message == "All Feild must be filled") {
+          toast.error("Too Short Password", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (user.message == "Email is not valid") {
+          toast.error("Email is not valid", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (user.message == "password is not strong enough") {
+          toast.error("password is not strong enough", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error("Wrong Inputs", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       });
   }
   render() {
@@ -88,21 +132,30 @@ export default class SignUp extends Component {
                   />
                 </div>
               </div>
-              <div class="form-wrapper mb-2">
-                <label for="">Email</label>
+              <div class="form-wrapper mb-2 form-group required">
+                <label class="control-label" for="">
+                  Email
+                </label>
                 <input
                   type="email"
                   class="form-control"
                   onChange={(e) => this.setState({ email: e.target.value })}
                 />
               </div>
-              <div class="form-wrapper mb-2">
-                <label for="">Password</label>
+              <div class="form-wrapper mb-2 form-group required">
+                <label class="control-label" for="">
+                  Password
+                </label>
                 <input
                   type="password"
                   class="form-control"
                   onChange={(e) => this.setState({ password: e.target.value })}
                 />
+                <p className="error">
+                  Use atleast a <strong>Capital letter</strong> a{" "}
+                  <strong>number</strong> and a{" "}
+                  <strong>special chracter</strong>
+                </p>
               </div>
               {/* <div class="form-wrapper mb-2">
                 <label for="">Confirm Password</label>

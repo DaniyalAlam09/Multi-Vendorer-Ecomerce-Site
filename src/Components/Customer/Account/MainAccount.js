@@ -2,26 +2,35 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard.jsx";
-import About from "./pages/About.jsx";
-import Analytics from "./pages/Analytics.jsx";
-import Comment from "./pages/Comment.jsx";
-import Product from "./pages/Product.jsx";
+import Orders from "./pages/Orders.jsx";
+import EditProfile from "./pages/EditProfile.jsx";
+import Logout from "./pages/Logout.jsx";
 import ProductList from "./pages/ProductList.jsx";
+import Homex from "./pages/Homex.jsx";
 
 function MainAccount() {
   return (
+    // <BrowserRouter>
+    // <Sidebar>
+    //   <Routes>
+    //     <Route path="/customer-dashboard" element={<Dashboard />} />
+    //     <Route path="/edit-profile" element={<EditProfile />} />
+    //     <Route path="/customer-orders" element={<Orders />} />
+    //     <Route path="/logout" element={<Logout />} />
+    //     {/* <Route path="/productList" element={<ProductList />} /> */}
+    //   </Routes>
+    // </Sidebar>
+    // </BrowserRouter>
     <BrowserRouter>
-      <Sidebar>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/comment" element={<Comment />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/product" element={<Product />} />
+      <Routes>
+        <Route exact path="/" element={<Homex />}>
+          <Route path="/customer-dashboard" element={<Dashboard />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/customer-orders" element={<Orders />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/productList" element={<ProductList />} />
-        </Routes>
-      </Sidebar>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

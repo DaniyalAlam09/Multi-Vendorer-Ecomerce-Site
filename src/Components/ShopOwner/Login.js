@@ -12,14 +12,13 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function ShopOwnerLogin() {
   const navigate = useNavigate();
   const [state, setState] = useState({
     email: "",
     password: "",
     showPassword: false,
   });
-
   const handleClickShowPassword = () => {
     setState({ ...state, showPassword: !state.showPassword });
   };
@@ -35,7 +34,7 @@ export default function Login() {
     e.preventDefault();
     const { email, password } = state;
     console.log(email, password);
-    fetch("http://localhost:4000/users/login", {
+    fetch("http://localhost:4000/shopowners/login", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -53,12 +52,10 @@ export default function Login() {
         console.log(user);
         if (user.message == "success") {
           toast("Successfull Logged in");
-          window.localStorage.setItem("token", user.data);
-          console.log("token", user.token);
-          // navigate("user/customer-dashboard", { replace: true });
-          navigate("../user/customer-dashboard", { replace: true });
-          // navigate(0);
-          // window.location.href = "user/customer-dashboard";
+          window.localStorage.setItem(user.data);
+          navigate("../shopowner/shoponwer-dashboard", { replace: true });
+          console.log("token", user.data);
+          // window.location.href = "shopowner/shoponwer-dashboard";
         } else if (user.message == "Incorrect Password") {
           toast.error("Invalid Password", {
             position: "top-right",
@@ -101,8 +98,8 @@ export default function Login() {
                     Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
                     consectetur adipisicing.
                   </p>
-                  <Link className="negative" to="/shopowner-login">
-                    Login as Shop Owner?
+                  <Link className="negative" to="/account">
+                    Login as Customer?
                   </Link>
                 </div>
 

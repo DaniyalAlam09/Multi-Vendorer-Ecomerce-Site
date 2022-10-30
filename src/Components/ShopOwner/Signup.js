@@ -3,16 +3,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
-export default class SignUp extends Component {
+export default class ShopOwnerSignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fname: "",
-      lname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      shop_no: "",
-      shopname: "",
+      shopNo: "",
+      shopName: "",
       floor: "",
       catagorey: "",
       phone: "",
@@ -22,29 +22,29 @@ export default class SignUp extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const {
-      fname,
-      lname,
+      firstName,
+      lastName,
       email,
       password,
-      shop_no,
-      shopname,
+      shopNo,
+      shopName,
       floor,
       catagorey,
       phone,
     } = this.state;
     console.log(
-      fname,
-      lname,
+      firstName,
+      lastName,
       email,
       password,
-      shop_no,
-      shopname,
+      shopNo,
+      shopName,
       floor,
       catagorey,
       phone
     );
 
-    fetch("http://localhost:5000/shopowner-register", {
+    fetch("http://localhost:4000/shopowners/registration", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -53,23 +53,76 @@ export default class SignUp extends Component {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        fname,
-        lname,
+        firstName,
+        lastName,
         email,
         password,
-        shop_no,
-        shopname,
+        shopNo,
+        shopName,
         floor,
         catagorey,
         phone,
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "userRegister");
-
-        toast("Successfull Registered");
-        window.localStorage.setItem("token", data.data);
+      .then((shopOwner) => {
+        console.log(shopOwner, "shopOwnerRegister");
+        if (shopOwner.message == "success") {
+          toast("Successfull Registered");
+          window.localStorage.setItem("token", shopOwner.data);
+          console.log(shopOwner.password);
+          // window.location.href = "/account";
+        } else if (shopOwner.message == "shopOwner Already exist") {
+          toast.error("shopOwner Already exist", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (shopOwner.message == "All Feild must be filled") {
+          toast.error("Too Short Password", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (shopOwner.message == "Email is not valid") {
+          toast.error("Email is not valid", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (shopOwner.message == "password is not strong enough") {
+          toast.error("password is not strong enough", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error("Wrong Inputs", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
         // window.location.href = "/account";
       });
   }
@@ -100,7 +153,9 @@ export default class SignUp extends Component {
                       type="text"
                       id="form6Example1"
                       class="form-control"
-                      onChange={(e) => this.setState({ fname: e.target.value })}
+                      onChange={(e) =>
+                        this.setState({ firstName: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -113,13 +168,15 @@ export default class SignUp extends Component {
                       type="text"
                       id="form6Example2"
                       class="form-control"
-                      onChange={(e) => this.setState({ lname: e.target.value })}
+                      onChange={(e) =>
+                        this.setState({ lastName: e.target.value })
+                      }
                     />
                   </div>
                 </div>
               </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form6Example5">
+              <div class="form-outline mb-4 form-group required">
+                <label class="form-label control-label" for="form6Example5">
                   Email
                 </label>
                 <input
@@ -130,8 +187,10 @@ export default class SignUp extends Component {
                 />
               </div>
 
-              <div class="form-wrapper mb-2">
-                <label for="">Password</label>
+              <div class="form-wrapper form-group required mb-2">
+                <label class="form-label control-label" for="">
+                  Password
+                </label>
                 <input
                   type="password"
                   class="form-control"
@@ -139,32 +198,35 @@ export default class SignUp extends Component {
                 />
               </div>
 
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form6Example3">
+              <div class="form-outline mb-4 form-group required">
+                <label class="form-label control-label" for="form6Example3">
                   Shop name
                 </label>
                 <input
                   type="text"
                   id="form6Example3"
                   class="form-control"
-                  onChange={(e) => this.setState({ shopname: e.target.value })}
+                  onChange={(e) => this.setState({ shopName: e.target.value })}
                 />
               </div>
 
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form6Example4">
+              <div class="form-outline mb-4 form-group required">
+                <label class="form-label control-label" for="form6Example4">
                   Shop Number
                 </label>
                 <input
                   type="text"
                   id="form6Example4"
                   class="form-control"
-                  onChange={(e) => this.setState({ shop_no: e.target.value })}
+                  onChange={(e) => this.setState({ shopNo: e.target.value })}
                 />
               </div>
-              <div class="col-12">
-                <label class="visually-hidden">Floor</label>
-                <select class="select ml-4 mb-4" onChange={(e) => this.setState({ floor: e.target.value })}>
+              <div class="col-12 form-group required">
+                <label class="visually-hidden control-label">Floor</label>
+                <select
+                  class="select ml-4 mb-4"
+                  onChange={(e) => this.setState({ floor: e.target.value })}
+                >
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -173,8 +235,8 @@ export default class SignUp extends Component {
                 </select>
               </div>
 
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form6Example6">
+              <div class="form-outline mb-4 form-group required">
+                <label class="form-label control-label" for="form6Example6">
                   Phone
                 </label>
                 <input
@@ -189,16 +251,34 @@ export default class SignUp extends Component {
                 <label class="visually-hidden" for="inlineFormSelectPref">
                   Catagory Of Shop
                 </label>
-                <select class="select ml-4 mb-4" onChange={(e) => this.setState({ catagorey: e.target.value })}>
-                  <option value="1">Accessories</option>
-                  <option value="2">Moiles</option>
-                  <option value="3">Laptops</option>
-                  <option value="4">Tabetes</option>
+                <select
+                  class="select ml-4 mb-4"
+                  onChange={(e) => this.setState({ catagorey: e.target.value })}
+                >
+                  <option value="none">None</option>
+                  <option value="Accessories">Accessories</option>
+                  <option value="Moiles">Moiles</option>
+                  <option value="Laptops">Laptops</option>
+                  <option value="Tabetes">Tabetes</option>
                 </select>
               </div>
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button
+                type="submit"
+                class="buttons btn text-white btn-block btn-primary"
+              >
                 Register
               </button>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </form>
           </div>
         </div>

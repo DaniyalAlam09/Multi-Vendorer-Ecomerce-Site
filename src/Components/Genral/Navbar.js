@@ -16,22 +16,12 @@ export default class Navbar extends Component {
   }
   componentDidMount() {
     console.log(localStorage.getItem("token"));
-    fetch("http://localhost:4000/users/user", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        token: window.localStorage.getItem("token"),
-      }),
-    })
+    fetch("http://localhost:4000/users/user")
       .then((res) => res.json())
-      .then((data) => {
+      .then((da) => {
         console.log("user");
-        this.setState({ userData: data.data });
+        this.setState({ userData: da.data });
+        console.log(da.data);
       });
   }
   logout = () => {
@@ -147,7 +137,7 @@ export default class Navbar extends Component {
                   {this.state.userData.firstName}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <Link to="/dashboard" type="submit">
+                  <Link to="user" type="submit">
                     <button class="">Profile</button>
                   </Link>{" "}
                   <br />

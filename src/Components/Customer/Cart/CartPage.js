@@ -1,22 +1,34 @@
 import React from "react";
-import { useState } from "react";
+import { CartProvider, useCart } from "react-use-cart";
 
-export default function CartPage() {
-  const [cartItems, setCartItems] = useState([]);
+export default function Cart() {
+  const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } =
+    useCart();
+
+  if (isEmpty) return <p>Your cart is empty</p>;
 
   return (
-    <div className="cart">
-      <div className="cart-header">Cart</div>
+    <>
+      <h1>Cart ({totalUniqueItems})</h1>
 
-      {cartItems.length === 0 && <div className="empty-cart">no items</div>}
-
-      <div>
-        {cartItems.map((item) => (
-          <div className="cart-list" key={cartItems.indexOf(item)}>
-            <img className="cart-img" src={item.img} />
-          </div>
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>
+            {item.quantity} x {item.name} &mdash;
+            <button
+              onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
+            >
+              -
+            </button>
+            <button
+              onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
+            >
+              +
+            </button>
+            <button onClick={() => removeItem(item.id)}>&times;</button>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </>
   );
 }

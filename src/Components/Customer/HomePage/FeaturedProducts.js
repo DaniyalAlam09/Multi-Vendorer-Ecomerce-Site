@@ -6,24 +6,32 @@ import { Link } from "react-router-dom";
 import data from "./Data";
 
 function FeaturedProducts({ productItem }) {
-  const [cartItems, setCartItems] = useState([]);
-  const handleAddProduct = (product) => {
-    const ProductExist = cartItems.find((item) => item.id === product.id);
-    console.log(ProductExist);
-    if (ProductExist) {
-      console.log("hello");
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
-            : item
-        )
-      );
-    } else {
-      console.log("hellow");
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
+  const { addItem } = useCart();
+  // const [cartItems, setCartItems] = useState([]);
+  // const handleAddProduct = (product) => {
+  //   const ProductExist = cartItems.find((item) => item.id === product.id);
+  //   console.log(ProductExist);
+  //   if (ProductExist) {
+  //     console.log("hello");
+  //     setCartItems(
+  //       cartItems.map((item) =>
+  //         item.id === product.id
+  //           ? { ...ProductExist, quantity: ProductExist.quantity + 1 }
+  //           : item
+  //       )
+  //     );
+  //   } else {
+  //     console.log("hellow");
+  //     setCartItems([...cartItems, { ...product, quantity: 1 }]);
+  //   }
+  // };
+
+  console.log(addItem);
+
+  const addToCart = (id) => {
+    console.log(id);
   };
+
   return (
     <>
       <div className="heading container">
@@ -76,7 +84,7 @@ function FeaturedProducts({ productItem }) {
                       </div>
                     </div>
                     <button
-                      onClick={() => handleAddProduct(data)}
+                      onClick={() => addToCart(elem.id)}
                       className="btn button addcart"
                     >
                       Add to Cart
