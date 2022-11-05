@@ -55,7 +55,7 @@ export default function ShopOwnerLogin() {
           window.localStorage.setItem(user.data);
           navigate("../shopowner/shoponwer-dashboard", { replace: true });
           console.log("token", user.data);
-          // window.location.href = "shopowner/shoponwer-dashboard";
+          window.location.href = "shopowner/shoponwer-dashboard";
         } else if (user.message == "Incorrect Password") {
           toast.error("Invalid Password", {
             position: "top-right",

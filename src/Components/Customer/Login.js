@@ -11,6 +11,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -30,59 +31,85 @@ export default function Login() {
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    const { email, password } = state;
-    console.log(email, password);
-    fetch("http://localhost:4000/users/login", {
-      method: "POST",
-      crossDomain: true,
+    const config = {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((user) => {
-        console.log(user);
-        if (user.message == "success") {
-          toast("Successfull Logged in");
-          window.localStorage.setItem("token", user.data);
-          console.log("token", user.token);
-          // navigate("user/customer-dashboard", { replace: true });
-          navigate("../user/customer-dashboard", { replace: true });
-          // navigate(0);
-          // window.location.href = "user/customer-dashboard";
-        } else if (user.message == "Incorrect Password") {
-          toast.error("Invalid Password", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        } else {
-          // console.log("ok");
-          toast.error("User Doesnt exist", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
+      withCredentials: true,
+    };
+
+    axios
+      .post(
+        `http://localhost:4000/users/login`,
+        { email: state.email, password: state.password },
+        config
+      )
+      .then((response) => {
+        window.location.href = "user/customer-dashboard";
+        // navigate("./user/customer-dashboard");
+        alert("kihuhu");
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = state;
+  //   console.log(email, password);
+  //   fetch("http://localhost:4000/users/login", {
+  //     method: "POST",
+  //     crossDomain: true,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //     body: JSON.stringify({
+  //       email,
+  //       password,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((user) => {
+  //       console.log(user);
+  //       if (user.message == "success") {
+  //         toast("Successfull Logged in");
+  //         window.localStorage.setItem("token", user.token);
+  //         console.log("token", user.token);
+  //         // navigate("user/customer-dashboard", { replace: true });
+  //         // navigate("../user/customer-dashboard", { replace: true });
+  //         // navigate(0);
+  //         window.location.href = "user/customer-dashboard";
+  //       } else if (user.message == "Incorrect Password") {
+  //         toast.error("Invalid Password", {
+  //           position: "top-right",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //         });
+  //       } else {
+  //         // console.log("ok");
+  //         toast.error("User Doesnt exist", {
+  //           position: "top-right",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //         });
+  //       }
+  //     });
+  // };
+
   return (
     <div className="content heading">
       <div className="container">
@@ -106,7 +133,7 @@ export default function Login() {
                   </Link>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleLogin}>
                   <div className="form-group first form-group required">
                     <label class="control-label">Email</label>
                     <input

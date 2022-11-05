@@ -10,11 +10,12 @@ import Navbar from "./Components/Genral/Navbar";
 import CartPage from "./Components/Customer/Cart/CartPage";
 import Cart from "./Components/Customer/Cart/Cart";
 import ShopsPage from "./Components/Customer/Shops/ShopsPage";
+import Checkout from "./Components/Customer/Checkout/Checkout";
 import About from "./Components/Genral/About";
 import Contact from "./Components/Genral/Contact";
 import Search from "./Components/Customer/HomePage/Search/Search";
 import Detail from "./Components/Customer/SingleProduct/Detail";
-import CheckOut from "./Components/Customer/Cart/CheckOut";
+// import Checkout from "./Components/Customer/Checkout/Checkout";
 import Products from "./Components/Customer/Products/Products";
 import data from "./Components/Customer/HomePage/Data";
 import Signup from "./Components/Customer/Signup";
@@ -75,9 +76,10 @@ function App() {
             <Route path="/create-account" element={<Signup />} />
             <Route path="/reset-password" element={<ForgotPassword />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/singleProduct" element={<Detail />} />
+            <Route path="/singleProduct/:productId" element={<Detail />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/shopowner-account" element={<ShopOwnerSignUp />} />
             <Route path="/shopowner-login" element={<ShopOwnerLogin />} />

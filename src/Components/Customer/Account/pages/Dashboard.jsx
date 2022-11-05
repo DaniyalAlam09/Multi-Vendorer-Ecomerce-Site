@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Dashboard = () => {
-  const [user, setUser] = useState("");
-  useEffect(() => {
-    fetch("http://localhost:4000/users/user")
-      .then((response) => response.json())
-      .then((actualData) => {
-        console.log(actualData);
-        setUser(actualData);
+  const [user, setUser] = React.useState({});
+  React.useEffect(function () {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios
+      .get("http://localhost:4000/users/user", config)
+      .then((res) => {
+        setUser(res.data.user);
+        console.log(res.data.user);
         console.log(user);
       })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
-    // then((res) => {
-    //   setUser(res.data.user);
-    //   console.log(res.data);
-    // });
   }, []);
   return (
     <div className="">

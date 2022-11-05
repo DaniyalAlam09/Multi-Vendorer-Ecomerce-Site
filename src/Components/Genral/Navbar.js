@@ -5,173 +5,179 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 // import Navbar from './Navbar';
 import { Component } from "react";
+import axios from "axios";
 
-export default class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userData: "",
+const Navbar = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = React.useState({});
+  const handleLogout = () => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
     };
-    this.logout = this.logout.bind(this);
-  }
-  componentDidMount() {
-    console.log(localStorage.getItem("token"));
-    fetch("http://localhost:4000/users/user")
-      .then((res) => res.json())
-      .then((da) => {
-        console.log("user");
-        this.setState({ userData: da.data });
-        console.log(da.data);
+    axios
+      .get("http://localhost:4000/users/logout", config)
+      .then((response) => {
+        console.log(response.data);
+        navigate("../../account");
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
-  }
-  logout = () => {
-    console.log("clicked");
-    // const navigate = useNavigate();
-    localStorage.clear();
-
-    window.location.href = "/account";
   };
-  render() {
-    return (
-      <div classNameName="navbar container">
-        <nav className="navbar navbar-expand-lg navbar-light ovm">
-          {/* <a className="navbar-brand" href="#">
+  React.useEffect(function () {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios
+      .get("http://localhost:4000/users/user", config)
+      .then((res) => {
+        setUser(res.data.user);
+        console.log(res.data.user);
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <div classNameName="navbar container">
+      <nav className="navbar navbar-expand-lg navbar-light ovm">
+        {/* <a className="navbar-brand" href="#">
           OVM
         </a> */}
-          <Link to="/" className="navbar-brand">
-            <img src="/images/logo.jpg" alt="" width="100" height="40" />
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+        <Link to="/" className="navbar-brand">
+          <img src="/images/logo.jpg" alt="" width="100" height="40" />
+        </Link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div
-            className="collapse navbar-collapse menu"
-            id="navbarSupportedContent  "
-          >
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Catagories
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Catagories
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">
+                  Mobiles
                 </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">
-                    Mobiles
-                  </a>
-                  <a className="dropdown-item" href="#">
-                    Laptops
-                  </a>
-                </div>
-              </li>
-              <li className="nav-item">
-                <Link to="products" className="nav-link">
-                  Special Price <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/shops" className="nav-link">
-                  Shops
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Virtual Tour
+                <a className="dropdown-item" href="#">
+                  Laptops
                 </a>
-              </li>
-              <li className="nav-item">
-                <Link to="/about" className="nav-link">
-                  About Us
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/contact" className="nav-link">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-            <form className="form-inline">
-              <input
-                className="form-control "
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-            </form>
-            <div className="icon">
-              <Link to="/search">
-                <UilSearch className="icons" />
-              </Link>
-              <Link to="/cart">
-                <UilShoppingBag className="icons" />
-              </Link>
-              {/* <span>{size}</span> */}
-              <UilHeart className="icons" />
-            </div>
-
-            {localStorage.getItem("token") ? (
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {this.state.userData.firstName}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <Link to="user" type="submit">
-                    <button class="">Profile</button>
-                  </Link>{" "}
-                  <br />
-                  {/* <Link to="/logout" type="submit" class=""> */}
-                  <button class="" onClick={this.logout}>
-                    Logout
-                  </button>
-                  {/* </Link> */}
-                </div>
               </div>
-            ) : (
-              ""
-            )}
+            </li>
+            <li className="nav-item">
+              <Link to="products" className="nav-link">
+                Special Price <span className="sr-only">(current)</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/shops" className="nav-link">
+                Shops
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Virtual Tour
+              </a>
+            </li>
+            <li className="nav-item">
+              <Link to="/about" className="nav-link">
+                About Us
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/contact" className="nav-link">
+                Contact Us
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <form className="form-inline">
+          <input
+            className="form-control "
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+        <div className="icon">
+          <Link to="/search">
+            <UilSearch className="icons" />
+          </Link>
+          <Link to="/cart">
+            <UilShoppingBag className="icons" />
+          </Link>
+          {/* <span>{size}</span> */}
+          <UilHeart className="icons" />
+        </div>
 
-            {/* : */}
-            <Link to="/account" type="submit">
-              {localStorage.getItem("token") ? (
-                ""
-              ) : (
-                <button class="btn btn-primary signin ml-2">Sign IN</button>
-              )}
-            </Link>
-            {/* } */}
-            {/* <Link to="/userDetails" type="submit">
+        {user ? (
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {user.firstName}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <Link to="user" type="submit">
+                <button class="">Profile</button>
+              </Link>{" "}
+              <br />
+              {/* <Link to="/logout" type="submit" class=""> */}
+              <button class="" onClick={handleLogout}>
+                Logout
+              </button>
+              {/* </Link> */}
+            </div>
+          </div>
+        ) : (
+          <Link to="/account" type="submit">
+            <button class="btn btn-primary signin ml-2">Sign IN</button>
+          </Link>
+        )}
+
+        {/* } */}
+        {/* <Link to="/userDetails" type="submit">
             <button class="btn btn-primary signin">{this.state.userData.fname}</button>
           </Link>
           <Link to="/logout" type="submit">
             <button class="btn btn-primary signin">Logout</button>
           </Link> */}
-          </div>
-        </nav>
-      </div>
-    );
-  }
-}
+      </nav>
+    </div>
+  );
+};
 
-// export default Navbar;
+export default Navbar;
