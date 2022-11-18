@@ -11,6 +11,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function ShopOwnerLogin() {
   const navigate = useNavigate();
@@ -32,53 +33,57 @@ export default function ShopOwnerLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = state;
-    console.log(email, password);
-    fetch("http://localhost:4000/shopowners/login", {
-      method: "POST",
-      crossDomain: true,
+    const config = {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((user) => {
-        console.log(user);
-        if (user.message == "success") {
-          toast("Successfull Logged in");
-          window.localStorage.setItem(user.data);
-          navigate("../shopowner/shoponwer-dashboard", { replace: true });
-          console.log("token", user.data);
-          window.location.href = "shopowner/shoponwer-dashboard";
-        } else if (user.message == "Incorrect Password") {
-          toast.error("Invalid Password", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        } else {
-          // console.log("ok");
-          toast.error("User Doesnt exist", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
+      withCredentials: true,
+    };
+
+    axios
+      .post(
+        `http://localhost:4000/shopowners/login`,
+        { email: state.email, password: state.password },
+        config
+      )
+      .then((response) => {
+        window.location.href = "shopowner/shoponwer-dashboard";
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
+    // .then((user) => {
+    //   console.log(user);
+    //   if (user.message == "success") {
+    //     toast("Successfull Logged in");
+    //     // window.localStorage.setItem(user.data);
+    //     // navigate("../shopowner/shoponwer-dashboard", { replace: true });
+    //     // console.log("token", user.data);
+    //     window.location.href = "shopowner/shoponwer-dashboard";
+    //   } else if (user.message == "Incorrect Password") {
+    //     toast.error("Invalid Password", {
+    //       position: "top-right",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //     });
+    //   } else {
+    //     // console.log("ok");
+    //     toast.error("User Doesnt exist", {
+    //       position: "top-right",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //     });
+    //   }
+    // });
   };
   return (
     <div className="content heading">

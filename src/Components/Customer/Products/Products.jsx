@@ -7,6 +7,7 @@ import SearchBar from "./Home/SearchBar";
 import { dataList } from "./Data";
 import "./styles.css";
 import Hero from "../Images/Hero.png";
+import Navbar from "../../Genral/Navbar";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -96,35 +97,38 @@ const Products = () => {
   }, [selectedRating, selectedCategory, brands, searchInput, selectedPrice]);
 
   return (
-    <div className="home headinng">
-      <HeroSection
-        Name1={"All Products are available "}
-        Name2={"Camera Product"}
-        ImageSource="/images/ProductsHero.png"
-      />
-      <div className="container heading">
-        {/* Search Bar */}
-        <SearchBar
-          value={searchInput}
-          changeInput={(e) => setSearchInput(e.target.value)}
+    <div>
+      {/* <Navbar /> */}
+      <div className="home headinng">
+        <HeroSection
+          Name1={"All Products are available "}
+          Name2={"Camera Product"}
+          ImageSource="/images/ProductsHero.png"
         />
-        <div className="home_panelList-wrap heading">
-          {/* Filter Panel */}
-          <div className="home_panel-wrap">
-            <FilterPanel
-              selectedCategory={selectedCategory}
-              selectCategory={handleSelectCategory}
-              selectedRating={selectedRating}
-              selectedPrice={selectedPrice}
-              selectRating={handleSelectRating}
-              brands={brands}
-              changeChecked={handleChangeChecked}
-              changePrice={handleChangePrice}
-            />
-          </div>
-          {/* List & Empty View */}
-          <div className="home_list-wrap">
-            {resultsFound ? <List list={list} /> : <EmptyView />}
+        <div className="container heading">
+          {/* Search Bar */}
+          <SearchBar
+            value={searchInput}
+            changeInput={(e) => setSearchInput(e.target.value)}
+          />
+          <div className="home_panelList-wrap heading">
+            {/* Filter Panel */}
+            <div className="home_panel-wrap">
+              <FilterPanel
+                selectedCategory={selectedCategory}
+                selectCategory={handleSelectCategory}
+                selectedRating={selectedRating}
+                selectedPrice={selectedPrice}
+                selectRating={handleSelectRating}
+                brands={brands}
+                changeChecked={handleChangeChecked}
+                changePrice={handleChangePrice}
+              />
+            </div>
+            {/* List & Empty View */}
+            <div className="home_list-wrap">
+              {resultsFound ? <List list={list} /> : <EmptyView />}
+            </div>
           </div>
         </div>
       </div>

@@ -1,13 +1,17 @@
 import React from "react";
-import { UilLocationPoint } from '@iconscout/react-unicons'
+import { UilLocationPoint } from "@iconscout/react-unicons";
+import Navbar from "./Navbar";
 
 function Contact() {
   return (
     <div>
+      {/* <Navbar /> */}
       <div className="py-5">
         <div className="container py-4">
           <h2 className="text-uppercase lined mb-4">Contact Us</h2>
-          <h2 className="heading text-uppercase lined mb-4">We are here to help you</h2>
+          <h2 className="heading text-uppercase lined mb-4">
+            We are here to help you
+          </h2>
           <p className="lead mb-5">
             Are you curious about something? Do you have some kind of problem
             with our products? As am hastily invited settled at limited civilly
@@ -22,7 +26,7 @@ function Contact() {
           <div className="row gy-5 mb-5">
             <div className="col-lg-4 block-icon-hover text-center">
               <div className="icon icon-outlined icon-outlined-primary icon-thin mx-auto mb-3">
-              <UilLocationPoint className="icons"/>
+                <UilLocationPoint className="icons" />
               </div>
               <h4 className="text-uppercase mb-3">Address</h4>
               <p className="text-gray-600 text-sm">
@@ -35,7 +39,7 @@ function Contact() {
             </div>
             <div className="col-lg-4 block-icon-hover text-center">
               <div className="icon icon-outlined icon-outlined-primary icon-thin mx-auto mb-3">
-              <UilLocationPoint className="icons"/>
+                <UilLocationPoint className="icons" />
               </div>
               <h4 className="text-uppercase mb-3">Call center</h4>
               <p className="text-gray-600 text-sm">
@@ -48,7 +52,7 @@ function Contact() {
             </div>
             <div className="col-lg-4 block-icon-hover text-center">
               <div className="icon icon-outlined icon-outlined-primary icon-thin mx-auto mb-3">
-                <UilLocationPoint className="icons"/>
+                <UilLocationPoint className="icons" />
               </div>
               <h4 className="text-uppercase mb-3">Electronic support</h4>
               <p className="text-gray-600 text-sm">
@@ -120,7 +124,10 @@ function Contact() {
                     ></textarea>
                   </div>
                   <div className="col-md-12 text-center">
-                    <button className="btn button btn-outline-primary" type="submit">
+                    <button
+                      className="btn button btn-outline-primary"
+                      type="submit"
+                    >
                       <i className="far fa-envelope me-2"></i>Send message
                     </button>
                   </div>

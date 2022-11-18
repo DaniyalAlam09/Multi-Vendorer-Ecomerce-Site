@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 // import Navbar from './Navbar';
 import { Component } from "react";
 import axios from "axios";
+import { useCart } from "react-use-cart";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { isEmpty, totalItems } = useCart();
   const [user, setUser] = React.useState({});
   const handleLogout = () => {
     const config = {
@@ -22,7 +24,9 @@ const Navbar = () => {
       .get("http://localhost:4000/users/logout", config)
       .then((response) => {
         console.log(response.data);
+
         navigate("../../account");
+        navigate(0);
       })
       .catch((err) => {
         console.log(err.message);
@@ -133,6 +137,14 @@ const Navbar = () => {
           </Link>
           <Link to="/cart">
             <UilShoppingBag className="icons" />
+            {!isEmpty && (
+              <span
+                style={{ position: "relative", left: "-21px", top: "-18px" }}
+              >
+                {totalItems}
+              </span>
+            )}
+            <span style={{ marginLeft: !isEmpty ? "-13px" : 0 }}></span>
           </Link>
           {/* <span>{size}</span> */}
           <UilHeart className="icons" />
@@ -151,7 +163,7 @@ const Navbar = () => {
               {user.firstName}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <Link to="user" type="submit">
+              <Link to="user/customer-dashboard" type="submit">
                 <button class="">Profile</button>
               </Link>{" "}
               <br />

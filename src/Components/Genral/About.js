@@ -7,10 +7,12 @@ import {
   UilTwitter,
   UilInstagram,
 } from "@iconscout/react-unicons";
+import Navbar from "./Navbar";
 
 function About() {
   return (
     <div>
+      {/* <Navbar/> */}
       <div class="hero">
         <div class="container py-5">
           <div class="row h-100 align-items-center py-5">

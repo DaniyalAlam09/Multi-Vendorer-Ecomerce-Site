@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import MultiImageInput from "react-multiple-image-input";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const AddProduct = () => {
   const crop = {
@@ -10,54 +11,71 @@ const AddProduct = () => {
     width: "100",
   };
   const [images, setImages] = useState({});
+  const [image, setImage] = React.useState("");
   const [state, setState] = useState({
     name: "",
     description: "",
     price: "",
-    brandS: "",
+    brands: "",
     category: "",
+    // color: "",
+
+    stoke: "",
+    sku: "",
   });
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
     console.log(state);
   };
-
+  const imageChange = (e) => {
+    setImage(e.target.files[0]);
+    console.log(e.target.files[0]);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = state;
-    console.log(email, password);
-    fetch("http://localhost:4000/shops/add-product", {
-      method: "POST",
-      crossDomain: true,
+    const formData = new FormData();
+    formData.append(
+      "product_image",
+      state.image
+      // state.productImage.name
+    );
+    formData.append("product_name", state.name);
+    formData.append("product_price", state.price);
+    formData.append("product_description", state.description);
+    formData.append("product_brand", state.brands);
+    formData.append("product_stoke", state.stoke);
+    formData.append("product_sku", state.sku);
+    // formData.append("product_sku", state.color);
+    const config = {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((user) => {
-        console.log(user);
-        if (user.message == "success") {
-          toast("Successfull");
-          // window.localStorage.setItem("token", user.data);
-          // window.location.href = "./shopowner-dashboard";
-        } else {
-          // console.log("ok");
-          toast.error("error", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
+      withCredentials: true,
+    };
+
+    axios
+      .post(
+        `http://localhost:4000/shops/add-product`,
+        // {
+        //   product_name: state.name,
+        //   product_price: state.price,
+        //   product_description: state.description,
+        //   product_brand: state.brand,
+        //   product_stoke: state.stroke,
+        //   product_sku: state.sku,
+        //   product_image: state.productImage.name,
+        // },
+        formData,
+        config
+      )
+      .then((response) => {
+        // window.location.href = "shopowner/shoponwer-dashboard";
+        // cosolelog(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 
@@ -105,7 +123,13 @@ const AddProduct = () => {
             <label class="form-label" for="customFile">
               Add Product Cover Image
             </label>
-            <input type="file" class="form-control" id="customFile" />
+            <input
+              type="file"
+              class="form-control"
+              id="customFile"
+              name="productImage"
+              onChange={imageChange}
+            />
           </div>
           <br />
           <div className="ml-3">
@@ -158,13 +182,34 @@ const AddProduct = () => {
           <label for="inputCity" className="form-label">
             Color
           </label>
-          <input type="text" className="form-control" />
+          <input
+            name="color"
+            type="text"
+            className="form-control"
+            onChange={handleChange}
+          />
         </div>
         <div className="col-md-2 mt-3">
           <label for="inputZip" className="form-label">
             SKU
           </label>
-          <input type="text" className="form-control" />
+          <input
+            name="sku"
+            type="text"
+            className="form-control"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-md-2 mt-3">
+          <label for="inputZip" className="form-label">
+            Stoke
+          </label>
+          <input
+            name="stoke"
+            type="text"
+            className="form-control"
+            onChange={handleChange}
+          />
         </div>
         <div className="col-12 mt-3 d-flex">
           <button

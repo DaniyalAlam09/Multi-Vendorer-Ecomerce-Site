@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
+import Navbar from "../../Genral/Navbar";
 
 function Copyright() {
   return (
@@ -59,8 +60,9 @@ export default function Checkout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar
+      {/* <Navbar /> */}
+      {/* <CssBaseline /> */}
+      {/* <AppBar
         position="absolute"
         color="default"
         elevation={0}
@@ -68,7 +70,7 @@ export default function Checkout() {
           position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
-      ></AppBar>
+      ></AppBar> */}
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"

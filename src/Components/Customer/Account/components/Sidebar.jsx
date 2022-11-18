@@ -46,14 +46,16 @@ const Sidebar = ({ children }) => {
     // }
   ];
   return (
-    <div className="sidebyside">
-      <div style={{ width: isOpen ? "500px" : "200px" }} className="sidebar">
-        {/* <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">OVM</h1>
-                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
-                       <FaBars onClick={toggle}/>
-                   </div>
-               </div> */}
+    <div className="contain">
+      <div style={{ width: isOpen ? "180px" : "50px" }} className="sidebar">
+        <div className="top_section">
+          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
+            OVM
+          </h1>
+          <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
+            <FaBars onClick={toggle} />
+          </div>
+        </div>
         {menuItem.map((item, index) => (
           <NavLink
             to={item.path}
@@ -62,7 +64,12 @@ const Sidebar = ({ children }) => {
             activeclassName="active"
           >
             <div className="icon">{item.icon}</div>
-            <div className="link_text">{item.name}</div>
+            <div
+              style={{ display: isOpen ? "block" : "none" }}
+              className="link_text"
+            >
+              {item.name}
+            </div>
           </NavLink>
         ))}
       </div>

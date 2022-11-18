@@ -12,9 +12,10 @@ import data from "./Data";
 import { useParams } from "react-router-dom";
 
 function FeaturedProducts() {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState([]);
   const [product, setProduct] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const { addItem } = useCart();
 
   React.useEffect(function () {
     axios
@@ -23,6 +24,7 @@ function FeaturedProducts() {
         setProduct(res.data);
         // setProduct(prevState => [res.data])
         console.log(res.data);
+        console.log(product.reviews["rating"]);
         console.log(product);
         setLoading(false);
       })
@@ -30,6 +32,7 @@ function FeaturedProducts() {
         console.log(err);
       });
   }, []);
+
   return (
     <div className="heading container ">
       <div className="featured-head">
@@ -51,45 +54,52 @@ function FeaturedProducts() {
             <div className="container heading2">
               <div className="row text-center justify-content-around">
                 {product
+
                   // .filter((person) => person.price < 40000)
                   .slice(0, 4)
-                  .map((product) => (
-                    <div className="col-xl-3 col-sm-6 mb-5">
-                      <div className="thumbnail ">
-                        <div
-                          className="bg-image hover-zoom"
-                          style={{ maxWidth: "22rem" }}
-                        >
-                          <Link to={`singleProduct/${product._id}`}>
-                            <img
-                              className="product-image rounded "
-                              src={`${product.img}`}
-                            />
-                          </Link>
-                        </div>
-
-                        <div>
-                          <p className="brand-name">{`${product.product_brand}`}</p>
-                          <Link to={`singleProduct/${product._id}`}>
-                            <p className="product-name">{`${product.product_name}`}</p>
-                          </Link>
-
-                          <div className="row ">
-                            <p className="product-price">{`${product.product_price}`}</p>
-                            <div className="rate">
-                              <Typography component="legend"></Typography>
-                              <Rating
-                                size="small"
-                                name="read-only"
-                                value={value}
-                                readOnly
+                  .map((product, index) => (
+                    <div key={index}>
+                      <div className="col-xl-3 col-sm-6 mb-5">
+                        <div className="thumbnail ">
+                          <div
+                            className="bg-image hover-zoom"
+                            style={{ maxWidth: "22rem" }}
+                          >
+                            <Link to={`singleProduct/${product._id}`}>
+                              <img
+                                className="product-image rounded "
+                                src={`${product.img}`}
                               />
+                            </Link>
+                          </div>
+
+                          <div>
+                            <p className="brand-name">{`${product.product_brand}`}</p>
+                            <Link to={`singleProduct/${product._id}`}>
+                              <p className="product-name">{`${product.product_name}`}</p>
+                            </Link>
+
+                            <div className="row ">
+                              <p className="product-price">{`${product.product_price}`}</p>
+                              <div className="rate">
+                                <Typography component="legend"></Typography>
+                                <Rating
+                                  size="small"
+                                  name="read-only"
+                                  value={product.reviews.rating}
+                                  readOnly
+                                />
+                              </div>
                             </div>
                           </div>
+
+                          <button
+                            className="btn button addcart"
+                            onClick={() => addItem(product)}
+                          >
+                            Add to Cart
+                          </button>
                         </div>
-                        <button className="btn button addcart">
-                          Add to Cart
-                        </button>
                       </div>
                     </div>
                   ))}

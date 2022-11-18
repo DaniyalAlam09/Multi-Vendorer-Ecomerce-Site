@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Navbar from "../../Genral/Navbar";
 function Detail() {
   let { productId } = useParams();
   const [product, setProduct] = React.useState({});
@@ -32,6 +33,7 @@ function Detail() {
 
   return (
     <div>
+      {/* <Navbar /> */}
       <h1></h1>
       <div className="container">
         <div className="card">
