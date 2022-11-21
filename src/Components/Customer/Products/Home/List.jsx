@@ -1,10 +1,10 @@
-import React from 'react';
-import ListItem from './ListItem';
-import './Style.css';
+import React from "react";
+import ListItem from "./ListItem";
+import "./Style.css";
 
 const List = ({ list }) => (
-  <div className='list-wrap'>
-    {list.map((item) => (
+  <div className="list-wrap">
+    {list?.map((item) => (
       <ListItem key={item.id} item={item} />
     ))}
   </div>

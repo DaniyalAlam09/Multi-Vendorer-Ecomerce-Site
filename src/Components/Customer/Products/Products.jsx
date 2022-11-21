@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import HeroSection from "../HomePage/HeroSection";
 import EmptyView from "./common/EmptyView";
 import FilterPanel from "./Home/FilterPanel";
@@ -14,13 +15,30 @@ const Products = () => {
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
+  const [product, setProduct] = useState([]);
+  React.useEffect(function () {
+    axios
+      .get("http://localhost:4000/shopowners/viewProducts")
+      .then((res) => {
+        setProduct(Object.values(res.data));
+
+        // setProduct(prevState => [res.data])
+        console.log(res.data);
+        // console.log(product.reviews["rating"]);
+        console.log(product);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const [brands, setbrands] = useState([
     { id: 1, checked: false, label: "Apple" },
     { id: 2, checked: false, label: "Huawei" },
     { id: 3, checked: false, label: "Acer" },
   ]);
 
-  const [list, setList] = useState(dataList);
+  const [list, setList] = useState(product);
   const [resultsFound, setResultsFound] = useState(true);
   const [searchInput, setSearchInput] = useState("");
 
@@ -43,18 +61,18 @@ const Products = () => {
   };
 
   const applyFilters = () => {
-    let updatedList = dataList;
+    let updatedList = product;
 
     // Rating Filter
     if (selectedRating) {
-      updatedList = updatedList.filter(
+      updatedList = Object.values(updatedList).filter(
         (item) => parseInt(item.rating) === parseInt(selectedRating)
       );
     }
 
     // Category Filter
     if (selectedCategory) {
-      updatedList = updatedList.filter(
+      updatedList = Object.values(updatedList).filter(
         (item) => item.category === selectedCategory
       );
     }
@@ -65,14 +83,14 @@ const Products = () => {
       .map((item) => item.label.toLowerCase());
 
     if (brandsChecked.length) {
-      updatedList = updatedList.filter((item) =>
+      updatedList = Object.values(updatedList).filter((item) =>
         brandsChecked.includes(item.brand)
       );
     }
 
     // Search Filter
     if (searchInput) {
-      updatedList = updatedList.filter(
+      updatedList = Object.values(updatedList).filter(
         (item) =>
           item.title.toLowerCase().search(searchInput.toLowerCase().trim()) !==
           -1
@@ -83,7 +101,7 @@ const Products = () => {
     const minPrice = selectedPrice[0];
     const maxPrice = selectedPrice[1];
 
-    updatedList = updatedList.filter(
+    updatedList = Object.values(updatedList).filter(
       (item) => item.price >= minPrice && item.price <= maxPrice
     );
 
@@ -93,6 +111,7 @@ const Products = () => {
   };
 
   useEffect(() => {
+    console.log(list);
     applyFilters();
   }, [selectedRating, selectedCategory, brands, searchInput, selectedPrice]);
 
@@ -127,7 +146,8 @@ const Products = () => {
             </div>
             {/* List & Empty View */}
             <div className="home_list-wrap">
-              {resultsFound ? <List list={list} /> : <EmptyView />}
+              {/* {resultsFound ? <List list={list} /> : <EmptyView />} */}
+              <List list={list} />
             </div>
           </div>
         </div>

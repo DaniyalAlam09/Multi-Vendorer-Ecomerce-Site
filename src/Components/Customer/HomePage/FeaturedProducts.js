@@ -24,7 +24,7 @@ function FeaturedProducts() {
         setProduct(res.data);
         // setProduct(prevState => [res.data])
         console.log(res.data);
-        console.log(product.reviews["rating"]);
+        // console.log(product.reviews.rating);
         console.log(product);
         setLoading(false);
       })
@@ -83,12 +83,12 @@ function FeaturedProducts() {
                               <p className="product-price">{`${product.product_price}`}</p>
                               <div className="rate">
                                 <Typography component="legend"></Typography>
-                                <Rating
+                                {/* <Rating
                                   size="small"
                                   name="read-only"
                                   value={product.reviews.rating}
                                   readOnly
-                                />
+                                /> */}
                               </div>
                             </div>
                           </div>

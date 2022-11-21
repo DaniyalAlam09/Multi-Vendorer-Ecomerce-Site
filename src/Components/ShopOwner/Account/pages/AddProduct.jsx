@@ -10,7 +10,7 @@ const AddProduct = () => {
     aspect: 16 / 9,
     width: "100",
   };
-  const [images, setImages] = useState({});
+  // const [images, setImages] = useState("");
   const [image, setImage] = React.useState("");
   const [state, setState] = useState({
     name: "",
@@ -27,16 +27,13 @@ const AddProduct = () => {
     setState({ ...state, [e.target.name]: e.target.value });
     console.log(state);
   };
-  const imageChange = (e) => {
-    setImage(e.target.files[0]);
-    console.log(e.target.files[0]);
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append(
-      "product_image",
-      state.image
+      "productImage",
+      image
       // state.productImage.name
     );
     formData.append("product_name", state.name);
@@ -128,11 +125,14 @@ const AddProduct = () => {
               class="form-control"
               id="customFile"
               name="productImage"
-              onChange={imageChange}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                setImage(file);
+              }}
             />
           </div>
           <br />
-          <div className="ml-3">
+          {/* <div className="ml-3">
             <br />
             <label class="form-label" for="customFile">
               Add Multiple images
@@ -150,7 +150,7 @@ const AddProduct = () => {
               setImages={setImages}
               cropConfig={{ crop }}
             />
-          </div>
+          </div> */}
         </div>
         <div className="col-12 mt-3">
           <label for="inputAddress" className="form-label">

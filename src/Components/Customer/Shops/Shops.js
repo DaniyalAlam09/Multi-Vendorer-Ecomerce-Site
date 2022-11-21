@@ -1,80 +1,30 @@
-import React from "react";
-import { useState } from "react";
+// import React from "react";
+// import { useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
 import SearchIcon from "@material-ui/icons/Search";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./ShopStyle.css";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Unstable_Grid2";
 
 function Shops() {
-  const data1 = [
-    {
-      id: 1,
-      img: HeadPhone,
-      brand: "Dell",
-      name: "Dell I7",
-      price: 500,
-      rating: 2,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      img: HeadPhone,
-      brand: "Apple ",
-      name: "Macbook 2020",
-      price: 1000,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      img: HeadPhone,
-      brand: "Samsung",
-      name: "Samsung Note20 Ultra ",
-      price: 30000,
-      quantity: 1,
-    },
-
-    {
-      id: 4,
-      img: HeadPhone,
-      brand: "JBL",
-      name: "Contrller",
-      price: 5000,
-      quantity: 1,
-    },
-
-    {
-      id: 5,
-      img: HeadPhone,
-      brand: "LG",
-      name: "LG Smart Tv 4k",
-      price: 50000,
-    },
-    {
-      id: 6,
-      img: HeadPhone,
-      brand: "Watch ",
-      name: "G-shock watch waterprof",
-      price: 50000,
-    },
-    {
-      id: 7,
-      img: HeadPhone,
-      brand: "Sony",
-      name: "Sony Beat Ah100K",
-      price: 50000,
-    },
-
-    {
-      id: 8,
-      img: HeadPhone,
-      brand: "Apple",
-      name: "Airpods Gen 3",
-      price: 2000,
-    },
-  ];
-
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:4000/admins/viewshopowners")
+      .then((response) => response.json())
+      .then((actualData) => {
+        console.log(actualData);
+        setUser(actualData);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
   const [search, setSearch] = useState("");
   return (
-    <div className="container heading ">
+    <Stack className="container heading " spacing={2}>
       <div className="searchBar-wrap">
         <SearchIcon className="searchBar-icon" />
         <input
@@ -86,10 +36,34 @@ function Shops() {
           }}
         />
       </div>
+      <div class="dropdown ">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">
+            Action
+          </a>
+          <a class="dropdown-item" href="#">
+            Another action
+          </a>
+          <a class="dropdown-item" href="#">
+            Something else here
+          </a>
+        </div>
+      </div>
 
       <div className="container products ">
         <div className="row text-center justify-content-around">
-          {data1
+          {Object.values(user)
+            .slice(0, 8)
 
             .filter((person) => {
               if (search == "") {
@@ -102,7 +76,7 @@ function Shops() {
             })
             .map((elem) => (
               <div
-                key={data1.indexOf(elem)}
+                key={user.indexOf(elem)}
                 className="heading col-xl-3 col-sm-6 mb-5"
               >
                 <img
@@ -110,14 +84,22 @@ function Shops() {
                   style={{ width: "10rem", height: "10rem" }}
                   src={`${elem.img}`}
                 />
-                <p className="brand-name">{`${elem.brand}`}</p>
+                <p className="brand-name">Shop no {`${elem.shopNo}`}</p>
 
-                <p className="product-name">{`${elem.name}`}</p>
+                <p className="product-name">{`${elem.shopName}`}</p>
               </div>
             ))}
         </div>
       </div>
-    </div>
+      <Grid display="flex" justifyContent="center" alignItems="center">
+        <Pagination
+          count={10}
+          size="large"
+          variant="outlined"
+          shape="rounded"
+        />
+      </Grid>
+    </Stack>
   );
 }
 export default Shops;
