@@ -93,7 +93,10 @@ function App() {
 
             <Route path="shopowner" element={<Homey />}>
               <Route path="addproduct" element={<AddProduct />} />
-              <Route path="edit-profile" element={<ShopOwnerEditProfile />} />
+              <Route
+                path="edit-profile/:itemId"
+                element={<ShopOwnerEditProfile />}
+              />
               <Route path="manage-orders" element={<ManageOrders />} />
               <Route
                 path="shoponwer-analytics"

@@ -16,7 +16,7 @@ const AddProduct = () => {
     name: "",
     description: "",
     price: "",
-    brands: "",
+    brand: "",
     category: "",
     // color: "",
 
@@ -39,7 +39,7 @@ const AddProduct = () => {
     formData.append("product_name", state.name);
     formData.append("product_price", state.price);
     formData.append("product_description", state.description);
-    formData.append("product_brand", state.brands);
+    formData.append("product_brand", state.brand);
     formData.append("product_stoke", state.stoke);
     formData.append("product_sku", state.sku);
     // formData.append("product_sku", state.color);
@@ -165,7 +165,7 @@ const AddProduct = () => {
             value={state.description}
           ></textarea>
         </div>
-        <div className="col-12 mt-3 col-md-6">
+        <div className="col-12 mt-3 col-md-4">
           <label for="inputAddress2" className="form-label">
             Price
           </label>
@@ -176,6 +176,19 @@ const AddProduct = () => {
             placeholder="in RS."
             onChange={handleChange}
             value={state.price}
+          />
+        </div>
+        <div className="col-12 mt-3 col-md-4">
+          <label for="inputAddress2" className="form-label">
+            Brand
+          </label>
+          <input
+            name="brand"
+            type="text"
+            className="form-control"
+            placeholder="brannd"
+            onChange={handleChange}
+            value={state.brand}
           />
         </div>
         <div className="col-md-6 mt-3">
