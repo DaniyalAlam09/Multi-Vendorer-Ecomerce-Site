@@ -8,6 +8,7 @@ import "./ShopStyle.css";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
+import { Link } from "react-router-dom";
 
 function Shops() {
   const [user, setUser] = useState("");
@@ -63,7 +64,7 @@ function Shops() {
       <div className="container products ">
         <div className="row text-center justify-content-around">
           {Object.values(user)
-            .slice(0, 8)
+            // .slice(0, 8)
 
             .filter((person) => {
               if (search == "") {
@@ -79,14 +80,16 @@ function Shops() {
                 key={user.indexOf(elem)}
                 className="heading col-xl-3 col-sm-6 mb-5"
               >
-                <img
-                  className=" rounded "
-                  style={{ width: "10rem", height: "10rem" }}
-                  src={`${elem.img}`}
-                />
-                <p className="brand-name">Shop no {`${elem.shopNo}`}</p>
+                <Link to={`/singleshop/${elem._id}/${elem.shopName}`}>
+                  <img
+                    className=" rounded "
+                    style={{ width: "10rem", height: "10rem" }}
+                    src={`${elem.img}`}
+                  />
+                  <p className="brand-name">Shop no {`${elem.shopNo}`}</p>
 
-                <p className="product-name">{`${elem.shopName}`}</p>
+                  <p className="product-name">{`${elem.shopName}`}</p>
+                </Link>
               </div>
             ))}
         </div>

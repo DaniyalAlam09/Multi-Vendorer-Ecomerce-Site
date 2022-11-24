@@ -8,6 +8,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -15,12 +17,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const ShopOwnerEditProfile = () => {
   let { itemId } = useParams();
   const [image, setImage] = React.useState("");
+  const navigate = useNavigate();
   const [state, setState] = useState({
     name: "",
     description: "",
     price: "",
     brand: "",
     category: "",
+    color: "",
     stoke: "",
     sku: "",
   });
@@ -52,6 +56,7 @@ const ShopOwnerEditProfile = () => {
     formData.append("product_name", state.name);
     formData.append("product_price", state.price);
     formData.append("product_description", state.description);
+    formData.append("product_color", state.color);
     formData.append("product_brand", state.brand);
     formData.append("product_stoke", state.stoke);
     formData.append("product_sku", state.sku);
@@ -75,10 +80,35 @@ const ShopOwnerEditProfile = () => {
         if (response.status === 200) {
           console.log("SUCCESSS");
           setOpen(true);
+          toast.success("Sucessfull Updated", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("../product-list");
           // return response.json();
         } else {
           console.log("SOMETHING WENT WRONG");
-          setError(true);
+          // setError(true);
+          toast.error("SOMETHING WENT WRONG", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          {
+            /* Same as */
+          }
+          <ToastContainer />;
           // this.setState({ requestFailed: true })
         }
       })
@@ -91,13 +121,14 @@ const ShopOwnerEditProfile = () => {
       axios
         .get("http://localhost:4000/shops/" + itemId)
         .then((res) => {
-          console.log("data");
+          console.log(res.data);
           setState(res.data);
           setState((pre) => ({ ...pre, name: res.data.product_name }));
           setState((pre) => ({ ...pre, price: res.data.product_price }));
           setState((pre) => ({ ...pre, brand: res.data.product_brand }));
           setState((pre) => ({ ...pre, stoke: res.data.product_stoke }));
           setState((pre) => ({ ...pre, sku: res.data.product_sku }));
+          setState((pre) => ({ ...pre, color: res.data.product_color }));
           setState((pre) => ({
             ...pre,
             description: res.data.product_description,
@@ -115,17 +146,7 @@ const ShopOwnerEditProfile = () => {
 
   return (
     <div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <ToastContainer />
       <form onSubmit={handleSubmit} className="container row g-3">
         <div className="col-md-6 mb-3">
           <label for="" className="form-label">
@@ -218,6 +239,7 @@ const ShopOwnerEditProfile = () => {
             type="text"
             className="form-control"
             onChange={handleChange}
+            value={state.color}
           />
         </div>
         <div className="col-md-2 mt-3">
@@ -229,6 +251,7 @@ const ShopOwnerEditProfile = () => {
             type="text"
             className="form-control"
             onChange={handleChange}
+            value={state.sku}
           />
         </div>
         <div className="col-md-2 mt-3">
@@ -240,6 +263,7 @@ const ShopOwnerEditProfile = () => {
             type="text"
             className="form-control"
             onChange={handleChange}
+            value={state.stoke}
           />
         </div>
         <div className="col-12 mt-3 d-flex">

@@ -2,7 +2,7 @@ import React from "react";
 import "./Homepage.css";
 import Hero from "../Images/Hero.png";
 
-function HeroSection({Name1, Name2, ImageSource}) {
+function HeroSection({ Name1, Name2, ImageSource }) {
   return (
     <div className="hero ">
       <div className="container main row d-flex justify-content-around">
@@ -10,7 +10,7 @@ function HeroSection({Name1, Name2, ImageSource}) {
           <div className="h3">
             {" "}
             <span> {Name1}</span>
-            <br/>
+            <br />
             <span> {Name2} </span>{" "}
           </div>
           <p>
@@ -18,9 +18,6 @@ function HeroSection({Name1, Name2, ImageSource}) {
             <br />
             <span>bokeh speciality from samsung s20 pro max</span>
           </p>
-          <button className="btn btn-primary shop" type="">
-            Shop now
-          </button>
         </div>
         <div className=" right rounded col-md-6">
           <img className="img-fluid hero-img" src={ImageSource} />

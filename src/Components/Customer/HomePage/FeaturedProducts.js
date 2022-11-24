@@ -3,19 +3,35 @@ import axios from "axios";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
 
 import ReactStars from "react-rating-stars-component";
 import { CartProvider, useCart } from "react-use-cart";
 import { Link } from "react-router-dom";
 import data from "./Data";
 import { useParams } from "react-router-dom";
+import { useRef } from "react";
 
 function FeaturedProducts() {
   const [value, setValue] = React.useState([]);
   const [product, setProduct] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const { addItem } = useCart();
+  const ref = useRef(null);
+  const [state, setState] = useState({
+    name: "",
+    id: "",
+    price: "",
+  });
+  const { _id } = useParams();
+  const item = { _id };
+  const handleChange = (e) => {
+    console.log(item);
+  };
 
   React.useEffect(function () {
     axios
@@ -46,60 +62,47 @@ function FeaturedProducts() {
         <div>
           {loading ? (
             <>
-              <Skeleton variant="rectangular" width={210} height={40} />
-              <Skeleton variant="rectangular" width={210} height={40} mt={10} />
-              <Skeleton variant="rectangular" width={210} height={40} mt={10} />
+              <Skeleton variant="rectangular" width={210} height={280} />
             </>
           ) : (
             <div className="container heading2">
-              <div className="row text-center justify-content-around">
+              <div className="row ">
                 {product
 
                   // .filter((person) => person.price < 40000)
                   .slice(0, 4)
                   .map((product, index) => (
                     <div key={index}>
-                      <div className="col-xl-3 col-sm-6 mb-5">
-                        <div className="thumbnail ">
-                          <div
-                            className="bg-image hover-zoom"
-                            style={{ maxWidth: "22rem" }}
-                          >
-                            <Link to={`singleProduct/${product._id}`}>
-                              <img
-                                className="product-image rounded "
-                                src={`${product.img}`}
+                      <div className="mr-3">
+                        <Link to={`singleProduct/${product._id}`}>
+                          <Card sx={{ maxWidth: 250 }}>
+                            <CardActionArea>
+                              <CardMedia
+                                component="img"
+                                height="140"
+                                image="/static/images/cards/contemplative-reptile.jpg"
+                                alt="green iguana"
                               />
-                            </Link>
-                          </div>
-
-                          <div>
-                            <p className="brand-name">{`${product.product_brand}`}</p>
-                            <Link to={`singleProduct/${product._id}`}>
-                              <p className="product-name">{`${product.product_name}`}</p>
-                            </Link>
-
-                            <div className="row ">
-                              <p className="product-price">{`${product.product_price}`}</p>
-                              <div className="rate">
-                                <Typography component="legend"></Typography>
-                                {/* <Rating
-                                  size="small"
-                                  name="read-only"
-                                  value={product.reviews.rating}
-                                  readOnly
-                                /> */}
-                              </div>
-                            </div>
-                          </div>
-
-                          <button
-                            className="btn button addcart"
-                            onClick={() => addItem(product)}
-                          >
-                            Add to Cart
-                          </button>
-                        </div>
+                              <CardContent>
+                                <Typography
+                                  gutterBottom
+                                  variant="h5"
+                                  component="div"
+                                >
+                                  {`${product.product_name}`}
+                                </Typography>
+                                <p className="brand-name">{`${product.product_brand}`}</p>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  {`${product.product_description}`}
+                                </Typography>
+                                <p className="product-price">{`${product.product_price}`}</p>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                        </Link>
                       </div>
                     </div>
                   ))}

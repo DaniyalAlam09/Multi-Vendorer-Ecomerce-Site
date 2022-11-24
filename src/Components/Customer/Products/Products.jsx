@@ -117,7 +117,6 @@ const Products = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
       <div className="home headinng">
         <HeroSection
           Name1={"All Products are available "}

@@ -6,14 +6,56 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Navbar from "../../Genral/Navbar";
+import HeroSection from "../../Customer/HomePage/HeroSection";
+import SingleShopHero from "../../Customer/Images/SingleShopHero.png";
 function Detail() {
   let { productId } = useParams();
   const [product, setProduct] = React.useState({});
-  const [counter, setCounter] = React.useState(0);
+  const [counter, setCounter] = React.useState(1);
+  const { _id } = useParams();
+  const [cart, setCart] = useState({
+    name: "",
+    id: "",
+    price: "",
+  });
+  const item = { _id };
+  // const Cart = (e) => {
+  //   console.log(product._id);
+  // };
+
+  const Cart = () => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+
+    axios
+      .post(
+        `http://localhost:4000/product/cart`,
+        {
+          productId: product._id,
+          quantity: counter,
+        },
+        config
+      )
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          console.log("SUCCESSS");
+          console.log(response.data);
+          // navigate("../product-list");
+        } else {
+          console.log("SOMETHING WENT WRONG");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   React.useEffect(
     function () {
@@ -21,8 +63,8 @@ function Detail() {
         .get("http://localhost:4000/shops/" + productId)
         .then((res) => {
           setProduct(res.data);
-          console.log(res.data);
-          console.log(product);
+          // console.log(res.data);
+          // console.log(product);
         })
         .catch((err) => {
           console.log(err);
@@ -31,47 +73,58 @@ function Detail() {
     [productId]
   );
 
+  const [state, setState] = useState({
+    comment: "",
+    name: "",
+  });
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+    console.log(state);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", state.name);
+    formData.append("comment", state.comment);
+    // formData.append("product_sku", state.color);
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+
+    axios
+      .post(`http://localhost:4000/shops/review/${productId}`, formData, config)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          console.log("SUCCESSS");
+        } else {
+          console.log("SOMETHING WENT WRONG");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <div>
-      {/* <Navbar /> */}
-      <h1></h1>
+      <HeroSection
+        Name1={"Single Product"}
+        ImageSource={SingleShopHero}
+        className="shopimage"
+      />
       <div className="container">
+        <div className=" d-flex justify-content-center mb-4 mt-4">
+          <h1>Here Your Product</h1>
+        </div>
         <div className="card">
           <div className="container-fliud">
             <div className="wrapper row">
               <div className=" col-md-6">
-                {/* <ul className="">
-                  <li className="active">
-                    <a data-target="#pic-1" data-toggle="tab">
-                      <img src="http://placekitten.com/200/126" />
-                    </a>
-                  </li>
-                  <li>
-                    <a data-target="#pic-2" data-toggle="tab">
-                      <img src="http://placekitten.com/200/126" />
-                    </a>
-                  </li>
-                  <li>
-                    <a data-target="#pic-3" data-toggle="tab">
-                      <img src="http://placekitten.com/200/126" />
-                    </a>
-                  </li>
-                  <li>
-                    <a data-target="#pic-4" data-toggle="tab">
-                      <img src="http://placekitten.com/200/126" />
-                    </a>
-                  </li>
-                  <li>
-                    <a data-target="#pic-5" data-toggle="tab">
-                      <img src="http://placekitten.com/200/126" />
-                    </a>
-                  </li>
-                </ul>
-                <div className="">
-                  <div className="tab-pane active" id="pic-1">
-                    <img src="http://placekitten.com/400/252" />
-                  </div>
-                </div> */}
                 <div className="row">
                   <div className="col-md-3">
                     <ul className="small">
@@ -112,7 +165,12 @@ function Detail() {
               <div className="details col-md-6">
                 <h3 className="product-title">{product.product_name}</h3>
                 <div className="rating">
-                  <span className="review-no">41 reviews</span>
+                  <span className="review-no">
+                    <strong>
+                      {product.reviews ? product.reviews.length : "No"}
+                    </strong>{" "}
+                    Review on this Product
+                  </span>
                 </div>
                 <p className="product-description">
                   {product.product_description}
@@ -156,7 +214,7 @@ function Detail() {
                       <Button
                         disabled={counter <= 0}
                         onClick={() => {
-                          setCounter(counter - 1);
+                          setCounter((pre) => pre - 1);
                         }}
                       >
                         -
@@ -167,7 +225,7 @@ function Detail() {
                     <Button
                       disabled={counter >= product["countInStock"]}
                       onClick={() => {
-                        setCounter(counter + 1);
+                        setCounter((pre) => pre + 1);
                       }}
                     >
                       +
@@ -178,6 +236,7 @@ function Detail() {
                     <button
                       className="btn btn-primary signin justify-end"
                       type="button"
+                      onClick={() => Cart()}
                     >
                       Add to cart
                     </button>
@@ -186,8 +245,57 @@ function Detail() {
               </div>
             </div>
             <div className="wrapper row mt-5">
-              <div className="preview col-md-6">fde</div>
-              <div className="preview col-md-6">fde</div>
+              <div className="preview col-md-6">
+                <h2>Reviews</h2>
+                {product.reviews?.map((product) => (
+                  <div>
+                    <div className="">
+                      <div className="">
+                        <div>
+                          <p className="mt-3 ml-4 review-name">{`${product.name}`}</p>
+                        </div>
+                        <div className="ml">
+                          <p className="ml-5 comment">{`${product.comment}`}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="preview col-md-6">
+                <h3>Enter Your Review</h3>
+                <form onSubmit={handleSubmit} className="container">
+                  <div className="">
+                    <label for="inputZip" className="form-label">
+                      Name
+                    </label>
+                    <input
+                      name="name"
+                      type="text"
+                      className="form-control"
+                      onChange={handleChange}
+                      value={state.name}
+                    />
+                    <label for="inputZip" className="form-label">
+                      Enter Your Review
+                    </label>
+                    <textarea
+                      name="comment"
+                      type="text"
+                      className="form-control"
+                      rows="3"
+                      onChange={handleChange}
+                      value={state.comment}
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    className="buttons btn text-white btn-primary mt-3"
+                  >
+                    Post
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -199,3 +307,10 @@ function Detail() {
 }
 
 export default Detail;
+// import React from "react";
+
+// function Detail() {
+//   return <div>Detail</div>;
+// }
+
+// export default Detail;

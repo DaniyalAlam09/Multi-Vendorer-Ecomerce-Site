@@ -197,3 +197,12 @@ img {
 .small {
   list-style: none;
 }
+
+.review-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+.comment {
+  color: #747373;
+  margin-top: -10px;
+}

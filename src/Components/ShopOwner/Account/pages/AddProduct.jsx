@@ -3,6 +3,7 @@ import { useState } from "react";
 import MultiImageInput from "react-multiple-image-input";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const crop = {
@@ -10,6 +11,7 @@ const AddProduct = () => {
     aspect: 16 / 9,
     width: "100",
   };
+  const navigate = useNavigate();
   // const [images, setImages] = useState("");
   const [image, setImage] = React.useState("");
   const [state, setState] = useState({
@@ -18,8 +20,7 @@ const AddProduct = () => {
     price: "",
     brand: "",
     category: "",
-    // color: "",
-
+    color: "",
     stoke: "",
     sku: "",
   });
@@ -40,6 +41,7 @@ const AddProduct = () => {
     formData.append("product_price", state.price);
     formData.append("product_description", state.description);
     formData.append("product_brand", state.brand);
+    formData.append("product_color", state.color);
     formData.append("product_stoke", state.stoke);
     formData.append("product_sku", state.sku);
     // formData.append("product_sku", state.color);
@@ -51,6 +53,7 @@ const AddProduct = () => {
       withCredentials: true,
     };
 
+    
     axios
       .post(
         `http://localhost:4000/shops/add-product`,
@@ -67,6 +70,40 @@ const AddProduct = () => {
         config
       )
       .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          console.log("SUCCESSS");
+          // setOpen(true);
+          toast.success("Sucessfull Added", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("../product-list");
+          // return response.json();
+        } else {
+          console.log("SOMETHING WENT WRONG");
+          // setError(true);
+          toast.error("SOMETHING WENT WRONG", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          {
+            /* Same as */
+          }
+          <ToastContainer />;
+          // this.setState({ requestFailed: true })
+        }
         // window.location.href = "shopowner/shoponwer-dashboard";
         // cosolelog(response.data);
         console.log(response.data);
@@ -186,7 +223,7 @@ const AddProduct = () => {
             name="brand"
             type="text"
             className="form-control"
-            placeholder="brannd"
+            placeholder="Brand"
             onChange={handleChange}
             value={state.brand}
           />
@@ -197,6 +234,7 @@ const AddProduct = () => {
           </label>
           <input
             name="color"
+            placeholder="Color"
             type="text"
             className="form-control"
             onChange={handleChange}

@@ -31,11 +31,13 @@ import Logout from "./Components/Customer/Account/pages/Logout";
 import Homey from "./Components/ShopOwner/Account/pages/Homey";
 import AddProduct from "./Components/ShopOwner/Account/pages/AddProduct";
 import ShopOwnerEditProfile from "./Components/ShopOwner/Account/pages/ShopOwnerEditProfile";
+import ShopOwnerEdit from "./Components/ShopOwner/Account/pages/ShopOwnerEdit";
 import ManageOrders from "./Components/ShopOwner/Account/pages/ManageOrders";
 import ShopOwnerAnalytics from "./Components/ShopOwner/Account/pages/ShopOwnerAnalytics";
 import ShopOwnerDashboard from "./Components/ShopOwner/Account/pages/ShopOwnerDashboard";
 import ShopOwnerLogout from "./Components/ShopOwner/Account/pages/ShopOwnerLogout";
 import ShopOwnerProductList from "./Components/ShopOwner/Account/pages/ShopOwnerProductList";
+import SingleShop from "./Components/Customer/Shops/SingleShop/SingleShop";
 
 function App() {
   const { productItem } = data;
@@ -80,6 +82,10 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/products" element={<Products />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route
+              path="/singleshop/:shopId/:shopName"
+              element={<SingleShop />}
+            />
 
             <Route path="/shopowner-account" element={<ShopOwnerSignUp />} />
             <Route path="/shopowner-login" element={<ShopOwnerLogin />} />
@@ -97,6 +103,7 @@ function App() {
                 path="edit-profile/:itemId"
                 element={<ShopOwnerEditProfile />}
               />
+              <Route path="edit-profile" element={<ShopOwnerEdit />} />
               <Route path="manage-orders" element={<ManageOrders />} />
               <Route
                 path="shoponwer-analytics"

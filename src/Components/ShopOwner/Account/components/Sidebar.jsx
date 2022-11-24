@@ -31,7 +31,7 @@ const Sidebar = ({ children }) => {
     },
     {
       path: "edit-profile",
-      name: "Edit Profile",
+      name: "Edit",
       icon: <FaCommentAlt />,
     },
     {

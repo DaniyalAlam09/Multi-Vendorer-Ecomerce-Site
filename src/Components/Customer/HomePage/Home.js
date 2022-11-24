@@ -15,17 +15,17 @@ function Home() {
     <div>
       {/* <Navbar /> */}
 
-      {/* <HeroSection
+      <HeroSection
         Name1={"Introducing New Samsung "}
         Name2={"Camera Product"}
         ImageSource={Hero}
       />
       <BestDeals />
-      <WorkDetails /> */}
+      <WorkDetails />
       <FeaturedProducts />
-      {/* <FeaturedCatagories />
+      <FeaturedCatagories />
       <HotCollection />
-      <Subscribe /> */}
+      <Subscribe />
     </div>
   );
 }

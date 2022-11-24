@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -16,41 +16,57 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  // border: "2px solid #000",
-  // boxShadow: 24,
   p: 4,
 };
 const ShopOwnerProductList = () => {
+  const { shopId } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState([]);
   const [page, setPage] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  // const handledeletpage = () => {
-  //   navigate(`../edit-product${item._id}`);
-  // };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  // const Data = () => {
-  // React.useEffect(function () {
-  //   const config = {
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Content-Type": "application/json",
-  //     },
-  //     withCredentials: true,
-  //   };
-  //   axios
-  //     .get("http://localhost:4000/shopowners/myproducts", config)
+  const handleDelete = (id) => {
+    // console.log(userID);
+    axios
+      .get(`http://localhost:4000/shopowners/deleteproduct/${id}`)
+      .then((user) => {
+        console.log("user delete");
+        // navigate(0);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  React.useEffect(function () {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios
+      .get("http://localhost:4000/shopowners/myproducts", config)
+      .then((response) => {
+        setUser(response.data.products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/shopowners/viewproducts")
   //     .then((response) => response.json())
   //     .then((actualData) => {
   //       console.log(actualData);
@@ -58,25 +74,9 @@ const ShopOwnerProductList = () => {
   //       console.log(user);
   //     })
   //     .catch((err) => {
-  //       console.log(err);
+  //       console.log(err.message);
   //     });
   // }, []);
-  useEffect(() => {
-    fetch("http://localhost:4000/shopowners/viewproducts")
-      .then((response) => response.json())
-      .then((actualData) => {
-        console.log(actualData);
-        setUser(actualData);
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-    // then((res) => {
-    //   setUser(res.data.user);
-    //   console.log(res.data);
-    // });
-  }, []);
 
   return (
     <Paper sx={{ width: "100%" }}>
@@ -89,19 +89,25 @@ const ShopOwnerProductList = () => {
             <th scope="col">Product Name</th>
             <th scope="col">Brand</th>
             <th scope="col">Categorey</th>
+            <th scope="col">Color</th>
             <th scope="col">Price</th>
+            <th scope="col">SKU</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
-          {Object.values(user)
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          {user
+            ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.product_name}</td>
+                {/* <td>{item.product_name}</td> */}
                 <td>{item.product_brand}</td>
                 <td>{item.product_catagorey}</td>
+                <td>{item.product_color}</td>
                 <td>{item.product_price}</td>
+                <td>{item.product_sku}</td>
                 <td>
                   <button className="buttons btn text-white btn-block btn-primary">
                     <Link
@@ -138,9 +144,9 @@ const ShopOwnerProductList = () => {
                       <br />
                       <button
                         className="buttons btn text-white btn-block btn-danger"
-                        // onClick={() => {
-                        //   handleDelete(item._id);
-                        // }}
+                        onClick={() => {
+                          handleDelete(item._id);
+                        }}
                       >
                         Delete
                       </button>
@@ -171,30 +177,3 @@ const ShopOwnerProductList = () => {
 };
 
 export default ShopOwnerProductList;
-
-{
-  /* <div>
-  <h5>Total Registered Customers</h5>
-  <h6>{user.length}</h6>
-  <table className="table">
-    <thead>
-      <tr>
-        <th scope="col">Product Name</th>
-        <th scope="col">Brand</th>
-        <th scope="col">Categorey</th>
-        <th scope="col">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      {Object.values(user).map((item, index) => (
-        <tr key={index}>
-          <td>{item.product_name}</td>
-          <td>{item.product_brand}</td>
-          <td>{item.product_catagorey}</td>
-          <td>{item.product_price}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>; */
-}
