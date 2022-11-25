@@ -12,13 +12,24 @@ export default class SignUp extends Component {
       lname: "",
       email: "",
       password: "",
+      phoneNo: "",
+      address: "",
+      profession: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
-    const { firstName, lastName, email, password } = this.state;
-    console.log(firstName, lastName, email, password);
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      address,
+      phoneNo,
+      profession,
+    } = this.state;
+    console.log(firstName, lastName, email, password, address, phoneNo);
     fetch("http://localhost:4000/users/registration", {
       method: "POST",
       crossDomain: true,
@@ -32,6 +43,9 @@ export default class SignUp extends Component {
         lastName,
         email,
         password,
+        address,
+        phoneNo,
+        profession,
       }),
     })
       .then((res) => res.json())
@@ -44,6 +58,16 @@ export default class SignUp extends Component {
           // window.location.href = "/account";
         } else if (user.message == "user Already exist") {
           toast.error("User Already exist", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else if (user.message == "All Feild must be filled") {
+          toast.error("Too Short Password", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -118,25 +142,27 @@ export default class SignUp extends Component {
                   Register as Shop Owner?
                 </Link>
                 <div class="form-group mt-2">
-                  <div class="form-wrapper mb-2">
-                    <label for="">First Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      onChange={(e) =>
-                        this.setState({ firstName: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div class="form-wrapper mb-2">
-                    <label for="">Last Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      onChange={(e) =>
-                        this.setState({ lastName: e.target.value })
-                      }
-                    />
+                  <div class="row">
+                    <div class="col-md-6 form-wrapper mb-2">
+                      <label for="">First Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        onChange={(e) =>
+                          this.setState({ firstName: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div class="form-wrapper mb-2 ml-2">
+                      <label for="">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        onChange={(e) =>
+                          this.setState({ lastName: e.target.value })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="form-wrapper mb-2 form-group required">
@@ -147,6 +173,28 @@ export default class SignUp extends Component {
                     type="email"
                     class="form-control"
                     onChange={(e) => this.setState({ email: e.target.value })}
+                  />
+                </div>
+                <div class="form-wrapper mb-2 form-group required">
+                  <label class="control-label" for="">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    onChange={(e) => this.setState({ phoneNo: e.target.value })}
+                  />
+                </div>
+                <div class="form-wrapper mb-2 form-group required">
+                  <label class="control-label" for="">
+                    Profession
+                  </label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    onChange={(e) =>
+                      this.setState({ profession: e.target.value })
+                    }
                   />
                 </div>
                 <div class="form-wrapper mb-2 form-group required">
@@ -165,6 +213,17 @@ export default class SignUp extends Component {
                     <strong>number</strong> and a{" "}
                     <strong>special chracter</strong>
                   </p>
+                </div>
+                <div class="form-wrapper mb-2 form-group required">
+                  <label class="control-label" for="">
+                    Address
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    onChange={(e) => this.setState({ address: e.target.value })}
+                  ></textarea>
                 </div>
                 {/* <div class="form-wrapper mb-2">
                 <label for="">Confirm Password</label>

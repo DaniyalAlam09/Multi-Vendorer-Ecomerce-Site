@@ -9,7 +9,7 @@ import {
   FaThList,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-
+import ReorderIcon from "@mui/icons-material/Reorder";
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -52,13 +52,15 @@ const Sidebar = ({ children }) => {
   ];
   return (
     <div className="sidebyside">
-      <div style={{ width: isOpen ? "500px" : "200px" }} className="sidebar">
-        {/* <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">OVM</h1>
-                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
-                       <FaBars onClick={toggle}/>
-                   </div>
-               </div> */}
+      <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
+        <div className="top_section">
+          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
+            OVM
+          </h1>
+          <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
+            <ReorderIcon onClick={toggle} />
+          </div>
+        </div>
         {menuItem.map((item, index) => (
           <NavLink
             to={item.path}

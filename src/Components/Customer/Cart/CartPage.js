@@ -2,12 +2,16 @@ import React from "react";
 import axios from "axios";
 import HeroSection from "../HomePage/HeroSection";
 import CartHero from "../Images/CartHero.png";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { Link } from "react-router-dom";
 
 function CartPage() {
   const [products, setProducts] = React.useState([]);
   const [bill, setBill] = React.useState();
   const [loadig, setLoadig] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [counter, setCounter] = React.useState(1);
 
   React.useEffect(function () {
     setLoadig(true);
@@ -34,6 +38,20 @@ function CartPage() {
       });
   }, []);
 
+  const handleDelete = (id) => {
+    // console.log(userID);
+    axios
+      .get(`http://localhost:4000/product/cart`)
+      .then((user) => {
+        console.log("user delete");
+        // navigate(0);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    // console.log("dcwj");
+  };
+
   return (
     <>
       <HeroSection
@@ -49,14 +67,14 @@ function CartPage() {
           <section class="section-pagetop bg">
             <div class="container">
               <section class="section-content padding-y">
-                {products?.map((product, index) => {
-                  return (
-                    <>
-                      <div key={index}>
-                        <div class="container">
-                          <div class="row">
-                            <main class="col-md-9">
-                              <div class="card">
+                <div class="container">
+                  <div class="row">
+                    <main class="col-md-9">
+                      <div class="card">
+                        {products?.map((product, index) => {
+                          return (
+                            <>
+                              <div key={index}>
                                 <table class="table table-borderless table-shopping-cart">
                                   <thead class="text-muted">
                                     <tr class="small text-uppercase">
@@ -98,12 +116,33 @@ function CartPage() {
                                         </figure>
                                       </td>
                                       <td>
-                                        <select class="form-control">
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                        </select>
+                                        <ButtonGroup
+                                          size="small"
+                                          aria-label="small outlined button group"
+                                        >
+                                          {
+                                            <Button
+                                              disabled={counter <= 0}
+                                              onClick={() => {
+                                                setCounter((pre) => pre - 1);
+                                              }}
+                                            >
+                                              -
+                                            </Button>
+                                          }
+
+                                          {<Button>{counter}</Button>}
+                                          <Button
+                                            disabled={
+                                              counter >= product["countInStock"]
+                                            }
+                                            onClick={() => {
+                                              setCounter((pre) => pre + 1);
+                                            }}
+                                          >
+                                            +
+                                          </Button>
+                                        </ButtonGroup>
                                       </td>
                                       <td>
                                         <div class="price-wrap">
@@ -134,90 +173,56 @@ function CartPage() {
                                     <tr></tr>
                                   </tbody>
                                 </table>
+                              </div>
+                            </>
+                          );
+                        })}
 
-                                <div class="card-body border-top">
-                                  <a
-                                    href="#"
-                                    class="btn btn-primary float-md-right"
-                                  >
-                                    {" "}
-                                    Make Purchase{" "}
-                                    <i class="fa fa-chevron-right"></i>{" "}
-                                  </a>
-                                  <a href="#" class="btn btn-light">
-                                    {" "}
-                                    <i class="fa fa-chevron-left"></i> Continue
-                                    shopping{" "}
-                                  </a>
-                                </div>
-                              </div>
-
-                              <div class="alert alert-success mt-3">
-                                <p class="icontext">
-                                  <i class="icon text-success fa fa-truck"></i>{" "}
-                                  Free Delivery within 1-2 weeks
-                                </p>
-                              </div>
-                            </main>
-                            <aside class="col-md-3">
-                              <div class="card mb-3">
-                                <div class="card-body">
-                                  <form>
-                                    <div class="form-group">
-                                      <label>Have coupon?</label>
-                                      <div class="input-group">
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          name=""
-                                          placeholder="Coupon code"
-                                        />
-                                        <span class="input-group-append">
-                                          <button class="btn btn-primary">
-                                            Apply
-                                          </button>
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                              <div class="card">
-                                <div class="card-body">
-                                  <dl class="dlist-align">
-                                    <dt>Total price:</dt>
-                                    <dd class="text-right">
-                                      {bill && <dd>Total: {bill}</dd>}
-                                    </dd>
-                                  </dl>
-                                  <dl class="dlist-align">
-                                    <dt>Discount:</dt>
-                                    <dd class="text-right">--</dd>
-                                  </dl>
-                                  <dl class="dlist-align">
-                                    <dt>Total:</dt>
-                                    <dd class="text-right  h5">
-                                      <strong>
-                                        {bill && <dd>Total: {bill}</dd>}
-                                      </strong>
-                                    </dd>
-                                  </dl>
-                                  <hr />
-                                  <p class="text-center mb-3">
-                                    <img
-                                      src="assets/images/misc/payments.png"
-                                      height="26"
-                                    />
-                                  </p>
-                                </div>
-                              </div>
-                            </aside>
-                          </div>
+                        <div class="card-body border-top">
+                          <Link
+                            to="/checkout"
+                            class="btn btn-primary float-md-right"
+                          >
+                            {" "}
+                            Make Purchase <i class="fa fa-chevron-right"></i>{" "}
+                          </Link>
+                          <Link to="/" class="btn btn-light">
+                            Continue shopping
+                          </Link>
                         </div>
                       </div>
-                    </>
-                  );
-                })}
+
+                      <div class="alert alert-success mt-3">
+                        <p class="icontext">
+                          <i class="icon text-success fa fa-truck"></i> Free
+                          Delivery within 1-2 weeks
+                        </p>
+                      </div>
+                    </main>
+                    <aside class="col-md-3">
+                      <div class="card ">
+                        <div class="card-body">
+                          <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-right">
+                              {bill && <dd>Total: {bill}</dd>}
+                            </dd>
+                          </dl>
+                          <dl class="dlist-align">
+                            <dt>Discount:</dt>
+                            <dd class="text-right">--</dd>
+                          </dl>
+                          <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-right  h5">
+                              <strong>{bill && <dd>Total: {bill}</dd>}</strong>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
               </section>
               <section class="section-name bg padding-y">
                 <div class="container">

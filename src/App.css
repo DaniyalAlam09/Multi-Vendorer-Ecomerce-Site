@@ -80,13 +80,13 @@ main {
   transition: all 0.5s;
 }
 .link:hover {
-  background: lightskyblue;
-  color: #000;
+  background: #fff;
+  color: #1da599;
   transition: all 0.5s;
 }
 .active {
-  background: lightskyblue;
-  color: #000;
+  background: #fff;
+  color: #1da599;
 }
 .icon {
   font-size: 20px;

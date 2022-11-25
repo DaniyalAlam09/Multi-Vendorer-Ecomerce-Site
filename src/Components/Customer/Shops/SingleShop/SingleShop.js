@@ -42,7 +42,7 @@ function SingleShop() {
           console.log(err);
         });
       axios
-        .get("http://localhost:4000/shopowners/myproducts", config)
+        .get("http://localhost:4000/shopowners/shopproducts", config)
         // .then((response) => response.json())
         .then((actualData) => {
           console.log(actualData.data.products);

@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
-export default class ShopOwnerSignUp extends Component { 
+export default class ShopOwnerSignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -240,7 +240,7 @@ export default class ShopOwnerSignUp extends Component {
                   Phone
                 </label>
                 <input
-                  type="number"
+                  type="tel"
                   id="form6Example6"
                   class="form-control"
                   onChange={(e) => this.setState({ phone: e.target.value })}

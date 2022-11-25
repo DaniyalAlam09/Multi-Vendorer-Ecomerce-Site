@@ -102,7 +102,7 @@ const ShopOwnerProductList = () => {
             .map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                {/* <td>{item.product_name}</td> */}
+                <td>{item.product_name}</td>
                 <td>{item.product_brand}</td>
                 <td>{item.product_catagorey}</td>
                 <td>{item.product_color}</td>

@@ -24,102 +24,75 @@ const Dashboard = () => {
       });
   }, []);
   return (
-    <div class="container emp-profile ml-6">
-      <form method="post">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="profile-img">
-              <img
-                // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                alt=""
-              />
-              <div class="file btn btn-lg btn-primary">
-                Change Photo
-                <input type="file" name="file" />
+    <div class="container ml-2">
+      <div class="main-body">
+        <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img
+                    src="https://www.w3schools.com/howto/img_avatar.png"
+                    alt="Admin"
+                    class="rounded-circle"
+                    width="150"
+                  />
+                  <div class="mt-3">
+                    <h4> {user.firstName}</h4>
+                    <p class="text-secondary mb-1">{user.profession}</p>
+                    <p class="text-muted font-size-sm">{user.email}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="profile-head">
-              <h5>{user.firstName}</h5>
-              <h6>{user.email}</h6>
-              <p class="proile-rating">
-                RANKINGS : <span>8/10</span>
-              </p>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <input
-              type="submit"
-              class="profile-edit-btn"
-              name="btnAddMore"
-              value="Edit Profile"
-            />
-          </div>
-        </div>
-        <div class="row">
-          {/* <div class="col-md-4">
-            <div class="profile-work">
-              <p>WORK LINK</p>
-              <a href="">Website Link</a>
-              <br />
-              <a href="">Bootsnipp Profile</a>
-              <br />
-              <a href="">Bootply Profile</a>
-              <p>SKILLS</p>
-              <a href="">Web Designer</a>
-              <br />
-              <a href="">Web Developer</a>
-              <br />
-              <a href="">WordPress</a>
-              <br />
-              <a href="">WooCommerce</a>
-              <br />
-              <a href="">PHP, .Net</a>
-              <br />
-            </div>
-          </div> */}
-          <div class="col-md-10">
-            <div class="tab-content profile-tab">
-              <div class="row">
-                <div class="col-md-3">
-                  <label>User Id</label>
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {" "}
+                    {user.firstName} {user.lastName}
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <p>{user._id}</p>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{user.email}</div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <label>Name</label>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phone</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{user.phoneNo}</div>
                 </div>
-                <div class="col-md-6">
-                  <p>
-                    {user.firstName}
-                    {user.lastName}
-                  </p>
+
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Address</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{user.address}</div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <label>Email</label>
-                </div>
-                <div class="col-md-6">
-                  <p>{user.email}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <label>Phone</label>
-                </div>
-                <div class="col-md-6">
-                  <p>{user.phone}0</p>
+                <hr />
+                <div class="">
+                  <div class="d-flex flex-row-reverse">
+                    <button class="btn btn-primary signin ml-2">
+                      Edit profile
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

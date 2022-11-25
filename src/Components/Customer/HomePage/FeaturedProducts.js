@@ -80,13 +80,13 @@ function FeaturedProducts() {
                               <CardMedia
                                 component="img"
                                 height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
-                                alt="green iguana"
+                                image={`${product.product_image}`}
+                                alt="product image"
                               />
                               <CardContent>
                                 <Typography
                                   gutterBottom
-                                  variant="h5"
+                                  variant="h6"
                                   component="div"
                                 >
                                   {`${product.product_name}`}

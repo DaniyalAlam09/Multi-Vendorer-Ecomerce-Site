@@ -53,7 +53,6 @@ const AddProduct = () => {
       withCredentials: true,
     };
 
-    
     axios
       .post(
         `http://localhost:4000/shops/add-product`,
@@ -83,7 +82,7 @@ const AddProduct = () => {
             progress: undefined,
             theme: "light",
           });
-          navigate("../product-list");
+          // navigate("../product-list");
           // return response.json();
         } else {
           console.log("SOMETHING WENT WRONG");
