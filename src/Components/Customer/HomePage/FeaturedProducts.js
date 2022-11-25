@@ -66,14 +66,42 @@ function FeaturedProducts() {
             </>
           ) : (
             <div className="container heading2">
-              <div className="row ">
+              <div className="row text-center justify-content-around ">
                 {product
 
                   // .filter((person) => person.price < 40000)
                   .slice(0, 4)
                   .map((product, index) => (
-                    <div key={index}>
-                      <div className="mr-3">
+                    <div key={index} className=" col-xl-3 col-sm-6 mb-5">
+                      <Link to={`singleProduct/${product._id}`}>
+                        <div className="thumbnail ">
+                          <img
+                            className="product-image rounded"
+                            src={`${product.product_image}`}
+                          />
+                          <div>
+                            <p className="brand-name">{`${product.product_brand}`}</p>
+                            <p className="product-name">{`${product.product_name}`}</p>
+                            <p className="product-price">{`${product.product_price}`}</p>
+                            {product.reviews.map((rat, index) => {
+                              <div key={index}>
+                                <Rating
+                                  name="read-only"
+                                  value={rat.rating}
+                                  readOnly
+                                />
+                                <p>{rat.name}</p>;
+                              </div>;
+                              {
+                                console.log(rat.name);
+                              }
+                            })}
+                          </div>
+                          {/* <button className="button rounded">Add to Cart</button> */}
+                        </div>
+                      </Link>
+
+                      {/* <div className="mr-3">
                         <Link to={`singleProduct/${product._id}`}>
                           <Card sx={{ maxWidth: 250 }}>
                             <CardActionArea>
@@ -103,7 +131,7 @@ function FeaturedProducts() {
                             </CardActionArea>
                           </Card>
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   ))}
               </div>

@@ -42,6 +42,7 @@ const ShopOwnerProductList = () => {
       .get(`http://localhost:4000/shopowners/deleteproduct/${id}`)
       .then((user) => {
         console.log("user delete");
+        setOpen(false);
         // navigate(0);
       })
       .catch((error) => {

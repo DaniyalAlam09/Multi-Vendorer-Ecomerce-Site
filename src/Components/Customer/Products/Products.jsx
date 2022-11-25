@@ -16,21 +16,6 @@ const Products = () => {
   const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
 
   const [product, setProduct] = useState([]);
-  React.useEffect(function () {
-    axios
-      .get("http://localhost:4000/shopowners/viewProducts")
-      .then((res) => {
-        setProduct(Object.values(res.data));
-
-        // setProduct(prevState => [res.data])
-        console.log(res.data);
-        // console.log(product.reviews["rating"]);
-        console.log(product);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const [brands, setbrands] = useState([
     { id: 1, checked: false, label: "Apple" },
@@ -110,10 +95,30 @@ const Products = () => {
     !updatedList.length ? setResultsFound(false) : setResultsFound(true);
   };
 
-  useEffect(() => {
-    console.log(list);
-    applyFilters();
-  }, [selectedRating, selectedCategory, brands, searchInput, selectedPrice]);
+  React.useEffect(
+    function () {
+      axios
+        .get("http://localhost:4000/shopowners/viewProducts")
+        .then((res) => {
+          setProduct(Object.values(res.data));
+
+          // setProduct(prevState => [res.data])
+          console.log(res.data);
+          // console.log(product.reviews["rating"]);
+          console.log(product);
+          applyFilters();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    [selectedRating, selectedCategory, brands, searchInput, selectedPrice]
+  );
+
+  // useEffect(() => {
+  //   console.log(list);
+
+  // }, );
 
   return (
     <div>
@@ -145,7 +150,7 @@ const Products = () => {
             </div>
             {/* List & Empty View */}
             <div className="home_list-wrap">
-              {/* {resultsFound ? <List list={list} /> : <EmptyView />} */}
+              {resultsFound ? <List list={list} /> : <EmptyView />}
               <List list={list} />
             </div>
           </div>
