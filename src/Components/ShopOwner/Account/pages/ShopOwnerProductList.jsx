@@ -38,18 +38,26 @@ const ShopOwnerProductList = () => {
   };
   const handleDelete = (id) => {
     // console.log(userID);
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
     axios
-      .get(`http://localhost:4000/shopowners/deleteproduct/${id}`)
+      .get(`http://localhost:4000/shopowners/deleteproduct/${id}`, config)
       .then((user) => {
         console.log("user delete");
         setOpen(false);
+        fetchProducts();
         // navigate(0);
       })
       .catch((error) => {
         console.log(error.message);
       });
   };
-  React.useEffect(function () {
+  const fetchProducts = () => {
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -61,10 +69,14 @@ const ShopOwnerProductList = () => {
       .get("http://localhost:4000/shopowners/myproducts", config)
       .then((response) => {
         setUser(response.data.products);
+        console.log(response.data.products);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+  React.useEffect(function () {
+    fetchProducts();
   }, []);
   // useEffect(() => {
   //   fetch("http://localhost:4000/shopowners/viewproducts")
@@ -98,70 +110,76 @@ const ShopOwnerProductList = () => {
           </tr>
         </thead>
         <tbody>
-          {user
-            ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.product_name}</td>
-                <td>{item.product_brand}</td>
-                <td>{item.product_catagorey}</td>
-                <td>{item.product_color}</td>
-                <td>{item.product_price}</td>
-                <td>{item.product_sku}</td>
-                <td>
-                  <button className="buttons btn text-white btn-block btn-primary">
-                    <Link
-                      to={`/shopowner/edit-profile/${item._id}`}
-                      className="text-white"
+          {user.length > 0 ? (
+            user
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item?.product_name}</td>
+                  <td>{item?.product_brand}</td>
+                  <td>{item?.product_catagorey}</td>
+                  <td>{item?.product_color}</td>
+                  <td>{item?.product_price}</td>
+                  <td>{item?.product_sku}</td>
+                  <td>
+                    <button className="buttons btn text-white btn-block btn-primary">
+                      <Link
+                        to={`/shopowner/edit-profile/${item?._id}`}
+                        className="text-white"
+                      >
+                        Edit
+                      </Link>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={handleOpen}
+                      className="buttons btn text-white btn-block btn-danger"
                     >
-                      Edit
-                    </Link>
-                  </button>
-                </td>
-                <td>
-                  <button
-                    onClick={handleOpen}
-                    className="buttons btn text-white btn-block btn-danger"
-                  >
-                    {" "}
-                    Delete
-                  </button>
-                  <Modal
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="keep-mounted-modal-title"
-                    aria-describedby="keep-mounted-modal-description"
-                  >
-                    <Box sx={style}>
-                      <Typography
-                        id="keep-mounted-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        Are You Sure
-                      </Typography>
-                      <br />
-                      <button
-                        className="buttons btn text-white btn-block btn-danger"
-                        onClick={() => {
-                          handleDelete(item._id);
-                        }}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="buttons btn text-white btn-block btn-danger"
-                        onClick={handleClose}
-                      >
-                        Cancel
-                      </button>
-                    </Box>
-                  </Modal>
-                </td>
-              </tr>
-            ))}
+                      {" "}
+                      Delete
+                    </button>
+                    <Modal
+                      keepMounted
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="keep-mounted-modal-title"
+                      aria-describedby="keep-mounted-modal-description"
+                    >
+                      <Box sx={style}>
+                        <Typography
+                          id="keep-mounted-modal-title"
+                          variant="h6"
+                          component="h2"
+                        >
+                          Are You Sure
+                        </Typography>
+                        <br />
+                        <button
+                          className="buttons btn text-white btn-block btn-danger"
+                          onClick={() => {
+                            handleDelete(item._id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="buttons btn text-white btn-block btn-danger"
+                          onClick={handleClose}
+                        >
+                          Cancel
+                        </button>
+                      </Box>
+                    </Modal>
+                  </td>
+                </tr>
+              ))
+          ) : (
+            <>
+              <h1>No Products</h1>
+            </>
+          )}
         </tbody>
       </table>
       <TablePagination

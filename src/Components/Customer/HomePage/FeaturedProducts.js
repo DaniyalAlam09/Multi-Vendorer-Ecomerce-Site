@@ -83,19 +83,16 @@ function FeaturedProducts() {
                             <p className="brand-name">{`${product.product_brand}`}</p>
                             <p className="product-name">{`${product.product_name}`}</p>
                             <p className="product-price">{`${product.product_price}`}</p>
-                            {product.reviews.map((rat, index) => {
-                              <div key={index}>
-                                <Rating
-                                  name="read-only"
-                                  value={rat.rating}
-                                  readOnly
-                                />
-                                <p>{rat.name}</p>;
-                              </div>;
-                              {
-                                console.log(rat.name);
-                              }
-                            })}
+                            <p className="product-price">{`${product.product_price}`}</p>
+                            <p className="product-price">
+                              {product.reviews ? (
+                                product.reviews?.map((rew) => (
+                                  <Rating value={rew.rating} readOnly />
+                                ))
+                              ) : (
+                                <Rating value={null} name="read-only" />
+                              )}
+                            </p>
                           </div>
                           {/* <button className="button rounded">Add to Cart</button> */}
                         </div>

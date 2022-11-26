@@ -90,7 +90,7 @@ function ShopOwnerEdit() {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-      },
+      }, 
       withCredentials: true,
     };
 
@@ -117,32 +117,36 @@ function ShopOwnerEdit() {
       });
   };
 
-  // React.useEffect(
-  //   function () {
-  //     axios
-  //       .get("http://localhost:4000/shopowners/" + itemId)
-  //       .then((res) => {
-  //         console.log(res.data);
-  //         setState(res.data);
-  //         setState((pre) => ({ ...pre, firstName: res.data.firstName }));
-  //         setState((pre) => ({ ...pre, lastName: res.data.lastName }));
-  //         setState((pre) => ({ ...pre, email: res.data.email }));
-  //         setState((pre) => ({ ...pre, shopNo: res.data.shopNo }));
-  //         setState((pre) => ({ ...pre, shopName: res.data.shopName }));
-  //         setState((pre) => ({ ...pre, catagorey: res.data.catagorey }));
-  //         setState((pre) => ({ ...pre, phone: res.data.phone }));
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   },
-  //   [itemId]
-  // );
+  React.useEffect(function () {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios
+      .get("http://localhost:4000/shopowners/shopowner", config)
+      .then((res) => {
+        console.log(res.data.user);
+        // setState(res.data.user);
+        setState((pre) => ({ ...pre, firstName: res.data.user.firstName }));
+        setState((pre) => ({ ...pre, lastName: res.data.user.lastName }));
+        setState((pre) => ({ ...pre, email: res.data.user.email }));
+        setState((pre) => ({ ...pre, shopNo: res.data.user.shopNo }));
+        setState((pre) => ({ ...pre, shopName: res.data.user.shopName }));
+        setState((pre) => ({ ...pre, catagorey: res.data.user.catagorey }));
+        setState((pre) => ({ ...pre, phone: res.data.user.phone }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div>
       <div class="ml-5">
-        <form onSubmit={handleSubmit}>
+        <form autoComplete={false} onSubmit={handleSubmit}>
           <div class="row mt-4 mb-4">
             <div class="col">
               <div class="form-outline">
@@ -179,11 +183,6 @@ function ShopOwnerEdit() {
               id="form6Example5"
               class="form-control"
             />
-          </div>
-
-          <div class="form-wrapper form-group required mb-2">
-            <label class="form-label control-label">Password</label>
-            <input type="password" class="form-control" />
           </div>
 
           <div class="form-outline mb-4 form-group required">

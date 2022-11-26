@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const Dashboard = () => {
@@ -28,7 +29,7 @@ const Dashboard = () => {
       <div class="main-body">
         <div class="row gutters-sm">
           <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card" style={{ height: "27em" }}>
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
                   <img
@@ -46,7 +47,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8" style={{ height: "27em" }}>
             <div class="card mb-3">
               <div class="card-body">
                 <div class="row">
@@ -84,7 +85,9 @@ const Dashboard = () => {
                 <div class="">
                   <div class="d-flex flex-row-reverse">
                     <button class="btn btn-primary signin ml-2">
-                      Edit profile
+                      <Link to="../edit-profile" className="text-white">
+                        Edit Profile
+                      </Link>
                     </button>
                   </div>
                 </div>

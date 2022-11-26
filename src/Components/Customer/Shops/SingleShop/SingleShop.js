@@ -18,9 +18,11 @@ import { Link } from "react-router-dom";
 import "./Style.css";
 
 function SingleShop() {
-  let { ShopId, shopName } = useParams();
+  let { shopId, shopName } = useParams();
+  let params = useParams();
   const [shop, setShop] = React.useState({});
   const [user, setUser] = useState("");
+  // console.log(params);
   React.useEffect(
     function () {
       const config = {
@@ -31,10 +33,10 @@ function SingleShop() {
         withCredentials: true,
       };
       axios
-        .get("http://localhost:4000/shopowners/" + ShopId)
+        .get("http://localhost:4000/shopowners/" + shopId)
         .then((res) => {
           setShop(res.data);
-          console.log(ShopId);
+          console.log(shopId);
           console.log(res.data);
           console.log(shop);
         })
@@ -42,7 +44,7 @@ function SingleShop() {
           console.log(err);
         });
       axios
-        .get("http://localhost:4000/shopowners/shopproducts", config)
+        .get("http://localhost:4000/shopowners/shopproducts")
         // .then((response) => response.json())
         .then((actualData) => {
           console.log(actualData.data.products);
@@ -54,7 +56,7 @@ function SingleShop() {
         });
     },
 
-    [ShopId]
+    [shopId]
   );
 
   return (
@@ -67,6 +69,7 @@ function SingleShop() {
       <div className="container">
         <div className=" d-flex justify-content-center mb-4 mt-4">
           <h1>{shopName}</h1>
+          {/* <h1>{ShopId}</h1> */}
         </div>
 
         {Object.values(user)?.map((product) => (

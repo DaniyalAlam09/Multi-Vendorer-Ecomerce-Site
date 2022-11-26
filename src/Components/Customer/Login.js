@@ -197,11 +197,6 @@ export default function Login() {
                     <div className="text-center">
                       <h6>OR</h6>
                     </div>
-                    <button className="buttons btn text-white btn-block btn-primary">
-                      <Link to="/create-account" className="text-white">
-                        Get Register
-                      </Link>
-                    </button>
 
                     <span className="d-block text-left my-4 text-muted">
                       {" "}
@@ -220,6 +215,11 @@ export default function Login() {
                       </a>
                     </div>
                   </form>
+                  <button className="buttons btn text-white btn-block btn-primary">
+                    <Link to="/create-account" className="text-white">
+                      Get Register
+                    </Link>
+                  </button>
                 </div>
               </div>
             </div>
