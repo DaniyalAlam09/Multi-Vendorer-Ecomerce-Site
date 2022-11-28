@@ -10,11 +10,58 @@ import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
 import { slice } from "lodash";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: " rgba(218, 216, 216, 0.26)",
+  "&:hover": {
+    backgroundColor: "rgba(218, 216, 216, 0.26)",
+    // width: "80%",
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "100%",
+  },
+}));
 
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "50ch",
+      "&:focus": {
+        width: "70ch",
+      },
+    },
+  },
+}));
 function Shops() {
   const [user, setUser] = useState("");
   const [index, setIndex] = useState(8);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [search, setSearch] = useState("");
   const initialPosts = slice(user, 0, index);
   useEffect(() => {
     fetch("http://localhost:4000/admins/viewshopowners")
@@ -36,46 +83,30 @@ function Shops() {
       setIsCompleted(false);
     }
   };
-  const [search, setSearch] = useState("");
   return (
     <Stack className="container heading " spacing={2}>
-      <div className="searchBar-wrap">
-        <SearchIcon className="searchBar-icon" />
-        <input
-          type="text"
-          className="form-control "
-          placeholder="Search Here"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-      </div>
-      <div class="dropdown ">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">
-            Action
-          </a>
-          <a class="dropdown-item" href="#">
-            Another action
-          </a>
-          <a class="dropdown-item" href="#">
-            Something else here
-          </a>
+      <div class=" container d-flex justify-content-center">
+        <div className="">
+          <Box>
+            <Toolbar>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              </Search>
+            </Toolbar>
+          </Box>
         </div>
       </div>
-
       <div className="container products ">
-        <div className="row text-center justify-content-around">
+        <div className="row text-center justify-content-start">
           {Object.values(initialPosts)
             // .slice(0, 8)
 

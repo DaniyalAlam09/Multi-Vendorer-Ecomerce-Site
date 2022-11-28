@@ -179,11 +179,11 @@ export default function Login() {
                       className="buttons btn text-white btn-block btn-primary"
                     />
                   </form>
-                  <button className="buttons btn text-white btn-block btn-primary mt-2">
-                    <Link to="/create-account" className="text-white">
+                  <Link to="/create-account" className="text-white">
+                    <button className="buttons btn text-white btn-block btn-primary mt-2">
                       Get Register
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                   <ToastContainer
                     position="top-right"
                     autoClose={5000}

@@ -103,7 +103,7 @@ export default class ShopOwnerSignUp extends Component {
             progress: undefined,
           });
         } else if (shopOwner.message == "password is not strong enough") {
-          toast.error("password is not strong enough", {
+          toast.error("Password is not strong enough", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -134,15 +134,15 @@ export default class ShopOwnerSignUp extends Component {
             <img src="/images/Account.png" alt="Image" className="img-fluid " />
           </div>
           <div class="inner">
-            <form autoComplete={false} onSubmit={this.handleSubmit}>
-              <h3>
-                {" "}
-                Become member of <strong>OVM</strong>
-              </h3>
-              <Link className="" to="/account">
-                Register as customer?
-              </Link>
+            <h3>
+              {" "}
+              Become member of <strong>OVM</strong>
+            </h3>
+            <Link className="" to="/create-account">
+              Register as customer?
+            </Link>
 
+            <form autoComplete={false} onSubmit={this.handleSubmit}>
               <div class="row mt-4 mb-4">
                 <div class="col">
                   <div class="form-outline">

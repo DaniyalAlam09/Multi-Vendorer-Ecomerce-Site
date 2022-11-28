@@ -97,7 +97,7 @@ export default class SignUp extends Component {
             progress: undefined,
           });
         } else if (user.message == "password is not strong enough") {
-          toast.error("password is not strong enough", {
+          toast.error("Password is not Strong enough", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -107,7 +107,7 @@ export default class SignUp extends Component {
             progress: undefined,
           });
         } else {
-          toast.error("Wrong Inputs", {
+          toast.error("All Feilds must be filled ", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -133,14 +133,14 @@ export default class SignUp extends Component {
               />
             </div>
             <div class="inner">
+              <h3>
+                {" "}
+                Become member of <strong>OVM</strong>
+              </h3>
+              <Link className="" to="/shopowner-account">
+                Register as Shop Owner?
+              </Link>
               <form autoComplete={false} onSubmit={this.handleSubmit}>
-                <h3>
-                  {" "}
-                  Become member of <strong>OVM</strong>
-                </h3>
-                <Link className="" to="/shopowner-account">
-                  Register as Shop Owner?
-                </Link>
                 <div class="form-group mt-2">
                   <div class="row">
                     <div class="col-md-6 form-wrapper mb-2">
