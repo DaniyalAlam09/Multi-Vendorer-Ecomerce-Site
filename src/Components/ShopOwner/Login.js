@@ -47,32 +47,8 @@ export default function ShopOwnerLogin() {
         { email: state.email, password: state.password },
         config
       )
-      .then((user) => {
-        if (user.message == "success") {
-          console.log(user);
-          toast("Successfull Logged in");
-          window.location.href = "shopowner/shoponwer-dashboard";
-        } else if (user.status === "Incorrect Password") {
-          toast.error("Invalid Password", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        } else {
-          toast.error("User Doesnt exist", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
+      .then((response) => {
+        window.location.href = "shopowner/shoponwer-dashboard";
       })
       .catch((error) => {
         console.log(error.message);
