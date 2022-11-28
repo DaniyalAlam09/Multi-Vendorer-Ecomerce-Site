@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { UilShoppingBag, UilHeart, UilSearch } from "@iconscout/react-unicons";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +7,62 @@ import { Link } from "react-router-dom";
 import { Component } from "react";
 import axios from "axios";
 import { useCart } from "react-use-cart";
+import SearchIcon from "@material-ui/icons/Search";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: " rgba(218, 216, 216, 0.26)",
+  "&:hover": {
+    backgroundColor: "rgba(218, 216, 216, 0.26)",
+    // width: "80%",
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "100%",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "20ch",
+      "&:focus": {
+        width: "27ch",
+      },
+    },
+  },
+}));
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { isEmpty, totalItems } = useCart();
   const [user, setUser] = React.useState({});
+  const [search, setSearch] = useState("");
+
   const handleLogout = () => {
     const config = {
       headers: {
@@ -124,12 +175,22 @@ const Navbar = () => {
           </ul>
         </div>
         <form className="form-inline">
-          <input
-            className="form-control "
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+          {/* <Box> */}
+          {/* <Toolbar> */}
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
+          </Search>
+          {/* </Toolbar> */}
+          {/* </Box> */}
         </form>
         <div className="icon">
           <Link to="/search">

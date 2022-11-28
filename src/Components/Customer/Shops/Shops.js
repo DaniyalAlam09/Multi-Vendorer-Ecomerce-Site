@@ -9,9 +9,13 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
+import { slice } from "lodash";
 
 function Shops() {
   const [user, setUser] = useState("");
+  const [index, setIndex] = useState(8);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const initialPosts = slice(user, 0, index);
   useEffect(() => {
     fetch("http://localhost:4000/admins/viewshopowners")
       .then((response) => response.json())
@@ -23,6 +27,15 @@ function Shops() {
         console.log(err.message);
       });
   }, []);
+  const loadMore = () => {
+    setIndex(index + 8);
+    console.log(index);
+    if (index >= user.length) {
+      setIsCompleted(true);
+    } else {
+      setIsCompleted(false);
+    }
+  };
   const [search, setSearch] = useState("");
   return (
     <Stack className="container heading " spacing={2}>
@@ -63,7 +76,7 @@ function Shops() {
 
       <div className="container products ">
         <div className="row text-center justify-content-around">
-          {Object.values(user)
+          {Object.values(initialPosts)
             // .slice(0, 8)
 
             .filter((person) => {
@@ -93,15 +106,32 @@ function Shops() {
               </div>
             ))}
         </div>
+        <div className="d-grid mt-3 mb-5">
+          {isCompleted ? (
+            <div class="text-center">
+              {" "}
+              <button
+                onClick={loadMore}
+                type="button"
+                className="btn btn-danger disabled"
+              >
+                No More Items
+              </button>
+            </div>
+          ) : (
+            <div class="text-center">
+              <button
+                onClick={loadMore}
+                type="button"
+                class="btn btn-primary signin ml-2"
+              >
+                Load More
+                {/* <KeyboardDoubleArrowDownSharpIcon /> */}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-      <Grid display="flex" justifyContent="center" alignItems="center">
-        <Pagination
-          count={10}
-          size="large"
-          variant="outlined"
-          shape="rounded"
-        />
-      </Grid>
     </Stack>
   );
 }
