@@ -14,6 +14,11 @@ const AddProduct = () => {
   const navigate = useNavigate();
   // const [images, setImages] = useState("");
   const [image, setImage] = React.useState("");
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgess] = React.useState(0);
+  const [sending, setSending] = React.useState(false);
+  const [isFilePicked, setIsFilePicked] = useState(false);
+
   const [state, setState] = useState({
     name: "",
     description: "",
@@ -28,89 +33,46 @@ const AddProduct = () => {
     setState({ ...state, [e.target.name]: e.target.value });
     console.log(state);
   };
+  const getFormData = () => {
+    var form_data = new FormData();
+    for (var key in state) {
+      form_data.append(key, state[key]);
+    }
+    form_data.append("product", image);
+    return form_data;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append(
-      "productImage",
-      image
-      // state.productImage.name
-    );
-    formData.append("product_name", state.name);
-    formData.append("product_price", state.price);
-    formData.append("product_description", state.description);
-    formData.append("product_brand", state.brand);
-    formData.append("product_color", state.color);
-    formData.append("product_stoke", state.stoke);
-    formData.append("product_sku", state.sku);
-    // formData.append("product_sku", state.color);
+    alert("ll");
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
       withCredentials: true,
+      onUploadProgress: function (progressEvent) {
+        var percentCompleted =
+          Math.round((progressEvent.loaded * 100) / progressEvent.total) + "%";
+        setProgess(percentCompleted);
+      },
     };
-
+    setSending(false);
     axios
-      .post(
-        `http://localhost:4000/shops/add-product`,
-        // {
-        //   product_name: state.name,
-        //   product_price: state.price,
-        //   product_description: state.description,
-        //   product_brand: state.brand,
-        //   product_stoke: state.stroke,
-        //   product_sku: state.sku,
-        //   product_image: state.productImage.name,
-        // },
-        formData,
-        config
-      )
+      .post(`http://localhost:4000/shops/add-product`, getFormData(), config)
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          console.log("SUCCESSS");
-          // setOpen(true);
-          toast.success("Sucessfull Added", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          // navigate("../product-list");
-        } else if (response.message == "All Feild must be filled") {
-          console.log("500");
-          toast.error("All Feild must be filled", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        } else {
-          console.log("SOMETHING WENT WRONG");
-          // setError(true);
-          toast.error("SOMETHING WENT WRONG", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-        // window.location.href = "shopowner/shoponwer-dashboard";
-        console.log(response.data);
+        setSending(false);
+        // window.location.reload(true);
+        // if (response.data.success) {
+        //   navigate(`/panel/gig`);
+        // }
+      })
+      .catch((error) => {
+        setSending(false);
+
+        //toast
       });
+    alert("9");
   };
 
   return (
@@ -159,12 +121,11 @@ const AddProduct = () => {
             </label>
             <input
               type="file"
-              class="form-control"
-              id="customFile"
-              name="productImage"
               onChange={(e) => {
-                const file = e.target.files[0];
-                setImage(file);
+                setProgess(0);
+                const file = e.target.files[0]; // accessing file
+                setImage(file); // storing file
+                setIsFilePicked(true);
               }}
             />
           </div>
@@ -247,6 +208,7 @@ const AddProduct = () => {
           <button
             type="submit"
             className="buttons btn text-white btn-primary ml-auto"
+            disabled={sending}
           >
             Add Product
           </button>

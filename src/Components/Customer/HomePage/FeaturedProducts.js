@@ -38,10 +38,6 @@ function FeaturedProducts() {
       .get("http://localhost:4000/shopowners/viewProducts")
       .then((res) => {
         setProduct(res.data);
-        // setProduct(prevState => [res.data])
-        console.log(res.data);
-        // console.log(product.reviews.rating);
-        console.log(product);
         setLoading(false);
       })
       .catch((err) => {
@@ -78,7 +74,7 @@ function FeaturedProducts() {
                         <div className="thumbnail ">
                           <img
                             className="product-image rounded"
-                            src={`${product.product_image}`}
+                            src={`http://localhost:4000/${product.product_image}`}
                           />
                           <div>
                             <p className="brand-name">{`${product.product_brand}`}</p>

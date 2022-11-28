@@ -60,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const navigate = useNavigate();
   const { isEmpty, totalItems } = useCart();
-  const [user, setUser] = React.useState({});
+  const [user, setUser] = React.useState([]);
   const [search, setSearch] = useState("");
 
   const handleLogout = () => {
@@ -71,11 +71,10 @@ const Navbar = () => {
       },
       withCredentials: true,
     };
+    setUser([]);
     axios
       .get("http://localhost:4000/users/logout", config)
       .then((response) => {
-        console.log(response.data);
-
         navigate("../../account");
         navigate(0);
       })
@@ -95,11 +94,10 @@ const Navbar = () => {
       .get("http://localhost:4000/users/user", config)
       .then((res) => {
         setUser(res.data.user);
-        console.log(res.data.user);
-        console.log(user);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        setUser([]);
       });
   }, []);
 
@@ -123,7 +121,6 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item dropdown">
@@ -210,8 +207,7 @@ const Navbar = () => {
           {/* <span>{size}</span> */}
           <UilHeart className="icons" />
         </div>
-
-        {user ? (
+        {user?.firstName && (
           <div class="dropdown">
             <button
               class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
@@ -226,7 +222,7 @@ const Navbar = () => {
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <Link to="user/customer-dashboard" type="submit">
                 <button class="">Profile</button>
-              </Link>{" "}
+              </Link>
               <br />
               {/* <Link to="/logout" type="submit" class=""> */}
               <button class="" onClick={handleLogout}>
@@ -235,12 +231,12 @@ const Navbar = () => {
               {/* </Link> */}
             </div>
           </div>
-        ) : (
+        )}
+        {!user?.firstName && (
           <Link to="/account" type="submit">
             <button class="btn btn-primary signin ml-2">Sign IN</button>
           </Link>
         )}
-
         {/* } */}
         {/* <Link to="/userDetails" type="submit">
             <button class="btn btn-primary signin">{this.state.userData.fname}</button>
