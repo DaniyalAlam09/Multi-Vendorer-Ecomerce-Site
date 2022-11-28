@@ -124,7 +124,7 @@ export default function Login() {
                     </Link>
                   </div>
 
-                  <form onSubmit={handleLogin}>
+                  <form autoComplete={false} onSubmit={handleLogin}>
                     <div className="form-group first form-group required">
                       <label class="control-label">Email</label>
                       <input
@@ -166,11 +166,6 @@ export default function Login() {
                     </div>
 
                     <div className="d-flex mb-5 align-items-center">
-                      {/* <label className="control control--checkbox mb-0">
-                        <span className="caption">Remember me</span>
-                        <input type="checkbox" className="mr-3" />
-                        <div className="control__indicator"></div>
-                      </label> */}
                       <span className="ml-auto">
                         <Link to="/reset-password" className="forgot-pass">
                           Forgot Password?
@@ -183,43 +178,43 @@ export default function Login() {
                       value="Log In"
                       className="buttons btn text-white btn-block btn-primary"
                     />
-                    <ToastContainer
-                      position="top-right"
-                      autoClose={5000}
-                      hideProgressBar={false}
-                      newestOnTop={false}
-                      closeOnClick
-                      rtl={false}
-                      pauseOnFocusLoss
-                      draggable
-                      pauseOnHover
-                    />
-                    <div className="text-center">
-                      <h6>OR</h6>
-                    </div>
-
-                    <span className="d-block text-left my-4 text-muted">
-                      {" "}
-                      or sign in with
-                    </span>
-
-                    <div className="social-login">
-                      <a href="#" className="facebook">
-                        <UilFacebookF className="mr-3" />
-                      </a>
-                      <a href="#" className="twitter">
-                        <UilTwitter className=" mr-3" />
-                      </a>
-                      <a href="#" className="google">
-                        <UilGoogle className=" mr-3" />
-                      </a>
-                    </div>
                   </form>
-                  <button className="buttons btn text-white btn-block btn-primary">
+                  <button className="buttons btn text-white btn-block btn-primary mt-2">
                     <Link to="/create-account" className="text-white">
                       Get Register
                     </Link>
                   </button>
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                  <div className="text-center mt-2">
+                    <h6>OR</h6>
+                  </div>
+
+                  <span className="d-block text-left text-muted">
+                    {" "}
+                    or sign in with
+                  </span>
+
+                  <div className="social-login">
+                    <a href="#" className="facebook">
+                      <UilFacebookF className="mr-3" />
+                    </a>
+                    <a href="#" className="twitter">
+                      <UilTwitter className=" mr-3" />
+                    </a>
+                    <a href="#" className="google">
+                      <UilGoogle className=" mr-3" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

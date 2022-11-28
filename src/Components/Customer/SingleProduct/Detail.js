@@ -126,36 +126,7 @@ function Detail() {
             <div className="wrapper row">
               <div className=" col-md-6">
                 <div className="row">
-                  <div className="col-md-3">
-                    <ul className="small">
-                      <li className="active">
-                        <a data-target="#pic-1" data-toggle="tab">
-                          <img src="http://placekitten.com/200/126" />
-                        </a>
-                      </li>
-                      <li>
-                        <a data-target="#pic-2" data-toggle="tab">
-                          <img src="http://placekitten.com/200/126" />
-                        </a>
-                      </li>
-                      <li>
-                        <a data-target="#pic-3" data-toggle="tab">
-                          <img src="http://placekitten.com/200/126" />
-                        </a>
-                      </li>
-                      <li>
-                        <a data-target="#pic-4" data-toggle="tab">
-                          <img src="http://placekitten.com/200/126" />
-                        </a>
-                      </li>
-                      <li>
-                        <a data-target="#pic-5" data-toggle="tab">
-                          <img src="http://placekitten.com/200/126" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-md-9 large">
+                  <div className=" large">
                     <div className="tab-pane active" id="pic-1">
                       <img src="http://placekitten.com/400/252" />
                     </div>

@@ -133,7 +133,7 @@ export default class SignUp extends Component {
               />
             </div>
             <div class="inner">
-              <form onSubmit={this.handleSubmit}>
+              <form autoComplete={false} onSubmit={this.handleSubmit}>
                 <h3>
                   {" "}
                   Become member of <strong>OVM</strong>

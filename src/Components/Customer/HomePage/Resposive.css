@@ -1,6 +1,5 @@
 @media (max-width: 575.98px) {
   .main {
-    
   }
   .left-deal {
     /* margin-left: 3rem; */
@@ -11,29 +10,30 @@
     margin-bottom: 3rem;
     margin-left: 0.5rem;
   }
-  .empty{
+  .empty {
     display: none;
   }
   .thumbnail {
     margin-right: 2rem;
   }
-  .catagory-style{
+  .catagory-style {
     width: 14rem;
   }
-  
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
+  /* .left-deal {
+    width: 50px;
+  } */
 }
 @media (min-width: 769px) {
   .main {
     margin-left: 7rem;
   }
-  .left-deal{
+  .left-deal {
     margin-right: 2rem;
   }
   .thumbnail {
     margin-right: 3rem;
   }
 }
-

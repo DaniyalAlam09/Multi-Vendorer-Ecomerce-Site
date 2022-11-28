@@ -108,7 +108,7 @@ export default function ShopOwnerLogin() {
                   </Link>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form autoComplete={false} onSubmit={handleSubmit}>
                   <div className="form-group first form-group required">
                     <label class="control-label">Email</label>
                     <input

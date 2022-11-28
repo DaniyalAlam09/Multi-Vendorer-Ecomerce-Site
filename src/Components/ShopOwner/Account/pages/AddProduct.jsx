@@ -83,7 +83,17 @@ const AddProduct = () => {
             theme: "light",
           });
           // navigate("../product-list");
-          // return response.json();
+        } else if (response.message == "All Feild must be filled") {
+          console.log("500");
+          toast.error("All Feild must be filled", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         } else {
           console.log("SOMETHING WENT WRONG");
           // setError(true);
@@ -97,18 +107,9 @@ const AddProduct = () => {
             progress: undefined,
             theme: "light",
           });
-          {
-            /* Same as */
-          }
-          <ToastContainer />;
-          // this.setState({ requestFailed: true })
         }
         // window.location.href = "shopowner/shoponwer-dashboard";
-        // cosolelog(response.data);
         console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.message);
       });
   };
 
@@ -126,8 +127,8 @@ const AddProduct = () => {
         pauseOnHover
       />
       <form onSubmit={handleSubmit} className="container row g-3">
-        <div className="col-md-6 mb-3">
-          <label for="" className="form-label">
+        <div className="col-md-6 mb-3 form-group required">
+          <label for="" class="control-label">
             Product Name
           </label>
           <input
@@ -138,8 +139,8 @@ const AddProduct = () => {
             value={state.name}
           />
         </div>
-        <div className="col-md-3">
-          <label for="" className="form-label">
+        <div className="col-md-3 form-group required">
+          <label for="" class="control-label">
             Select Catagory
           </label>
           <br />
@@ -152,8 +153,8 @@ const AddProduct = () => {
           </select>
         </div>
         <div>
-          <div className="ml-3 mt-3">
-            <label class="form-label" for="customFile">
+          <div className="ml-3 mt-3 form-group required">
+            <label class="control-label" for="customFile">
               Add Product Cover Image
             </label>
             <input
@@ -168,27 +169,8 @@ const AddProduct = () => {
             />
           </div>
           <br />
-          {/* <div className="ml-3">
-            <br />
-            <label class="form-label" for="customFile">
-              Add Multiple images
-            </label>
-            <MultiImageInput
-              className="d-block"
-              theme={{
-                background: "#C5C5C5",
-                outlineColor: "#111111",
-                textColor: "rgba(255,255,255,0.6)",
-                buttonColor: "#ff0e1f",
-                // modalColor: "#ffffff",
-              }}
-              images={images}
-              setImages={setImages}
-              cropConfig={{ crop }}
-            />
-          </div> */}
         </div>
-        <div className="col-12 mt-3">
+        <div className="col-12 mt-3 form-group required">
           <label for="inputAddress" className="form-label">
             Product Description
           </label>
@@ -201,8 +183,8 @@ const AddProduct = () => {
             value={state.description}
           ></textarea>
         </div>
-        <div className="col-12 mt-3 col-md-4">
-          <label for="inputAddress2" className="form-label">
+        <div className="col-12 mt-3 col-md-4 form-group required">
+          <label for="inputAddress2" class="control-label">
             Price
           </label>
           <input
@@ -239,8 +221,8 @@ const AddProduct = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="col-md-2 mt-3">
-          <label for="inputZip" className="form-label">
+        <div className="col-md-2 mt-3 form-group required">
+          <label for="inputZip" class="control-label">
             SKU
           </label>
           <input
@@ -250,8 +232,8 @@ const AddProduct = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="col-md-2 mt-3">
-          <label for="inputZip" className="form-label">
+        <div className="col-md-2 mt-3 form-group required">
+          <label for="inputZip" class="control-label">
             Stoke
           </label>
           <input

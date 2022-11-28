@@ -134,7 +134,7 @@ export default class ShopOwnerSignUp extends Component {
             <img src="/images/Account.png" alt="Image" className="img-fluid " />
           </div>
           <div class="inner">
-            <form onSubmit={this.handleSubmit}>
+            <form autoComplete={false} onSubmit={this.handleSubmit}>
               <h3>
                 {" "}
                 Become member of <strong>OVM</strong>
