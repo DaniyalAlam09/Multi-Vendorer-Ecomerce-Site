@@ -8,8 +8,13 @@ import {
   FaShoppingBag,
   FaThList,
 } from "react-icons/fa";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { NavLink } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 import ReorderIcon from "@mui/icons-material/Reorder";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CategoryIcon from "@mui/icons-material/Category";
+import AddIcon from "@mui/icons-material/Add";
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -17,7 +22,7 @@ const Sidebar = ({ children }) => {
     {
       path: "shoponwer-dashboard",
       name: "Dashboard",
-      icon: <FaTh />,
+      icon: <DashboardIcon />,
     },
     {
       path: "manage-orders",
@@ -32,26 +37,26 @@ const Sidebar = ({ children }) => {
     {
       path: "edit-profile",
       name: "Edit",
-      icon: <FaCommentAlt />,
+      icon: <EditIcon />,
     },
     {
       path: "addproduct",
       name: "Add Product",
-      icon: <FaShoppingBag />,
+      icon: <AddIcon />,
     },
     {
       path: "product-list",
       name: "Products",
-      icon: <FaShoppingBag />,
+      icon: <CategoryIcon />,
     },
     {
       path: "logout",
       name: "Logout",
-      icon: <FaThList />,
+      icon: <LogoutIcon />,
     },
   ];
   return (
-    <div className="sidebyside">
+    <div className="contain">
       <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
         <div className="top_section">
           <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
@@ -69,7 +74,12 @@ const Sidebar = ({ children }) => {
             activeclassName="active"
           >
             <div className="icon">{item.icon}</div>
-            <div className="link_text">{item.name}</div>
+            <div
+              style={{ display: isOpen ? "block" : "none" }}
+              className="link_text"
+            >
+              {item.name}
+            </div>
           </NavLink>
         ))}
       </div>

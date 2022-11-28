@@ -73,7 +73,7 @@ export default class ShopOwnerSignUp extends Component {
           console.log(shopOwner.password);
           // window.location.href = "/account";
         } else if (shopOwner.message == "shopOwner Already exist") {
-          toast.error("shopOwner Already exist", {
+          toast.error("ShopOwner Already exist", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -83,7 +83,7 @@ export default class ShopOwnerSignUp extends Component {
             progress: undefined,
           });
         } else if (shopOwner.message == "All Feild must be filled") {
-          toast.error("Too Short Password", {
+          toast.error("All Feild must be filled", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -113,7 +113,7 @@ export default class ShopOwnerSignUp extends Component {
             progress: undefined,
           });
         } else {
-          toast.error("Wrong Inputs", {
+          toast.error("All Feild must be filled", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

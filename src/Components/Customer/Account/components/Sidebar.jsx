@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import {
-  FaTh,
-  FaBars,
-  FaUserAlt,
-  FaRegChartBar,
-  FaCommentAlt,
-  FaShoppingBag,
-  FaThList,
-} from "react-icons/fa";
+import { FaRegChartBar, FaTh } from "react-icons/fa";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { NavLink } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import ReorderIcon from "@mui/icons-material/Reorder";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,13 +13,8 @@ const Sidebar = ({ children }) => {
     {
       path: "customer-dashboard",
       name: "Dashboard",
-      icon: <FaTh />,
+      icon: <DashboardIcon />,
     },
-    // {
-    //     path:"/about",
-    //     name:"About",
-    //     icon:<FaUserAlt/>
-    // },
     {
       path: "customer-orders",
       name: "Your Orders",
@@ -32,28 +23,23 @@ const Sidebar = ({ children }) => {
     {
       path: "edit-profile",
       name: "Edit Profile",
-      icon: <FaCommentAlt />,
+      icon: <EditIcon />,
     },
     {
       path: "logout",
       name: "Logout",
-      icon: <FaShoppingBag />,
+      icon: <LogoutIcon />,
     },
-    // {
-    //     path:"/productList",
-    //     name:"Product List",
-    //     icon:<FaThList/>
-    // }
   ];
   return (
     <div className="contain">
-      <div style={{ width: isOpen ? "180px" : "50px" }} className="sidebar">
+      <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
         <div className="top_section">
           <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
             OVM
           </h1>
           <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
-            <FaBars onClick={toggle} />
+            <ReorderIcon onClick={toggle} />
           </div>
         </div>
         {menuItem.map((item, index) => (

@@ -70,7 +70,7 @@ function Shops() {
               if (search == "") {
                 return person;
               } else if (
-                person.name.toLowerCase().includes(search.toLowerCase())
+                person.shopName.toLowerCase().includes(search.toLowerCase())
               ) {
                 return person;
               }

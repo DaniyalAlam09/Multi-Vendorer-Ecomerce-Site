@@ -5,10 +5,10 @@ const Homey = () => {
   return (
     <>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ display: "flex", width: "12%" }}>
+        <div style={{ display: "flex", width: "auto" }}>
           <Sidebar />
         </div>
-        <div style={{ display: "flex", width: "78%" }}>
+        <div style={{ display: "flex", width: "auto" }}>
           <Outlet />
         </div>
       </div>

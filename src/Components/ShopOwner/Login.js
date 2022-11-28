@@ -161,49 +161,48 @@ export default function ShopOwnerLogin() {
                       </Link>
                     </span>
                   </div>
-
                   <input
                     type="submit"
                     value="Log In"
                     className="buttons btn text-white btn-block btn-primary"
                   />
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                  />
-                  <div className="text-center">
-                    <h6>OR</h6>
-                  </div>
-                  <button className="buttons btn text-white btn-block btn-primary">
-                    <Link to="/create-account" className="text-white">
-                      Get Register
-                    </Link>
-                  </button>
-
-                  <span className="d-block text-left my-4 text-muted">
-                    {" "}
-                    or sign in with
-                  </span>
-
-                  <div className="social-login">
-                    <a href="#" className="facebook">
-                      <UilFacebookF className="mr-3" />
-                    </a>
-                    <a href="#" className="twitter">
-                      <UilTwitter className=" mr-3" />
-                    </a>
-                    <a href="#" className="google">
-                      <UilGoogle className=" mr-3" />
-                    </a>
-                  </div>
                 </form>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                />
+                <div className="text-center">
+                  <h6>OR</h6>
+                </div>
+                <button className="buttons btn text-white btn-block btn-primary">
+                  <Link to="/create-account" className="text-white">
+                    Get Register
+                  </Link>
+                </button>
+
+                <span className="d-block text-left my-4 text-muted">
+                  {" "}
+                  or sign in with
+                </span>
+
+                <div className="social-login">
+                  <a href="#" className="facebook">
+                    <UilFacebookF className="mr-3" />
+                  </a>
+                  <a href="#" className="twitter">
+                    <UilTwitter className=" mr-3" />
+                  </a>
+                  <a href="#" className="google">
+                    <UilGoogle className=" mr-3" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

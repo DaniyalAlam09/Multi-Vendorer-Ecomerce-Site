@@ -1,163 +1,279 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Skeleton from "@mui/material/Skeleton";
+import Rating from "@mui/material/Rating";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HeroSection from "../HomePage/HeroSection";
-import EmptyView from "./common/EmptyView";
-import FilterPanel from "./Home/FilterPanel";
-import List from "./Home/List";
-import SearchBar from "./Home/SearchBar";
-import { dataList } from "./Data";
-import "./styles.css";
+import { styled, alpha } from "@mui/material/styles";
 import Hero from "../Images/Hero.png";
-import Navbar from "../../Genral/Navbar";
+import SearchIcon from "@material-ui/icons/Search";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
+import { slice } from "lodash";
+import TemporaryDrawer from "./Drawer";
+import KeyboardDoubleArrowDownSharpIcon from "@mui/icons-material/KeyboardDoubleArrowDownSharp";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
-const Products = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState([1000, 5000]);
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: " rgba(218, 216, 216, 0.26)",
+  "&:hover": {
+    backgroundColor: "rgba(218, 216, 216, 0.26)",
+    // width: "80%",
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "100%",
+  },
+}));
 
-  const [product, setProduct] = useState([]);
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
 
-  const [brands, setbrands] = useState([
-    { id: 1, checked: false, label: "Apple" },
-    { id: 2, checked: false, label: "Huawei" },
-    { id: 3, checked: false, label: "Acer" },
-  ]);
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "50ch",
+      "&:focus": {
+        width: "70ch",
+      },
+    },
+  },
+}));
 
-  const [list, setList] = useState(product);
-  const [resultsFound, setResultsFound] = useState(true);
-  const [searchInput, setSearchInput] = useState("");
+function Products() {
+  const [value, setValue] = React.useState([]);
+  const [product, setProduct] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [search, setSearch] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [index, setIndex] = useState(8);
+  const initialPosts = slice(product, 0, index);
+  const [state, setState] = useState({
+    name: "",
+    id: "",
+    price: "",
+  });
+  const { _id } = useParams();
+  const item = { _id };
+  const handleChange = (e) => {
+    console.log(item);
+  };
+  const filterByBrand = (product) => {
+    // Avoid filter for empty string
+    if (!selectedBrand) {
+      return product;
+    }
 
-  const handleSelectCategory = (event, value) =>
-    !value ? null : setSelectedCategory(value);
-
-  const handleSelectRating = (event, value) =>
-    !value ? null : setSelectedRating(value);
-
-  const handleChangeChecked = (id) => {
-    const cusinesStateList = brands;
-    const changeCheckedbrands = cusinesStateList.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+    const filteredProduct = product.filter(
+      (pro) => pro.split(" ").indexOf(selectedBrand) !== -1
     );
-    setbrands(changeCheckedbrands);
+    return filteredProduct;
   };
 
-  const handleChangePrice = (event, value) => {
-    setSelectedPrice(value);
+  const handleBrandChange = (event) => {
+    setSelectedBrand(event.target.value);
   };
-
-  const applyFilters = () => {
-    let updatedList = product;
-
-    // Rating Filter
-    if (selectedRating) {
-      updatedList = Object.values(updatedList).filter(
-        (item) => parseInt(item.rating) === parseInt(selectedRating)
-      );
+  const loadMore = () => {
+    setIndex(index + 8);
+    console.log(index);
+    if (index >= product.length) {
+      setIsCompleted(true);
+    } else {
+      setIsCompleted(false);
     }
-
-    // Category Filter
-    if (selectedCategory) {
-      updatedList = Object.values(updatedList).filter(
-        (item) => item.category === selectedCategory
-      );
-    }
-
-    // brand Filter
-    const brandsChecked = brands
-      .filter((item) => item.checked)
-      .map((item) => item.label.toLowerCase());
-
-    if (brandsChecked.length) {
-      updatedList = Object.values(updatedList).filter((item) =>
-        brandsChecked.includes(item.brand)
-      );
-    }
-
-    // Search Filter
-    if (searchInput) {
-      updatedList = Object.values(updatedList).filter(
-        (item) =>
-          item.title.toLowerCase().search(searchInput.toLowerCase().trim()) !==
-          -1
-      );
-    }
-
-    // Price Filter
-    const minPrice = selectedPrice[0];
-    const maxPrice = selectedPrice[1];
-
-    updatedList = Object.values(updatedList).filter(
-      (item) => item.price >= minPrice && item.price <= maxPrice
-    );
-
-    setList(updatedList);
-
-    !updatedList.length ? setResultsFound(false) : setResultsFound(true);
   };
-
   React.useEffect(
     function () {
       axios
         .get("http://localhost:4000/shopowners/viewProducts")
         .then((res) => {
-          setProduct(Object.values(res.data));
-
+          setProduct(res.data);
           // setProduct(prevState => [res.data])
           console.log(res.data);
-          // console.log(product.reviews["rating"]);
+          // console.log(product.reviews.rating);
           console.log(product);
-          applyFilters();
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
         });
+      var filteredData = filterByBrand(product);
+      setProduct(filteredData);
     },
-    [selectedRating, selectedCategory, brands, searchInput, selectedPrice]
+    [selectedBrand]
   );
 
-  // useEffect(() => {
-  //   console.log(list);
+  const filtered = product.filter((pro) => {
+    return pro.product_brand === "Apple";
+  });
 
-  // }, );
+  const apple = () => {
+    {
+      product
+        .filter((pro) => {
+          return pro.product_brand === "Apple";
+        })
+        .map((pro, index) => {
+          return (
+            <div key={index}>
+              <h2>name: {pro.product_name}</h2>
+              {/* <h2>country: {employee.country}</h2> */}
+              {console.log(pro.product_name)}
+
+              <hr />
+            </div>
+          );
+        });
+    }
+  };
 
   return (
     <div>
-      <div className="home headinng">
-        <HeroSection
-          Name1={"All Products are available "}
-          Name2={"Camera Product"}
-          ImageSource="/images/ProductsHero.png"
-        />
-        <div className="container heading">
-          {/* Search Bar */}
-          <SearchBar
-            value={searchInput}
-            changeInput={(e) => setSearchInput(e.target.value)}
-          />
-          <div className="home_panelList-wrap heading">
-            {/* Filter Panel */}
-            <div className="home_panel-wrap">
-              <FilterPanel
-                selectedCategory={selectedCategory}
-                selectCategory={handleSelectCategory}
-                selectedRating={selectedRating}
-                selectedPrice={selectedPrice}
-                selectRating={handleSelectRating}
-                brands={brands}
-                changeChecked={handleChangeChecked}
-                changePrice={handleChangePrice}
-              />
-            </div>
-            {/* List & Empty View */}
-            <div className="home_list-wrap">
-              {resultsFound ? <List list={list} /> : <EmptyView />}
-              <List list={list} />
-            </div>
+      <HeroSection
+        Name1={"All Products are available "}
+        Name2={"Camera Product"}
+        ImageSource="/images/ProductsHero.png"
+      />
+      <div className="mt-3">
+        <div class=" container d-flex justify-content-center">
+          <div className="">
+            <Box>
+              <Toolbar>
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
+                  />
+                </Search>
+              </Toolbar>
+            </Box>
+          </div>
+        </div>
+        <div className="text-center mt-2">
+          <button className="btn btn-primary signin ml-2">Mobile Phones</button>
+          <button className="btn btn-primary signin ml-2">Laptops</button>
+          <button className="btn btn-primary signin ml-2">
+            Audio & Speakers
+          </button>
+          <button className="btn btn-primary signin ml-2">
+            Headsets | Headphones
+          </button>
+          <button className="btn btn-primary signin ml-2">SSD</button>
+
+          <button className="btn btn-primary signin ml-2">Wifi Routers</button>
+          <button className="btn btn-primary signin ml-2">Accessories</button>
+        </div>
+        <div className="heading container">
+          <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
+          <div>
+            {loading ? (
+              <>
+                <Skeleton variant="rectangular" width={210} height={280} />
+              </>
+            ) : (
+              <div className="container">
+                <div className="row text-center d-flex justify-content-between ">
+                  {initialPosts
+                    .filter((person) => {
+                      if (search == "") {
+                        return person;
+                      } else if (
+                        person.product_name
+                          .toLowerCase()
+                          .includes(search.toLowerCase())
+                      ) {
+                        return person;
+                      }
+                    })
+                    .map((product, index) => (
+                      <div key={index} className=" col-xl-3 col-sm-6 mb-5">
+                        <Link to={`../singleProduct/${product._id}`}>
+                          <div className="thumbnail ">
+                            <img
+                              className="product-image rounded"
+                              src={`${product.product_image}`}
+                            />
+                            <div>
+                              <p className="brand-name">{`${product.product_brand}`}</p>
+                              <p className="product-name">{`${product.product_name}`}</p>
+                              <p className="product-price">{`${product.product_price}`}</p>
+                              <p className="product-price">
+                                {product.reviews ? (
+                                  product.reviews?.map((rew) => (
+                                    <Rating value={rew.rating} readOnly />
+                                  ))
+                                ) : (
+                                  <Rating value={null} name="read-only" />
+                                )}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                    ))}
+                </div>
+                <div className="d-grid mt-3 mb-5">
+                  {isCompleted ? (
+                    <div class="text-center">
+                      {" "}
+                      <button
+                        onClick={loadMore}
+                        type="button"
+                        className="btn btn-danger disabled"
+                      >
+                        No More Items
+                      </button>
+                    </div>
+                  ) : (
+                    <div class="text-center">
+                      <button
+                        onClick={loadMore}
+                        type="button"
+                        class="btn btn-primary signin ml-2"
+                      >
+                        Load More
+                        <KeyboardDoubleArrowDownSharpIcon />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Products;

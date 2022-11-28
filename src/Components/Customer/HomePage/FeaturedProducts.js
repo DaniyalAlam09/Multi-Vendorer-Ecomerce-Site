@@ -53,9 +53,9 @@ function FeaturedProducts() {
     <div className="heading container ">
       <div className="featured-head">
         <h3>Featured Products</h3>
-        <a href="#" class="link-secondary see-all">
+        <Link to="/products" class="link-secondary see-all">
           All Offers
-        </a>
+        </Link>
       </div>
       <div className="heading container">
         <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
@@ -70,7 +70,8 @@ function FeaturedProducts() {
                 {product
 
                   // .filter((person) => person.price < 40000)
-                  .slice(0, 4)
+
+                  .slice(0, 8)
                   .map((product, index) => (
                     <div key={index} className=" col-xl-3 col-sm-6 mb-5">
                       <Link to={`singleProduct/${product._id}`}>
@@ -83,7 +84,7 @@ function FeaturedProducts() {
                             <p className="brand-name">{`${product.product_brand}`}</p>
                             <p className="product-name">{`${product.product_name}`}</p>
                             <p className="product-price">{`${product.product_price}`}</p>
-                            <p className="product-price">{`${product.product_price}`}</p>
+                            {/* <p className="product-price">{`${product.product_price}`}</p> */}
                             <p className="product-price">
                               {product.reviews ? (
                                 product.reviews?.map((rew) => (

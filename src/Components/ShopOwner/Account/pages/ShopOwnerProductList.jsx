@@ -92,9 +92,9 @@ const ShopOwnerProductList = () => {
   // }, []);
 
   return (
-    <Paper sx={{ width: "100%" }}>
-      <h5>Total Registered Customers</h5>
-      <h6>{user.length}</h6>
+    <div className="text-center ml-5">
+      <h5 style={{ display: "inline-block" }}>Total Live Items = &nbsp;</h5>
+      <h5 style={{ display: "inline-block" }}>{user.length}</h5>
       <table className="table">
         <thead>
           <tr>
@@ -191,7 +191,7 @@ const ShopOwnerProductList = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </div>
   );
 };
 

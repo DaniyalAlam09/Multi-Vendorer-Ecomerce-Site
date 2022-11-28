@@ -28,7 +28,7 @@ const ShopOwnerDashboard = () => {
       <div class="main-body">
         <div class="row gutters-sm">
           <div class="col-md-4 mb-3">
-            <div class="card" style={{ height: "32em" }}>
+            <div class="card" style={{ height: "34rem" }}>
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
                   <img
@@ -46,7 +46,7 @@ const ShopOwnerDashboard = () => {
               </div>
             </div>
           </div>
-          <div class="col-md-8 " style={{ height: "32em" }}>
+          <div class="col-md-8 " style={{ height: "31rem" }}>
             <div class="card mb-3">
               <div class="card-body">
                 <div class="row">

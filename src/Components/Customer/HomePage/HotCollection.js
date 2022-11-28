@@ -1,95 +1,129 @@
 import React, { useEffect, useState } from "react";
-import { UilStar } from "@iconscout/react-unicons";
-import HeadPhone from "../Images/HeadPhone.png";
+import axios from "axios";
+import Skeleton from "@mui/material/Skeleton";
+import Rating from "@mui/material/Rating";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function HotCollection() {
-  const [visible, setVisible] = useState(4);
-  const loadMore = () => {
-    setVisible(visible + data.length);
+  const [value, setValue] = React.useState([]);
+  const [product, setProduct] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [state, setState] = useState({
+    name: "",
+    id: "",
+    price: "",
+  });
+  const { _id } = useParams();
+  const item = { _id };
+  const handleChange = (e) => {
+    console.log(item);
   };
 
-  const data = [
-    {
-        img: "/images/Mobiles/Mobile1.webp",
-        title: "Dell",
-        description: "Dell I7",
-        price: 50000,
-      },
-      {
-        img: HeadPhone,
-        title: "Apple ",
-        description: "Macbook 2020",
-        price: 50000,
-      },
-      {
-        img: "/images/Laptops/Laptop1.jpg",
-        title: "Samsung",
-        description: "Samsung Note20 Ultra ",
-        price: 50000,
-      },
-  
-      {
-        img: "/images/Mobiles/Mobile1.webp",
-        title: "JBL",
-        description: "Contrller",
-        price: 50000,
-      },
-  
-      {
-        img: HeadPhone,
-        title: "LG",
-        description: "LG Smart Tv 4k",
-        price: 50000,
-      },
-      {
-        img: HeadPhone,
-        title: "Watch ",
-        description: "G-shock watch waterprof",
-        price: 50000,
-      },
-      {
-        img: HeadPhone,
-        title: "Sony",
-        description: "Sony Beat Ah100K",
-        price: 50000,
-      },
-  
-      {
-        img: HeadPhone,
-        title: "Apple",
-        description: "Airpods Gen 3",
-        price: 50000,
-      },
-  ];
-  return (
-    <>
-      <div className="heading container">
-        <div className="featured-head">
-          <h3>Hot Collection</h3>
-          <a href="#" class="link-secondary see-all">
-            All Offers
-          </a>
-        </div>
-        <div className="container heading2">
-          <div className="row text-center justify-content-around">
-          {data.slice(0,4).map((elem) => (
-            <div key={data.indexOf(elem)} className=" col-xl-3 col-sm-6 mb-5">
-              <div className="thumbnail ">
-                <img className="product-image rounded" src={`${elem.img}`} />
-                <div>
-                  <p className="brand-name">{`${elem.title}`}</p>
-                  <p className="product-name">{`${elem.description}`}</p>
-                  <p className="product-price">{`${elem.price}`}</p>
+  React.useEffect(function () {
+    axios
+      .get("http://localhost:4000/shopowners/viewProducts")
+      .then((res) => {
+        setProduct(res.data);
+        // setProduct(prevState => [res.data])
+        console.log(res.data);
+        // console.log(product.reviews.rating);
+        console.log(product);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-                </div>
-                {/* <button className="button rounded">Add to Cart</button> */}
+  return (
+    <div className="heading container ">
+      <div className="featured-head">
+        <h3>Hot Collection</h3>
+        <Link to="/products" class="link-secondary see-all">
+          All Offers
+        </Link>
+      </div>
+      <div className="heading container">
+        <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
+        <div>
+          {loading ? (
+            <>
+              <Skeleton variant="rectangular" width={210} height={280} />
+            </>
+          ) : (
+            <div className="container heading2">
+              <div className="row text-center justify-content-around ">
+                {product
+
+                  .filter((person) => person.product_price < 40000)
+                  .slice(0, 4)
+                  .map((product, index) => (
+                    <div key={index} className=" col-xl-3 col-sm-6 mb-5">
+                      <Link to={`singleProduct/${product._id}`}>
+                        <div className="thumbnail ">
+                          <img
+                            className="product-image rounded"
+                            src={`${product.product_image}`}
+                          />
+                          <div>
+                            <p className="brand-name">{`${product.product_brand}`}</p>
+                            <p className="product-name">{`${product.product_name}`}</p>
+                            <p className="product-price">{`${product.product_price}`}</p>
+                            {/* <p className="product-price">{`${product.product_price}`}</p> */}
+                            <p className="product-price">
+                              {product.reviews ? (
+                                product.reviews?.map((rew) => (
+                                  <Rating value={rew.rating} readOnly />
+                                ))
+                              ) : (
+                                <Rating value={null} name="read-only" />
+                              )}
+                            </p>
+                          </div>
+                          {/* <button className="button rounded">Add to Cart</button> */}
+                        </div>
+                      </Link>
+
+                      {/* <div className="mr-3">
+                        <Link to={`singleProduct/${product._id}`}>
+                          <Card sx={{ maxWidth: 250 }}>
+                            <CardActionArea>
+                              <CardMedia
+                                component="img"
+                                height="140"
+                                image={`${product.product_image}`}
+                                alt="product image"
+                              />
+                              <CardContent>
+                                <Typography
+                                  gutterBottom
+                                  variant="h6"
+                                  component="div"
+                                >
+                                  {`${product.product_name}`}
+                                </Typography>
+                                <p className="brand-name">{`${product.product_brand}`}</p>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  {`${product.product_description}`}
+                                </Typography>
+                                <p className="product-price">{`${product.product_price}`}</p>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                        </Link>
+                      </div> */}
+                    </div>
+                  ))}
               </div>
             </div>
-          ))}
-          </div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
