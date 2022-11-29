@@ -77,7 +77,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/userDetails" element={<CustomerAccount />} />
-            <Route path="/allproducts/:categoreyName" element={<Catgories />} />
+            <Route path="/allproducts/:categoryName" element={<Catgories />} />
             <Route path="/allcatagories" element={<AllCatagoreyPage />} />
             {/* <Route path="/logout" element={<Logout />} /> */}
             <Route path="/account" element={<Login />} />

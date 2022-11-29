@@ -64,6 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Catgories() {
+  const { categoryName } = useParams();
   const [value, setValue] = React.useState([]);
   const [product, setProduct] = React.useState([]);
   const [catagories, setCatagories] = React.useState([]);
@@ -118,45 +119,22 @@ function Catgories() {
         console.log(err);
       });
   };
-  React.useEffect(
-    function () {
-      axios
-        .get("http://localhost:4000/shopowners/viewProducts")
-        .then((res) => {
-          setProduct(res.data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      getCategory();
-    },
-    [selectedBrand]
-  );
+  React.useEffect(function () {
+    axios
+      .get("http://localhost:4000/shops?category=" + categoryName)
+      .then((res) => {
+        setProduct(res.data.products);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getCategory();
+  }, []);
 
   const filtered = product.filter((pro) => {
     return pro.product_brand === "Apple";
   });
-
-  const apple = () => {
-    {
-      product
-        .filter((pro) => {
-          return pro.product_brand === "Apple";
-        })
-        .map((pro, index) => {
-          return (
-            <div key={index}>
-              <h2>name: {pro.product_name}</h2>
-              {/* <h2>country: {employee.country}</h2> */}
-              {console.log(pro.product_name)}
-
-              <hr />
-            </div>
-          );
-        });
-    }
-  };
 
   return (
     <div>

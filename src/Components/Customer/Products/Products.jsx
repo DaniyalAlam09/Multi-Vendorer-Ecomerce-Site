@@ -67,6 +67,7 @@ function Products() {
   const [value, setValue] = React.useState([]);
   const [product, setProduct] = React.useState([]);
   const [catagories, setCatagories] = React.useState([]);
+  const [searchCatagories, setSearchCatagories] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [search, setSearch] = useState("");
@@ -121,9 +122,9 @@ function Products() {
   React.useEffect(
     function () {
       axios
-        .get("http://localhost:4000/shopowners/viewProducts")
+        .get("http://localhost:4000/shops?category=" + searchCatagories)
         .then((res) => {
-          setProduct(res.data);
+          setProduct(res.data.products);
           setLoading(false);
         })
         .catch((err) => {
@@ -131,8 +132,24 @@ function Products() {
         });
       getCategory();
     },
-    [selectedBrand]
+    [searchCatagories]
   );
+
+  // React.useEffect(
+  //   function () {
+  //     axios
+  //       .get("http://localhost:4000/shopowners/viewProducts")
+  //       .then((res) => {
+  //         setProduct(res.data);
+  //         setLoading(false);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //     getCategory();
+  //   },
+  //   [selectedBrand]
+  // );
 
   const filtered = product.filter((pro) => {
     return pro.product_brand === "Apple";
@@ -197,7 +214,10 @@ function Products() {
                 style={{ display: "flex", direction: "row" }}
               >
                 <div key={index} className="">
-                  <button className="btn btn-primary signin ml-2">
+                  <button
+                    onClick={() => setSearchCatagories(catagory.name)}
+                    className="btn btn-primary signin ml-2"
+                  >
                     {catagory.name}
                   </button>
                 </div>
@@ -214,7 +234,7 @@ function Products() {
               </>
             ) : (
               <div className="container">
-                <div className="row text-center d-flex justify-content-between ">
+                <div className="row text-center d-flex justify-content-start ">
                   {initialPosts
                     .filter((person) => {
                       if (search == "") {
