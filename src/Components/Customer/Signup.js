@@ -55,7 +55,8 @@ export default class SignUp extends Component {
           toast("Successfull Registered");
           window.localStorage.setItem("token", user.data);
           console.log(user.password);
-          // window.location.href = "/account";
+
+          window.location.href = "/account";
         } else if (user.message == "user Already exist") {
           toast.error("User Already exist", {
             position: "top-right",
