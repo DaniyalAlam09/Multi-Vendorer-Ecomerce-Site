@@ -1,49 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function FeaturedCatagories() {
-  const data = [
-    {
-      img: "/images/Laptops/Laptop1.jpg",
-      qty: "128 Products",
-      Catagory: "Laptops",
-    },
-    {
-      img: "/images/Mobiles/Mobile1.webp",
-      qty: "128 Products",
-      Catagory: "Mobiles",
-    },
-    {
-      img: HeadPhone,
-      qty: "128 Products",
-      Catagory: "Headphones",
-    },
-  ];
+  const [catagories, setCatagories] = React.useState([]);
+  const getCategory = () => {
+    axios
+      .get("http://localhost:4000/category")
+      .then((res) => {
+        setCatagories(res.data.categories);
+        console.log(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  React.useEffect(function () {
+    getCategory();
+  }, []);
   return (
     <div className="heading container">
       <div className="featured-head">
         <h3>Featured Catagories</h3>
-        <a href="#" class="link-secondary see-all">
+        <Link to="/allcatagories" class="link-secondary see-all">
           All Catagories
-        </a>
+        </Link>
       </div>
       <div className="heading2">
-        <div className="row text-center justify-content-around">
-        {data.map((elem) => (
-          <div key={data.indexOf(elem)} className=" col-xl-3 col-sm-6 mb-5">
-            <div className=" catagory-style row thumbnail d-flex justify-content-around">
-              <div>
-                <h6 className="catagory">{`${elem.Catagory}`}</h6>
-                <p className="qty">{`${elem.qty}`}</p>
-                <a href="#" class="">
-                  Shop now+
-                </a>
+        <div className="row text-center justify-content-start">
+          {catagories?.map((categorey) => (
+            <div
+              key={catagories.indexOf(categorey)}
+              className=" col-xl-3 col-sm-6 mb-5"
+            >
+              <div className="catagory-style row thumbnail d-flex justify-content-around">
+                <div>
+                  <h6 className="catagory">{`${categorey.name}`}</h6>
+                  {/* <p className="qty">{`${categorey.qty}`}</p> */}
+                  <Link to="/allcatagories" class="">
+                    Shop now+
+                  </Link>
+                </div>
+                <div className="empty"></div>
+                <img
+                  className="catagory-image"
+                  src={`http://localhost:4000/${categorey.imageUrl}`}
+                />
               </div>
-              <div className="empty"></div>
-              <img className="catagory-image" src={`${elem.img}`} />
             </div>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
     </div>

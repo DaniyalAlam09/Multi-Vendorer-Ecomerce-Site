@@ -51,7 +51,16 @@ export default function ShopOwnerLogin() {
         window.location.href = "shopowner/shoponwer-dashboard";
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     // .then((user) => {
     //   console.log(user);

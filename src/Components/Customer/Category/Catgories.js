@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import { slice } from "lodash";
-import TemporaryDrawer from "./Drawer";
+// import TemporaryDrawer from "./Drawer";
 import KeyboardDoubleArrowDownSharpIcon from "@mui/icons-material/KeyboardDoubleArrowDownSharp";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -63,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function Products() {
+function Catgories() {
   const [value, setValue] = React.useState([]);
   const [product, setProduct] = React.useState([]);
   const [catagories, setCatagories] = React.useState([]);
@@ -160,11 +160,11 @@ function Products() {
 
   return (
     <div>
-      <HeroSection
+      {/* <HeroSection
         Name1={"All Products are available "}
         Name2={"Camera Product"}
         ImageSource="/images/ProductsHero.png"
-      />
+      /> */}
       <div className="mt-3">
         <div class=" container d-flex justify-content-center">
           <div className="">
@@ -186,7 +186,7 @@ function Products() {
             </Box>
           </div>
         </div>
-        <div
+        {/* <div
           className="container d-flex justify-content-center mt-4"
           style={{ display: "flex", direction: "row" }}
         >
@@ -204,7 +204,7 @@ function Products() {
               </div>
             );
           })}
-        </div>
+        </div> */}
         <div className="heading container">
           <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
           <div>
@@ -288,4 +288,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Catgories;

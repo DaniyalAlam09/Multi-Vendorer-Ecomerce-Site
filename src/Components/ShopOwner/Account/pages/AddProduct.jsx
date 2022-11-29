@@ -15,6 +15,7 @@ const AddProduct = () => {
   // const [images, setImages] = useState("");
   const [image, setImage] = React.useState("");
   const [loading, setLoading] = useState(false);
+  const [catagories, setCatagories] = React.useState([]);
   const [progress, setProgess] = React.useState(0);
   const [sending, setSending] = React.useState(false);
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -41,10 +42,23 @@ const AddProduct = () => {
     form_data.append("product", image);
     return form_data;
   };
+  const getCategory = () => {
+    axios
+      .get("http://localhost:4000/category")
+      .then((res) => {
+        setCatagories(res.data.categories);
+        console.log(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  React.useEffect(function () {
+    getCategory();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("ll");
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -61,18 +75,32 @@ const AddProduct = () => {
     axios
       .post(`http://localhost:4000/shops/add-product`, getFormData(), config)
       .then((response) => {
+        navigate("../product-list");
+        toast.success("Product Sucessfully Added", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         setSending(false);
-        // window.location.reload(true);
-        // if (response.data.success) {
-        //   navigate(`/panel/gig`);
-        // }
       })
       .catch((error) => {
-        setSending(false);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
 
-        //toast
+        setSending(false);
       });
-    alert("9");
   };
 
   return (
@@ -106,12 +134,19 @@ const AddProduct = () => {
             Select Catagory
           </label>
           <br />
-          <select className="form-select">
+          <select
+            name="category"
+            className="form-select"
+            onChange={(e) => {
+              setState((prev) => ({ ...prev, category: e.target.value }));
+            }}
+          >
             <option selected> Choose...</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Moiles">Moiles</option>
-            <option value="Laptops">Laptops</option>
-            <option value="Tabetes">Tabetes</option>
+            {catagories?.map((catagory, index) => (
+              <option key={index} value={catagory.name}>
+                {catagory.name}
+              </option>
+            ))}
           </select>
         </div>
         <div>
@@ -123,8 +158,8 @@ const AddProduct = () => {
               type="file"
               onChange={(e) => {
                 setProgess(0);
-                const file = e.target.files[0]; // accessing file
-                setImage(file); // storing file
+                const file = e.target.files[0];
+                setImage(file);
                 setIsFilePicked(true);
               }}
             />

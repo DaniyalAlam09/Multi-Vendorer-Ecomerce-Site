@@ -61,7 +61,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { isEmpty, totalItems } = useCart();
   const [user, setUser] = React.useState([]);
+  const [shopowner, setShopowner] = React.useState([]);
   const [search, setSearch] = useState("");
+  const [catagories, setCatagories] = React.useState([]);
 
   const handleLogout = () => {
     const config = {
@@ -82,6 +84,17 @@ const Navbar = () => {
         console.log(err.message);
       });
   };
+  const getCategory = () => {
+    axios
+      .get("http://localhost:4000/category")
+      .then((res) => {
+        setCatagories(res.data.categories);
+        console.log(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   React.useEffect(function () {
     const config = {
       headers: {
@@ -99,6 +112,16 @@ const Navbar = () => {
         console.log(err.response.data);
         setUser([]);
       });
+    axios
+      .get("http://localhost:4000/shopowners/shopowner", config)
+      .then((res) => {
+        setShopowner(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        setShopowner([]);
+      });
+    getCategory();
   }, []);
 
   return (
@@ -136,12 +159,15 @@ const Navbar = () => {
                 Catagories
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
-                  Mobiles
-                </a>
-                <a className="dropdown-item" href="#">
-                  Laptops
-                </a>
+                {catagories?.map((catagory, index) => (
+                  <Link
+                    to={`/allproducts/${catagory.name}`}
+                    key={index}
+                    className="dropdown-item"
+                  >
+                    {catagory.name}
+                  </Link>
+                ))}
               </div>
             </li>
             <li className="nav-item">
@@ -172,8 +198,6 @@ const Navbar = () => {
           </ul>
         </div>
         <form className="form-inline">
-          {/* <Box> */}
-          {/* <Toolbar> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -186,8 +210,6 @@ const Navbar = () => {
               }}
             />
           </Search>
-          {/* </Toolbar> */}
-          {/* </Box> */}
         </form>
         <div className="icon">
           <Link to="/search">
@@ -237,13 +259,31 @@ const Navbar = () => {
             <button class="btn btn-primary signin ml-2">Sign IN</button>
           </Link>
         )}
-        {/* } */}
-        {/* <Link to="/userDetails" type="submit">
-            <button class="btn btn-primary signin">{this.state.userData.fname}</button>
-          </Link>
-          <Link to="/logout" type="submit">
-            <button class="btn btn-primary signin">Logout</button>
-          </Link> */}
+        {shopowner?.firstName && (
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {shopowner.firstName}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <Link to="shopowner/shoponwer-dashboard" type="submit">
+                <button class="">Profile</button>
+              </Link>
+              <br />
+              {/* <Link to="/logout" type="submit" class=""> */}
+              <button class="" onClick={handleLogout}>
+                Logout
+              </button>
+              {/* </Link> */}
+            </div>
+          </div>
+        )}
       </nav>
     </div>
   );

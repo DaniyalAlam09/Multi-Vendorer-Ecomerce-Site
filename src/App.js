@@ -38,6 +38,9 @@ import ShopOwnerDashboard from "./Components/ShopOwner/Account/pages/ShopOwnerDa
 import ShopOwnerLogout from "./Components/ShopOwner/Account/pages/ShopOwnerLogout";
 import ShopOwnerProductList from "./Components/ShopOwner/Account/pages/ShopOwnerProductList";
 import SingleShop from "./Components/Customer/Shops/SingleShop/SingleShop";
+import Catgories from "./Components/Customer/Category/Catgories";
+import AllCatagoreyPage from "./Components/Customer/Category/AllCatagoreyPage";
+import Error from "./Components/Error";
 
 function App() {
   const { productItem } = data;
@@ -68,11 +71,14 @@ function App() {
               path="/"
               element={<Home />}
             />
+            <Route path="*" element={<Error />} />
             <Route path="home" element={<Home />} />
             <Route path="/shops" element={<ShopsPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/userDetails" element={<CustomerAccount />} />
+            <Route path="/allproducts/:categoreyName" element={<Catgories />} />
+            <Route path="/allcatagories" element={<AllCatagoreyPage />} />
             {/* <Route path="/logout" element={<Logout />} /> */}
             <Route path="/account" element={<Login />} />
             <Route path="/create-account" element={<Signup />} />

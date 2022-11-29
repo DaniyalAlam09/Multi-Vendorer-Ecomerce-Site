@@ -156,6 +156,7 @@ const EditProfile = () => {
             type="email"
             id="form6Example5"
             class="form-control"
+            disabled
           />
         </div>
 

@@ -128,8 +128,9 @@ function Shops() {
                   <img
                     className=" rounded "
                     style={{ width: "10rem", height: "10rem" }}
-                    src={`${elem.img}`}
+                    src={`http://localhost:4000${elem.shopImage}`}
                   />
+                  {console.log(elem)}
                   <p className="brand-name">Shop no {`${elem.shopNo}`}</p>
 
                   <p className="product-name">{`${elem.shopName}`}</p>

@@ -68,30 +68,19 @@ export default function Login() {
           console.log(user);
           toast("Successfull Logged in");
           window.location.href = "user/customer-dashboard";
-        } else if (user.message == "Incorrect Password") {
-          toast.error("Invalid Password", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        } else {
-          toast.error("User Doesnt exist", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
         }
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 

@@ -64,7 +64,7 @@ function HotCollection() {
                         <div className="thumbnail ">
                           <img
                             className="product-image rounded"
-                            src={`${product.product_image}`}
+                            src={`http://localhost:4000/${product.product_image}`}
                           />
                           <div>
                             <p className="brand-name">{`${product.product_brand}`}</p>

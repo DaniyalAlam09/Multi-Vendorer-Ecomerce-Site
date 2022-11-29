@@ -15,11 +15,7 @@ function Detail() {
   const [product, setProduct] = React.useState({});
   const [counter, setCounter] = React.useState(1);
   const { _id } = useParams();
-  const [cart, setCart] = useState({
-    name: "",
-    id: "",
-    price: "",
-  });
+
   const item = { _id };
   // const Cart = (e) => {
   //   console.log(product._id);
@@ -128,7 +124,9 @@ function Detail() {
                 <div className="row">
                   <div className=" large">
                     <div className="tab-pane active" id="pic-1">
-                      <img src="http://placekitten.com/400/252" />
+                      <img
+                        src={`http://localhost:4000/${product.product_image}`}
+                      />
                     </div>
                   </div>
                 </div>
