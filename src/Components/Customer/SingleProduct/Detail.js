@@ -10,6 +10,8 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import HeroSection from "../../Customer/HomePage/HeroSection";
 import SingleShopHero from "../../Customer/Images/SingleShopHero.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Detail() {
   let { productId } = useParams();
   const [product, setProduct] = React.useState({});
@@ -49,7 +51,16 @@ function Detail() {
         }
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error.response.data);
+        toast.error(error.response.data, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 
@@ -108,6 +119,7 @@ function Detail() {
 
   return (
     <div>
+      {/* <ToastContainer /> */}
       <HeroSection
         Name1={"Single Product"}
         ImageSource={SingleShopHero}

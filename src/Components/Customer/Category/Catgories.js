@@ -119,22 +119,21 @@ function Catgories() {
         console.log(err);
       });
   };
-  React.useEffect(function () {
-    axios
-      .get("http://localhost:4000/shops?category=" + categoryName)
-      .then((res) => {
-        setProduct(res.data.products);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    getCategory();
-  }, []);
-
-  const filtered = product.filter((pro) => {
-    return pro.product_brand === "Apple";
-  });
+  React.useEffect(
+    function () {
+      axios
+        .get("http://localhost:4000/shops?category=" + categoryName)
+        .then((res) => {
+          setProduct(res.data.products);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      getCategory();
+    },
+    [categoryName]
+  );
 
   return (
     <div>
@@ -192,7 +191,7 @@ function Catgories() {
               </>
             ) : (
               <div className="container">
-                <div className="row text-center d-flex justify-content-between ">
+                <div className="row text-center d-flex justify-content-start ">
                   {initialPosts
                     .filter((person) => {
                       if (search == "") {

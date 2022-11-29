@@ -3,6 +3,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import Navbar from "../Genral/Navbar";
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -18,6 +24,9 @@ export default class SignUp extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  // handleClickShowPassword = () => {
+  //   setState({ ...state, showPassword: !state.showPassword });
+  // };
   handleSubmit(e) {
     e.preventDefault();
     const {
@@ -28,6 +37,7 @@ export default class SignUp extends Component {
       address,
       phoneNo,
       profession,
+      showPassword,
     } = this.state;
     console.log(firstName, lastName, email, password, address, phoneNo);
     fetch("http://localhost:4000/users/registration", {

@@ -73,22 +73,16 @@ li:hover {
   margin-right: 0.5em;
 }
 
-
-
-
 /* _____________________footer */
 
-.footer-style{
+.footer-style {
   /* margin-left: 7rem; */
   margin-top: 5rem;
 }
-.footer-info{
-  font-size:13px;
+.footer-info {
+  font-size: 13px;
   color: #1b1d21;
 }
-
-
-
 
 .social-link {
   width: 30px;

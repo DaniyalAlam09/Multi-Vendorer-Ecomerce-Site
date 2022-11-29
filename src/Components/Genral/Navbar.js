@@ -181,7 +181,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a
+                className="nav-link"
+                target="_blank"
+                href="https://kuula.co/post/NsNPr/collection/79km6"
+              >
                 Virtual Tour
               </a>
             </li>

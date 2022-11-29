@@ -11,10 +11,39 @@ function CartPage() {
   const [bill, setBill] = React.useState();
   const [loadig, setLoadig] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [delet, setDelete] = React.useState(false);
   const [counter, setCounter] = React.useState(1);
 
-  React.useEffect(function () {
-    setLoadig(true);
+  React.useEffect(
+    function () {
+      setLoadig(true);
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      };
+      axios
+        .get("http://localhost:4000/product/cart", config)
+        .then((res) => {
+          setProducts(res.data.items);
+          console.log(res.data.items);
+          setBill(res.data.bill);
+          setLoadig(false);
+
+          // console.log("product");
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoadig(false);
+          setError(true);
+        });
+    },
+    [delet]
+  );
+
+  const handleDelete = (id) => {
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -22,28 +51,12 @@ function CartPage() {
       },
       withCredentials: true,
     };
-    axios
-      .get("http://localhost:4000/product/cart", config)
-      .then((res) => {
-        setProducts(res.data.items);
-        setBill(res.data.bill);
-        setLoadig(false);
-
-        // console.log("product");
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoadig(false);
-        setError(true);
-      });
-  }, []);
-
-  const handleDelete = (id) => {
     // console.log(userID);
     axios
-      .get(`http://localhost:4000/product/cart`)
+      .delete(`http://localhost:4000/product/cart/${id}`, config)
       .then((user) => {
         console.log("user delete");
+        setDelete(true);
         // navigate(0);
       })
       .catch((error) => {
@@ -59,7 +72,8 @@ function CartPage() {
         ImageSource={CartHero}
         className="shopimage"
       />
-      {loadig && <h1>Loadig ...</h1>}
+      {loadig && <h1>Loading ...</h1>}
+      {products?.length <= 0 && <h1>No products to Show</h1>}
       {products?.length <= 0 ? (
         "No Products"
       ) : (
@@ -164,32 +178,37 @@ function CartPage() {
                                           {" "}
                                           <i class="fa fa-heart"></i>
                                         </a>
-                                        <a href="" class="btn btn-light">
+                                        <button
+                                          onClick={() =>
+                                            handleDelete(product.productId)
+                                          }
+                                          class="btn btn-light"
+                                        >
                                           {" "}
                                           Remove
-                                        </a>
+                                        </button>
                                       </td>
                                     </tr>
                                     <tr></tr>
                                   </tbody>
                                 </table>
                               </div>
+                              <div class="card-body border-top">
+                                <Link
+                                  to="/checkout"
+                                  class="btn btn-primary float-md-right"
+                                >
+                                  {" "}
+                                  Make Purchase{" "}
+                                  <i class="fa fa-chevron-right"></i>{" "}
+                                </Link>
+                                <Link to="/" class="btn btn-light">
+                                  Continue shopping
+                                </Link>
+                              </div>
                             </>
                           );
                         })}
-
-                        <div class="card-body border-top">
-                          <Link
-                            to="/checkout"
-                            class="btn btn-primary float-md-right"
-                          >
-                            {" "}
-                            Make Purchase <i class="fa fa-chevron-right"></i>{" "}
-                          </Link>
-                          <Link to="/" class="btn btn-light">
-                            Continue shopping
-                          </Link>
-                        </div>
                       </div>
 
                       <div class="alert alert-success mt-3">

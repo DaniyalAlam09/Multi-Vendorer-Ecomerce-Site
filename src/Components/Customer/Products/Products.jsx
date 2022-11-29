@@ -125,6 +125,7 @@ function Products() {
         .get("http://localhost:4000/shops?category=" + searchCatagories)
         .then((res) => {
           setProduct(res.data.products);
+          console.log(res.data.products);
           setLoading(false);
         })
         .catch((err) => {

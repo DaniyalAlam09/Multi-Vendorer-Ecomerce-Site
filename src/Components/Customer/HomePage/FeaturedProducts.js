@@ -74,6 +74,7 @@ function FeaturedProducts() {
                         <div className="thumbnail ">
                           <img
                             className="product-image rounded"
+                            style={{ objectFit: "contain" }}
                             src={`http://localhost:4000/${product.product_image}`}
                           />
                           <div>

@@ -126,8 +126,12 @@ function Shops() {
               >
                 <Link to={`/singleshop/${elem._id}/${elem.shopName}`}>
                   <img
-                    className=" rounded "
-                    style={{ width: "10rem", height: "10rem" }}
+                    className=" rounded product-image"
+                    style={{
+                      width: "10rem",
+                      height: "10rem",
+                      objectFit: "contain",
+                    }}
                     src={`http://localhost:4000${elem.shopImage}`}
                   />
                   {console.log(elem)}

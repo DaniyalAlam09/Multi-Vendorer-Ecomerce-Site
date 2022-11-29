@@ -41,6 +41,7 @@ import SingleShop from "./Components/Customer/Shops/SingleShop/SingleShop";
 import Catgories from "./Components/Customer/Category/Catgories";
 import AllCatagoreyPage from "./Components/Customer/Category/AllCatagoreyPage";
 import Error from "./Components/Error";
+import { Divider } from "@material-ui/core";
 
 function App() {
   const { productItem } = data;
@@ -123,6 +124,7 @@ function App() {
               <Route path="logout" element={<ShopOwnerLogout />} />
             </Route>
           </Routes>
+          <Divider />
           <Footer />
         </div>
       </Router>
