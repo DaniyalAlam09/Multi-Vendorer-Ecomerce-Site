@@ -81,24 +81,7 @@ function Products() {
   });
   const { _id } = useParams();
   const item = { _id };
-  const handleChange = (e) => {
-    console.log(item);
-  };
-  const filterByBrand = (product) => {
-    // Avoid filter for empty string
-    if (!selectedBrand) {
-      return product;
-    }
 
-    const filteredProduct = product.filter(
-      (pro) => pro.split(" ").indexOf(selectedBrand) !== -1
-    );
-    return filteredProduct;
-  };
-
-  const handleBrandChange = (event) => {
-    setSelectedBrand(event.target.value);
-  };
   const loadMore = () => {
     setIndex(index + 8);
     console.log(index);
@@ -119,20 +102,34 @@ function Products() {
         console.log(err);
       });
   };
+  const catagoryFilter = () => {
+    axios
+      .get("http://localhost:4000/shops?category=" + searchCatagories)
+      .then((res) => {
+        setProduct(res.data.products);
+        console.log(res.data.products);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   React.useEffect(
     function () {
       axios
-        .get("http://localhost:4000/shops?category=" + searchCatagories)
+        .get("http://localhost:4000/shopowners/viewProducts")
         .then((res) => {
-          setProduct(res.data.products);
-          console.log(res.data.products);
+          setProduct(res.data);
           setLoading(false);
         })
         .catch((err) => {
           console.log(err);
         });
+
       getCategory();
+      catagoryFilter();
     },
+
     [searchCatagories]
   );
 

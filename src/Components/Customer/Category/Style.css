@@ -22,7 +22,8 @@ a {
 
 .card-img-tiles > .inner {
   display: table;
-  width: 100%;
+  /* width: 100%;
+  height: auto; */
 }
 
 .card-img-tiles .main-img,

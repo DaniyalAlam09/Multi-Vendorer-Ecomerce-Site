@@ -246,22 +246,6 @@ export default class ShopOwnerSignUp extends Component {
                   onChange={(e) => this.setState({ phone: e.target.value })}
                 />
               </div>
-
-              <div class="col-12">
-                <label class="visually-hidden" for="inlineFormSelectPref">
-                  Catagory Of Shop
-                </label>
-                <select
-                  class="select ml-4 mb-4"
-                  onChange={(e) => this.setState({ catagorey: e.target.value })}
-                >
-                  <option value="none">None</option>
-                  <option value="Accessories">Accessories</option>
-                  <option value="Moiles">Moiles</option>
-                  <option value="Laptops">Laptops</option>
-                  <option value="Tabetes">Tabetes</option>
-                </select>
-              </div>
               <button
                 type="submit"
                 class="buttons btn text-white btn-block btn-primary"

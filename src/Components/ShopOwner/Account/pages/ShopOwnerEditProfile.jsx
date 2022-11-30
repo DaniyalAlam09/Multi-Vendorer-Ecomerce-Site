@@ -129,6 +129,7 @@ const ShopOwnerEditProfile = () => {
           setState((pre) => ({ ...pre, stoke: res.data.product_stoke }));
           setState((pre) => ({ ...pre, sku: res.data.product_sku }));
           setState((pre) => ({ ...pre, color: res.data.product_color }));
+          setState((pre) => ({ ...pre, category: res.data.category }));
           setState((pre) => ({
             ...pre,
             description: res.data.product_description,

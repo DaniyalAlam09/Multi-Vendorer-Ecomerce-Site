@@ -78,24 +78,15 @@ const ShopOwnerProductList = () => {
   React.useEffect(function () {
     fetchProducts();
   }, []);
-  // useEffect(() => {
-  //   fetch("http://localhost:4000/shopowners/viewproducts")
-  //     .then((response) => response.json())
-  //     .then((actualData) => {
-  //       console.log(actualData);
-  //       setUser(actualData);
-  //       console.log(user);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
 
   return (
     <div className="text-center ml-5">
       <h5 style={{ display: "inline-block" }}>Total Live Items = &nbsp;</h5>
       <h5 style={{ display: "inline-block" }}>{user.length}</h5>
-      <table className="table">
+      <table
+        className="table table-hover table-striped"
+        style={{ cursor: "pointer" }}
+      >
         <thead>
           <tr>
             <th>Sr #</th>
@@ -118,7 +109,7 @@ const ShopOwnerProductList = () => {
                   <td>{index + 1}</td>
                   <td>{item?.product_name}</td>
                   <td>{item?.product_brand}</td>
-                  <td>{item?.product_catagorey}</td>
+                  <td>{item?.category}</td>
                   <td>{item?.product_color}</td>
                   <td>{item?.product_price}</td>
                   <td>{item?.product_sku}</td>

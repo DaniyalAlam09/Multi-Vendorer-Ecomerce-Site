@@ -108,7 +108,10 @@ export default function Login() {
                       Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
                       consectetur adipisicing.
                     </p>
-                    <Link className="negative" to="/shopowner-login">
+                    <Link
+                      className="negative small-link "
+                      to="/shopowner-login"
+                    >
                       Login as Shop Owner?
                     </Link>
                   </div>
@@ -156,7 +159,10 @@ export default function Login() {
 
                     <div className="d-flex mb-5 align-items-center">
                       <span className="ml-auto">
-                        <Link to="/reset-password" className="forgot-pass">
+                        <Link
+                          to="/reset-password"
+                          className="forgot-pass small-link "
+                        >
                           Forgot Password?
                         </Link>
                       </span>
@@ -168,6 +174,9 @@ export default function Login() {
                       className="buttons btn text-white btn-block btn-primary"
                     />
                   </form>
+                  <div className="text-center mt-2">
+                    <h6>OR</h6>
+                  </div>
                   <Link to="/create-account" className="text-white">
                     <button className="buttons btn text-white btn-block btn-primary mt-2">
                       Get Register
@@ -184,9 +193,6 @@ export default function Login() {
                     draggable
                     pauseOnHover
                   />
-                  <div className="text-center mt-2">
-                    <h6>OR</h6>
-                  </div>
 
                   <span className="d-block text-left text-muted">
                     {" "}
@@ -194,13 +200,13 @@ export default function Login() {
                   </span>
 
                   <div className="social-login">
-                    <a href="#" className="facebook">
+                    <a href="#" className="facebook small-link ">
                       <UilFacebookF className="mr-3" />
                     </a>
-                    <a href="#" className="twitter">
+                    <a href="#" className="twitter small-link ">
                       <UilTwitter className=" mr-3" />
                     </a>
-                    <a href="#" className="google">
+                    <a href="#" className="google small-link ">
                       <UilGoogle className=" mr-3" />
                     </a>
                   </div>

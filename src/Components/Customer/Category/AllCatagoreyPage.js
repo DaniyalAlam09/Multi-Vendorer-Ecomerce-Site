@@ -36,7 +36,7 @@ function AllCatagoreyPage() {
                     }}
                   >
                     <a class="card-img-tiles" href="#" data-abc="true">
-                      <div class="inner">
+                      <div class="inner" style={{ height: "2px" }}>
                         <div class="main-img">
                           <img
                             src={`http://localhost:4000/${categorey.imageUrl}`}
@@ -58,13 +58,9 @@ function AllCatagoreyPage() {
                     <div class="card-body text-center">
                       <h5 class="card-title">{categorey.name}</h5>
                       {/* <p class="text-muted">Starting from $499</p> */}
-                      <a
-                        class="btn btn-outline-primary btn-sm"
-                        href="#"
-                        data-abc="true"
-                      >
+                      <button class="buttons btn text-white btn-block btn-primary">
                         View Products
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const logout = () => {
-  console.log("clicked");
-  // const navigate = useNavigate();
-  localStorage.clear();
-
-  window.location.href = "/account";
-};
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Logout = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios
+      .get("http://localhost:4000/users/logout", config)
+      .then((response) => {
+        navigate("../../account");
+        navigate(0);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div>
       <Link to="/account" type="submit">
-        <button onClick={logout} class="btn btn-primary signin ml-2">
+        <button onClick={handleLogout} class="btn btn-primary signin ml-2">
           Logout
         </button>
       </Link>

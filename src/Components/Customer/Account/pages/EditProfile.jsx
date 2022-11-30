@@ -90,6 +90,7 @@ const EditProfile = () => {
         if (response.status === 200) {
           console.log("SUCCESSS");
           setOpen(true);
+
           toast.success("Sucessfull Update", {
             position: "top-right",
             autoClose: 5000,
@@ -100,15 +101,7 @@ const EditProfile = () => {
             progress: undefined,
             theme: "light",
           });
-          // const timer = setTimeout(() => {
-          //   console.log("This will run after 1 second!");
-          // }, 2000);
-          // return () => {
-          clearTimeout(setTimeout(2000));
-          // navigate("../customer-dashboard");
-          // };
-
-          // return response.json();
+          navigate("../../user/customer-dashboard");
         } else {
           console.log("SOMETHING WENT WRONG");
         }

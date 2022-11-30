@@ -112,7 +112,7 @@ export default function ShopOwnerLogin() {
                     Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
                     consectetur adipisicing.
                   </p>
-                  <Link className="negative" to="/account">
+                  <Link className="negative small-link " to="/account">
                     Login as Customer?
                   </Link>
                 </div>
@@ -165,7 +165,10 @@ export default function ShopOwnerLogin() {
                         <div className="control__indicator"></div>
                       </label> */}
                     <span className="ml-auto">
-                      <Link to="/reset-password" className="forgot-pass">
+                      <Link
+                        to="/reset-password small-link "
+                        className="forgot-pass small-link"
+                      >
                         Forgot Password?
                       </Link>
                     </span>
@@ -202,13 +205,13 @@ export default function ShopOwnerLogin() {
                 </span>
 
                 <div className="social-login">
-                  <a href="#" className="facebook">
+                  <a href="#" className="facebook small-link ">
                     <UilFacebookF className="mr-3" />
                   </a>
-                  <a href="#" className="twitter">
+                  <a href="#" className="twitter small-link ">
                     <UilTwitter className=" mr-3" />
                   </a>
-                  <a href="#" className="google">
+                  <a href="#" className="google small-link ">
                     <UilGoogle className=" mr-3" />
                   </a>
                 </div>

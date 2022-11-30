@@ -66,7 +66,7 @@ const Navbar = () => {
   const [catagories, setCatagories] = React.useState([]);
 
   const handleLogout = () => {
-    const config = {
+    const config = { 
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",

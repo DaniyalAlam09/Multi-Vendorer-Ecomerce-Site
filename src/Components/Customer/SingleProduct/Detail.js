@@ -45,6 +45,16 @@ function Detail() {
         if (response.status === 200 || response.status === 201) {
           console.log("SUCCESSS");
           console.log(response.data);
+          toast.success("Product Sucessfully Added to Cart", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           // navigate("../product-list");
         } else {
           console.log("SOMETHING WENT WRONG");
@@ -119,7 +129,7 @@ function Detail() {
 
   return (
     <div>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <HeroSection
         Name1={"Single Product"}
         ImageSource={SingleShopHero}

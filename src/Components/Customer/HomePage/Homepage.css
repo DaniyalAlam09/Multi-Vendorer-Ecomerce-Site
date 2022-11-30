@@ -182,6 +182,7 @@ margin-left: 3rem
   height: 10rem;
   cursor: pointer;
   object-fit: contain;
+  transition: 0.5s;
 }
 .tumbnail {
   margin-left: 6rem;

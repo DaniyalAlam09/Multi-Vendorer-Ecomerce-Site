@@ -15,10 +15,12 @@ body {
   cursor: pointer;
   background-color: #0f615a;
 }
-a {
+a,
+.small-link {
   color: #1da599;
 }
-a:hover {
+a:hover,
+Link:hover {
   text-decoration: none;
   color: #0f615a;
 }

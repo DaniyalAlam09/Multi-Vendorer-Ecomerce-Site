@@ -32,13 +32,13 @@ function FeaturedCatagories() {
           {catagories?.map((categorey) => (
             <div
               key={catagories.indexOf(categorey)}
-              className=" col-xl-3 col-sm-6 mb-5"
+              className="container col-xl-4 col-sm-6 mb-5"
             >
               <div className="catagory-style row thumbnail d-flex justify-content-around">
                 <div>
-                  <h6 className="catagory">{`${categorey.name}`}</h6>
+                  <h6 className="catagory mt-2">{`${categorey.name}`}</h6>
                   {/* <p className="qty">{`${categorey.qty}`}</p> */}
-                  <Link to="/allcatagories" class="">
+                  <Link to="/allcatagories" class="small-link">
                     Shop now+
                   </Link>
                 </div>
