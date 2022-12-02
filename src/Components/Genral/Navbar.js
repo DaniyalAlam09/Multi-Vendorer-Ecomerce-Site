@@ -66,7 +66,7 @@ const Navbar = () => {
   const [catagories, setCatagories] = React.useState([]);
 
   const handleLogout = () => {
-    const config = { 
+    const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -180,7 +180,43 @@ const Navbar = () => {
                 Shops
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Virtal Tour
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a
+                  class="dropdown-item"
+                  target="_blank"
+                  href="https://kuula.co/post/NsNl6/collection/79km6"
+                >
+                  Ground Floor
+                </a>
+                <a
+                  class="dropdown-item"
+                  target="_blank"
+                  href="https://kuula.co/post/n1/collection/79T5s"
+                >
+                  First Floor
+                </a>
+                <a
+                  class="dropdown-item"
+                  target="_blank"
+                  href="https://kuula.co/post/n1/collection/79TlB"
+                >
+                  Second Floor
+                </a>
+              </div>
+            </li>
+            {/* <li className="nav-item">
               <a
                 className="nav-link"
                 target="_blank"
@@ -188,7 +224,7 @@ const Navbar = () => {
               >
                 Virtual Tour
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link to="/about" className="nav-link">
                 About Us
@@ -216,9 +252,9 @@ const Navbar = () => {
           </Search>
         </form>
         <div className="icon">
-          <Link to="/search">
+          {/* <Link to="/search">
             <UilSearch className="icons" />
-          </Link>
+          </Link> */}
           <Link to="/cart">
             <UilShoppingBag className="icons" />
             {!isEmpty && (
@@ -231,7 +267,7 @@ const Navbar = () => {
             <span style={{ marginLeft: !isEmpty ? "-13px" : 0 }}></span>
           </Link>
           {/* <span>{size}</span> */}
-          <UilHeart className="icons" />
+          {/* <UilHeart className="icons" /> */}
         </div>
         {user?.firstName && (
           <div class="dropdown">

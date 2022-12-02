@@ -58,7 +58,7 @@ const Orders = () => {
                     />
                     <div>
                       <h2>No Order Yet</h2>
-                      <p>Requested page not found!</p>
+                      {/* <p>Requested page not found!</p> */}
                       {/* <div class="error-actions">
                         <Link
                           to="/"

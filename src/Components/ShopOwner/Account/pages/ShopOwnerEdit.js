@@ -106,7 +106,7 @@ function ShopOwnerEdit() {
         if (response.status === 200) {
           console.log("SUCCESSS");
           setOpen(true);
-          navigate("../product-list");
+          navigate("../shoponwer-dashboard");
           // return response.json();
         } else {
           console.log("SOMETHING WENT WRONG");

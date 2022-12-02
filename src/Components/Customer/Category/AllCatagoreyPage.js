@@ -29,7 +29,7 @@ function AllCatagoreyPage() {
               <div className="col-md-4 col-sm-6 ">
                 <div key={catagories.indexOf(categorey)}>
                   <div
-                    className="card mb-30"
+                    className="card card1 mb-30"
                     style={{
                       height: "320px",
                       backgroundColor: " rgba(236, 235, 235, 0.137)",
