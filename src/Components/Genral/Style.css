@@ -1,3 +1,28 @@
+.site-header {
+  background: #5bc1ac;
+  /* padding-top: 1px;
+  padding-bottom: 5px; */
+}
+
+.site-header p,
+.site-header p a,
+.site-header .social-icon-link {
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+}
+
+.site-header .social-icon {
+  text-align: right;
+}
+
+.site-header .social-icon-link {
+  background: transparent;
+  width: inherit;
+  height: inherit;
+  line-height: inherit;
+  margin-right: 15px;
+}
+
 .navbar {
   padding: 1em;
   color: black;

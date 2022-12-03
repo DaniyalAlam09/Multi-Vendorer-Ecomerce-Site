@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { Button } from "@mui/material";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +59,17 @@ const Sidebar = ({ children }) => {
             </div>
           </NavLink>
         ))}
+        <div className="link">
+          <div className="icon">
+            <LogoutIcon />
+          </div>
+          <div
+            style={{ display: isOpen ? "block" : "none" }}
+            className="link_text"
+          >
+            <button className="text-white">Logout</button>
+          </div>
+        </div>
       </div>
       <main>{children}</main>
     </div>

@@ -15,7 +15,16 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { UilUserCircle, UilUser, UilSignout } from "@iconscout/react-unicons";
+import {
+  UilUserCircle,
+  UilUser,
+  UilSignout,
+  UilFacebook,
+  UilGithub,
+  UilYoutube,
+  UilTwitter,
+  UilInstagram,
+} from "@iconscout/react-unicons";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -128,7 +137,66 @@ const Navbar = () => {
 
   return (
     <div classNameName="navbar container">
-      <nav className="navbar navbar-expand-lg navbar-light ovm">
+      {/* <header class="site-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-12 d-flex flex-wrap">
+              <p class="d-flex me-10 mb-0">
+                <i class="bi-geo-alt me-2"></i>
+                Akershusstranda 20, 0150 Oslo, Norway
+              </p>
+
+              <p class="d-flex mb-0">
+                <i class="bi-envelope me-2"></i>
+
+                <a href="mailto:info@company.com">info@company.com</a>
+              </p>
+            </div>
+
+            <div class="col-lg-3 col-12 ms-auto d-lg-block d-none pt-2">
+              <UilFacebook
+                style={{
+                  color: "white",
+                  marginLeft: "12px",
+                }}
+              />
+              <UilInstagram
+                style={{
+                  color: "white",
+                  marginLeft: "12px",
+                }}
+              />
+              <UilTwitter
+                style={{
+                  color: "white",
+                  marginLeft: "12px",
+                }}
+              />
+              <UilYoutube
+                style={{
+                  color: "white",
+                  marginLeft: "12px",
+                }}
+              />
+              <UilGithub
+                style={{
+                  color: "white",
+                  marginLeft: "12px",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </header> */}
+      <nav
+        className="navbar sticky-top navbar-expand-lg navbar-light ovm "
+        style={
+          {
+            // position: "fixed",
+            // width: "100%",
+          }
+        }
+      >
         {/* <a className="navbar-brand" href="#">
           OVM
         </a> */}

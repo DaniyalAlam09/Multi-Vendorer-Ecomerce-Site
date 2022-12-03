@@ -28,31 +28,33 @@ function FeaturedCatagories() {
           All Catagories
         </Link>
       </div>
-      <Container maxWidth={"lg"} className="heading2">
-        <div className="row text-center justify-content-start">
-          {catagories?.map((categorey) => (
+      <div className="">
+        <div className="row text-center">
+          {catagories?.slice(0, 4).map((categorey) => (
             <div
               key={catagories.indexOf(categorey)}
-              className=" col-xl-4 col-sm-6 mb-5"
+              className="col-lg-3 col-md-6"
             >
-              <div className="catagory-style row thumbnail d-flex justify-content-around">
-                <div>
-                  <h6 className="catagory mt-2">{`${categorey.name}`}</h6>
-                  {/* <p className="qty">{`${categorey.qty}`}</p> */}
-                  <Link to="/allcatagories" class="small-link">
-                    Shop now+
-                  </Link>
+              <div class="card shadow-sm border-0 rounded">
+                <div class="">
+                  <img
+                    src={`http://localhost:4000/${categorey.imageUrl}`}
+                    alt=""
+                    class="product-image"
+                  />
+                  <div class="p-4">
+                    <p class="mb-0">{`${categorey.name}`}</p>
+                    {/* <p class="small text-muted">CEO - Consultant</p> */}
+                    <Link to="/allcatagories" class="small-link">
+                      Shop now
+                    </Link>
+                  </div>
                 </div>
-                <div className="empty"></div>
-                <img
-                  className="catagory-image"
-                  src={`http://localhost:4000/${categorey.imageUrl}`}
-                />
               </div>
             </div>
           ))}
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

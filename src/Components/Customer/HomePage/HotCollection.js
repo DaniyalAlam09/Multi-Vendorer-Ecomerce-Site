@@ -4,6 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { Divider } from "@mui/material";
 
 function HotCollection() {
   const [value, setValue] = React.useState([]);
@@ -52,74 +53,90 @@ function HotCollection() {
               <Skeleton variant="rectangular" width={210} height={280} />
             </>
           ) : (
-            <div className="container heading2">
-              <div className="row text-center justify-content-around ">
-                {product
-
-                  .filter((person) => person.product_price < 40000)
-                  .slice(0, 4)
-                  .map((product, index) => (
-                    <div key={index} className=" col-xl-3 col-sm-6 mb-5">
-                      <Link to={`singleProduct/${product._id}`}>
-                        <div className="thumbnail ">
-                          <img
-                            className="product-image rounded"
-                            src={`http://localhost:4000/${product.product_image}`}
-                          />
-                          <div>
-                            <p className="brand-name">{`${product.product_brand}`}</p>
-                            <p className="product-name">{`${product.product_name}`}</p>
-                            <p className="product-price">{`${product.product_price}`}</p>
-                            {/* <p className="product-price">{`${product.product_price}`}</p> */}
-                            <p className="product-price">
-                              {product.reviews ? (
-                                product.reviews?.map((rew) => (
-                                  <Rating value={rew.rating} readOnly />
-                                ))
-                              ) : (
-                                <Rating value={null} name="read-only" />
-                              )}
-                            </p>
-                          </div>
-                          {/* <button className="button rounded">Add to Cart</button> */}
-                        </div>
-                      </Link>
-
-                      {/* <div className="mr-3">
-                        <Link to={`singleProduct/${product._id}`}>
-                          <Card sx={{ maxWidth: 250 }}>
-                            <CardActionArea>
-                              <CardMedia
-                                component="img"
-                                height="140"
-                                image={`${product.product_image}`}
-                                alt="product image"
+            <section>
+              <div class="container">
+                <div class="row">
+                  {/* <div class=" col-md-6 col-lg-4 mb-4 mb-md-0"> */}
+                  {product
+                    .filter((person) => person.product_price < 40000)
+                    .slice(0, 4)
+                    .map((product, index) => (
+                      <div key={index} class=" col-md-6 col-lg-3">
+                        <Link key={index} to={`singleProduct/${product._id}`}>
+                          <div
+                            class="border mb-4 p-3 card-hover"
+                            style={{
+                              height: "380px",
+                              borderRadius: "5px",
+                              // backgroundColor: " rgba(236, 235, 235, 0.137)",
+                            }}
+                          >
+                            <div className="text -center">
+                              <div></div>
+                              <img
+                                src={`http://localhost:4000/${product.product_image}`}
+                                style={{
+                                  height: "200px",
+                                  width: "200px",
+                                }}
+                                class="product-image"
+                                alt="Laptop"
                               />
-                              <CardContent>
-                                <Typography
-                                  gutterBottom
-                                  variant="h6"
-                                  component="div"
-                                >
-                                  {`${product.product_name}`}
-                                </Typography>
-                                <p className="brand-name">{`${product.product_brand}`}</p>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  {`${product.product_description}`}
-                                </Typography>
-                                <p className="product-price">{`${product.product_price}`}</p>
-                              </CardContent>
-                            </CardActionArea>
-                          </Card>
+                            </div>
+
+                            <div class="negativemargine">
+                              <div class="d-flex justify-content-between">
+                                <p class="small">
+                                  <a class="text-muted">
+                                    {`${product.product_brand}`}
+                                  </a>
+                                </p>
+                                <p class="small text-danger">
+                                  <s
+                                    style={{ textDecoration: "line-through" }}
+                                  >{`${product.product_price}`}</s>
+                                </p>
+                              </div>
+                              <Divider />
+                              <div class="d-flex justify-content-between mb-3">
+                                <p
+                                  className="product-name"
+                                  // class="mb-0"
+                                >{`${product.product_name}`}</p>
+                                <p
+                                  className="product-price"
+                                  // class="text-dark mb-0"
+                                >{`${product.product_price}`}</p>
+                              </div>
+
+                              <div class="d-flex justify-content-between">
+                                <p class="rating text-muted">
+                                  Stoke: {`${product.product_stoke}`}
+                                </p>
+                                <div class="rating">
+                                  {product.reviews
+                                    ? product.reviews?.map((rew) => (
+                                        <Rating
+                                          size="small"
+                                          value={rew.rating}
+                                          readOnly
+                                        />
+                                      ))
+                                    : "kj"}
+                                  {/* {product.reviews.rating ?(
+                                <p>oid</p>)
+                                : <p>dsk</p>} */}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </Link>
-                      </div> */}
-                    </div>
-                  ))}
+                      </div>
+                    ))}
+                  {/* </div> */}
+                </div>
               </div>
-            </div>
+            </section>
           )}
         </div>
       </div>
