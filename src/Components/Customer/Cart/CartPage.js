@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Divider } from "@material-ui/core";
 
 function CartPage() {
   const [products, setProducts] = React.useState([]);
@@ -94,6 +95,7 @@ function CartPage() {
       )
       .then((user) => {
         console.log("order Done");
+        handleDelete(id);
         toast.success("Order Placed Successfully", {
           position: "top-right",
           autoClose: 5000,
@@ -138,11 +140,39 @@ function CartPage() {
         pauseOnHover
       />
       {loadig && <h1>Loading ...</h1>}
-      {products?.length <= 0 && (
+      {/* {products?.length <= 0 && (
         <h1 className="container">No products to Show</h1>
-      )}
+      )} */}
       {products?.length <= 0 ? (
-        "No Products"
+        <div>
+          <div class="container bootstrap snippets bootdey mb-5 mt-5">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right" style={{ marginTop: "10px" }}>
+                  <div class="d-flex align-items-center justify-content-around text-center">
+                    <img
+                      // class="img-thumbnail "
+                      style={{ width: "40%" }}
+                      src="/images/No.png"
+                    />
+                    <div>
+                      <h2>No Item In Cart</h2>
+                      {/* <p>Requested page not found!</p> */}
+                      {/* <div class="error-actions">
+                              <Link
+                                to="/"
+                                class="btn btn-primary  signin btn-lg sign-in"
+                              >
+                                Back Home
+                              </Link>
+                            </div> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="App">
           <section class="section-pagetop bg">
@@ -150,35 +180,31 @@ function CartPage() {
               <section class="section-content padding-y">
                 <div class="container">
                   {/* <div class="card"> */}
-                  {products?.map((product, index) => {
-                    return (
-                      <div class="row">
-                        <main class="col-md-9">
-                          <div class="card">
-                            <div key={index}>
-                              <table class="table table-borderless table-shopping-cart">
-                                <thead class="text-muted">
-                                  <tr class="small text-uppercase">
-                                    <th scope="col">Sr #</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col" width="120">
-                                      Quantity
-                                    </th>
-                                    <th scope="col" width="120">
-                                      Price
-                                    </th>
-                                    <th
-                                      scope="col"
-                                      class="text-right"
-                                      width="200"
-                                    >
-                                      {" "}
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
+                  <div class="">
+                    <main class="">
+                      <div class="card">
+                        <div>
+                          <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                              <tr class="small text-uppercase">
+                                {/* <th scope="col">Sr #</th> */}
+                                <th scope="col">Product</th>
+                                <th scope="col" width="120">
+                                  Quantity
+                                </th>
+                                <th scope="col" width="120">
+                                  Price
+                                </th>
+                                <th scope="col" class="text-right" width="200">
+                                  {" "}
+                                </th>
+                              </tr>
+                            </thead>
+                            {products?.map((product, index) => {
+                              return (
+                                <tbody key={index}>
                                   <tr>
-                                    <td>{index + 1}</td>
+                                    {/* <td>{index + 1}</td> */}
                                     <td>
                                       <figure class="itemside">
                                         {/* <div class="aside">
@@ -228,6 +254,17 @@ function CartPage() {
                                         <var class="price">{`${product?.price}`}</var>
                                       </div>
                                     </td>
+                                    <td class="">
+                                      <button
+                                        onClick={() =>
+                                          makeOrder(product.productId)
+                                        }
+                                        class="buttons btn text-white btn-primary"
+                                      >
+                                        {" "}
+                                        Make Purchase
+                                      </button>
+                                    </td>
                                     <td class="text-right">
                                       <button
                                         onClick={() =>
@@ -242,58 +279,51 @@ function CartPage() {
                                   </tr>
                                   <tr></tr>
                                 </tbody>
-                              </table>
-                            </div>
-                            <div class="card-body border-top d-flex justify-content-between">
-                              <Link to="/" class="btn btn-light">
-                                Continue shopping
-                              </Link>
-                              <button
-                                onClick={() => makeOrder(product.productId)}
-                                class="buttons btn text-white btn-primary ml-auto"
-                              >
-                                {" "}
-                                Make Purchase
-                              </button>
-                            </div>
-                            <div class="alert alert-success mt-3">
-                              <p class="icontext">
-                                <i class="icon text-success fa fa-truck"></i>{" "}
-                                Free Delivery within 1-2 weeks
-                              </p>
-                            </div>
-                          </div>
-                        </main>
-                        <aside class="col-md-3">
-                          <div class="card ">
-                            <div class="card-body">
-                              <dl class="dlist-align">
-                                <dt>Total price:</dt>
-                                <dd class="text-right">
-                                  {bill && <dd>Total: {bill}</dd>}
-                                </dd>
-                              </dl>
-                              <dl class="dlist-align">
-                                <dt>Discount:</dt>
-                                <dd class="text-right">--</dd>
-                              </dl>
-                              <dl class="dlist-align">
-                                <dt>Total:</dt>
-                                <dd class="text-right  h5">
-                                  <strong>
-                                    {bill && <dd>Total: {bill}</dd>}
-                                  </strong>
-                                </dd>
-                              </dl>
-                            </div>
-                          </div>
-                        </aside>
+                              );
+                            })}
+                          </table>
+                        </div>
+                        <div class="card-body border-top d-flex justify-content-between">
+                          <Link to="/" class="btn btn-light">
+                            Continue shopping
+                          </Link>
+                        </div>
                       </div>
-                    );
-                  })}
+                    </main>
+                    <aside class="">
+                      <div class="card ">
+                        <div class="card-body">
+                          <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-right">
+                              {bill && <dd>Total: {bill}</dd>}
+                            </dd>
+                          </dl>
+                          <Divider />
+                          <dl class="dlist-align">
+                            <dt>Discount:</dt>
+                            <dd class="text-right">--</dd>
+                          </dl>
+                          <Divider />
+                          <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-right  h5">
+                              <strong>{bill && <dd>Total: {bill}</dd>}</strong>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </aside>
+                  </div>
                   {/* </div> */}
                 </div>
               </section>
+              <div class="alert alert-success mt-3">
+                <p class="icontext">
+                  <i class="icon text-success fa fa-truck"></i> Free Delivery
+                  within 1-2 weeks
+                </p>
+              </div>
               <section class="section-name bg padding-y">
                 <div class="container">
                   <h6>Payment and refund policy</h6>

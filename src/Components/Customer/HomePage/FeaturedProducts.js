@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import data from "./Data";
 import { useParams } from "react-router-dom";
 import { useRef } from "react";
+import { Divider } from "@material-ui/core";
 
 function FeaturedProducts() {
   const [value, setValue] = React.useState([]);
@@ -88,6 +89,7 @@ function FeaturedProducts() {
                               alt="Laptop"
                             />
                           </div>
+
                           <div class="negativemargine">
                             <div class="d-flex justify-content-between">
                               <p class="small">
@@ -101,7 +103,7 @@ function FeaturedProducts() {
                                 >{`${product.product_price}`}</s>
                               </p>
                             </div>
-
+                            <Divider />
                             <div class="d-flex justify-content-between mb-3">
                               <p
                                 className="product-name"
@@ -114,23 +116,22 @@ function FeaturedProducts() {
                             </div>
 
                             <div class="d-flex justify-content-between">
-                              <p class="rating text-muted">Stoke:6</p>
+                              <p class="rating text-muted">
+                                Stoke: {`${product.product_stoke}`}
+                              </p>
                               <div class="rating">
-                                {product.reviews ? (
-                                  product.reviews?.map((rew) => (
-                                    <Rating
-                                      size="small"
-                                      value={rew.rating}
-                                      readOnly
-                                    />
-                                  ))
-                                ) : (
-                                  <Rating
-                                    name="size-small"
-                                    value={null}
-                                    size="small"
-                                  />
-                                )}
+                                {product.reviews
+                                  ? product.reviews?.map((rew) => (
+                                      <Rating
+                                        size="small"
+                                        value={rew.rating}
+                                        readOnly
+                                      />
+                                    ))
+                                  : "kj"}
+                                {/* {product.reviews.rating ?(
+                                  <p>oid</p>)
+                                  : <p>dsk</p>} */}
                               </div>
                             </div>
                           </div>

@@ -14,6 +14,8 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { UilUserCircle, UilUser, UilSignout } from "@iconscout/react-unicons";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -270,29 +272,83 @@ const Navbar = () => {
           {/* <UilHeart className="icons" /> */}
         </div>
         {user?.firstName && (
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
-              type="button"
-              id="dropdownMenuButton"
+          <div class="nav-item dropdown nav-user">
+            <a
+              class="nav-link nav-user-img"
+              href="#"
+              id="navbarDropdownMenuLink2"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {user.firstName}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <UilUserCircle className="icons" style={{ marginLeft: "-8px" }} />
+              {/* <img
+                src="https://img.icons8.com/dusk/100/000000/user-female-circle.png"
+                alt=""
+              /> */}
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+              aria-labelledby="navbarDropdownMenuLink2"
+            >
+              <div class="nav-user-info">
+                <h5 class="mb-0 text-white nav-user-name">
+                  Hi, {user.firstName}
+                </h5>
+              </div>
               <Link to="user/customer-dashboard" type="submit">
-                <button class="">Profile</button>
+                <button class="">
+                  {" "}
+                  <UilUser
+                    className="icons"
+                    style={{
+                      marginTop: "4px",
+                      marginRight: "2px",
+                      width: "20%",
+                    }}
+                  />
+                  Profile
+                </button>
               </Link>
               <br />
-              {/* <Link to="/logout" type="submit" class=""> */}
-              <button class="" onClick={handleLogout}>
-                Logout
-              </button>
-              {/* </Link> */}
+              <Link to="/logout" type="submit" class="">
+                <button class="" onClick={handleLogout}>
+                  <UilSignout
+                    style={{
+                      marginTop: "4px",
+                      marginRight: "2px",
+                      width: "20%",
+                    }}
+                    className="icons"
+                  />
+                  Logout
+                </button>
+              </Link>
             </div>
           </div>
+          // <div class="dropdown">
+          //   <button
+          //     class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
+          //     type="button"
+          //     id="dropdownMenuButton"
+          //     data-toggle="dropdown"
+          //     aria-haspopup="true"
+          //     aria-expanded="false"
+          //   >
+          //     {user.firstName}
+          //   </button>
+          //   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          //     <Link to="user/customer-dashboard" type="submit">
+          //       <button class="">Profile</button>
+          //     </Link>
+          //     <br />
+          //     {/* <Link to="/logout" type="submit" class=""> */}
+          //     <button class="" onClick={handleLogout}>
+          //       Logout
+          //     </button>
+          //     {/* </Link> */}
+          //   </div>
+          // </div>
         )}
         {!user?.firstName && (
           <Link to="/account" type="submit">

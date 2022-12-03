@@ -80,6 +80,7 @@ function Detail() {
         .get("http://localhost:4000/shops/" + productId)
         .then((res) => {
           setProduct(res.data);
+          window.scrollTo(0, 0);
           // console.log(res.data);
           // console.log(product);
         })

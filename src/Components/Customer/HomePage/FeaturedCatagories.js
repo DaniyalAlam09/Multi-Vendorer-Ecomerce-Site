@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Container } from "@material-ui/core";
 
 function FeaturedCatagories() {
   const [catagories, setCatagories] = React.useState([]);
@@ -27,12 +28,12 @@ function FeaturedCatagories() {
           All Catagories
         </Link>
       </div>
-      <div className="heading2">
+      <Container maxWidth={"lg"} className="heading2">
         <div className="row text-center justify-content-start">
           {catagories?.map((categorey) => (
             <div
               key={catagories.indexOf(categorey)}
-              className="container col-xl-4 col-sm-6 mb-5"
+              className=" col-xl-4 col-sm-6 mb-5"
             >
               <div className="catagory-style row thumbnail d-flex justify-content-around">
                 <div>
@@ -51,7 +52,7 @@ function FeaturedCatagories() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }
