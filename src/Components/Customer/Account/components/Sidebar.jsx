@@ -6,10 +6,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { Button } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const navigate = useNavigate();
   const menuItem = [
     {
       path: "customer-dashboard",
@@ -32,6 +34,25 @@ const Sidebar = ({ children }) => {
       icon: <LogoutIcon />,
     },
   ];
+  const handleLogout = () => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    // setUser([]);
+    axios
+      .get("http://localhost:4000/users/logout", config)
+      .then((response) => {
+        navigate("../../account");
+        navigate(0);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="contain">
       <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
@@ -67,7 +88,9 @@ const Sidebar = ({ children }) => {
             style={{ display: isOpen ? "block" : "none" }}
             className="link_text"
           >
-            <button className="text-white">Logout</button>
+            <button className="logoututtoosidebar" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </div>

@@ -62,6 +62,17 @@ main {
   width: 200px;
   transition: all 0.5s;
 }
+.logoututtoosidebar {
+  /* background: #1da599; */
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.5s;
+}
+.logoututtoosidebar:hover {
+  background: #fff;
+  color: #1da599;
+  transition: all 0.5s;
+}
 .top_section {
   display: flex;
   align-items: center;

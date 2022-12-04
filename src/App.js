@@ -42,6 +42,7 @@ import Catgories from "./Components/Customer/Category/Catgories";
 import AllCatagoreyPage from "./Components/Customer/Category/AllCatagoreyPage";
 import Error from "./Components/Error";
 import { Divider } from "@material-ui/core";
+import EmailVerify from "./Components/ShopOwner/Verify";
 
 function App() {
   const { productItem } = data;
@@ -75,6 +76,10 @@ function App() {
             <Route path="*" element={<Error />} />
             <Route path="home" element={<Home />} />
             <Route path="/shops" element={<ShopsPage />} />
+            <Route
+              path="/users/:id/verify/:tokenverify"
+              element={<EmailVerify />}
+            />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/userDetails" element={<CustomerAccount />} />

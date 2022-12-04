@@ -70,8 +70,8 @@ export default class ShopOwnerSignUp extends Component {
         if (shopOwner.message == "success") {
           toast("Successfull Registered");
           window.localStorage.setItem("token", shopOwner.data);
-          console.log(shopOwner.password);
-          window.location.href = "/shopowner-login";
+          // console.log(shopOwner.password);
+          // window.location.href = "/shopowner-login";
         } else if (shopOwner.message == "shopOwner Already exist") {
           toast.error("ShopOwner Already exist", {
             position: "top-right",
