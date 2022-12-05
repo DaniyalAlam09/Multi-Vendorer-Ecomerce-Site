@@ -75,6 +75,7 @@ const Navbar = () => {
   const [shopowner, setShopowner] = React.useState([]);
   const [search, setSearch] = useState("");
   const [catagories, setCatagories] = React.useState([]);
+  const [products, setProducts] = React.useState({});
 
   const handleLogout = () => {
     const config = {
@@ -106,34 +107,47 @@ const Navbar = () => {
         console.log(err);
       });
   };
-  React.useEffect(function () {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-    axios
-      .get("http://localhost:4000/users/user", config)
-      .then((res) => {
-        setUser(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        setUser([]);
-      });
-    axios
-      .get("http://localhost:4000/shopowners/shopowner", config)
-      .then((res) => {
-        setShopowner(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        setShopowner([]);
-      });
-    getCategory();
-  }, []);
+  React.useEffect(
+    function () {
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      };
+      axios
+        .get("http://localhost:4000/users/user", config)
+        .then((res) => {
+          setUser(res.data.user);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          setUser([]);
+        });
+      axios
+        .get("http://localhost:4000/shopowners/shopowner", config)
+        .then((res) => {
+          setShopowner(res.data.user);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          setShopowner([]);
+        });
+      axios
+        .get("http://localhost:4000/product/cart", config)
+        .then((res) => {
+          setProducts(res.data.items);
+
+          // console.log("product");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      getCategory();
+    },
+    [products]
+  );
 
   return (
     <div classNameName="navbar container">
@@ -189,7 +203,7 @@ const Navbar = () => {
         </div>
       </header> */}
       <nav
-        className="navbar sticky-top navbar-expand-lg navbar-light ovm "
+        className="navbar header fixed-top sticky-top navbar-expand-lg navbar-light ovm "
         style={
           {
             // position: "fixed",
@@ -327,6 +341,16 @@ const Navbar = () => {
           </Link> */}
           <Link to="/cart">
             <UilShoppingBag className="icons" />
+            <span
+              style={{
+                marginLeft: "-10px",
+                marginBottom: "-5px",
+                fontSize: "10px",
+              }}
+              class="badge badge-pill badge-danger"
+            >
+              {/* {Object.values(products).length} */}
+            </span>
             {!isEmpty && (
               <span
                 style={{ position: "relative", left: "-21px", top: "-18px" }}
@@ -394,57 +418,65 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          // <div class="dropdown">
-          //   <button
-          //     class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
-          //     type="button"
-          //     id="dropdownMenuButton"
-          //     data-toggle="dropdown"
-          //     aria-haspopup="true"
-          //     aria-expanded="false"
-          //   >
-          //     {user.firstName}
-          //   </button>
-          //   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          //     <Link to="user/customer-dashboard" type="submit">
-          //       <button class="">Profile</button>
-          //     </Link>
-          //     <br />
-          //     {/* <Link to="/logout" type="submit" class=""> */}
-          //     <button class="" onClick={handleLogout}>
-          //       Logout
-          //     </button>
-          //     {/* </Link> */}
-          //   </div>
-          // </div>
         )}
-        {!user?.firstName && (
+        {!user?.firstName && !shopowner?.firstName && (
           <Link to="/account" type="submit">
             <button class="btn btn-primary signin ml-2">Sign IN</button>
           </Link>
         )}
         {shopowner?.firstName && (
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle btn btn-primary signin ml-2"
-              type="button"
-              id="dropdownMenuButton"
+          <div class="nav-item dropdown nav-user">
+            <a
+              class="nav-link nav-user-img"
+              href="#"
+              id="navbarDropdownMenuLink2"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {shopowner.firstName}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <UilUserCircle className="icons" style={{ marginLeft: "-8px" }} />
+              {/* <img
+              src="https://img.icons8.com/dusk/100/000000/user-female-circle.png"
+              alt=""
+            /> */}
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+              aria-labelledby="navbarDropdownMenuLink2"
+            >
+              <div class="nav-user-info">
+                <h5 class="mb-0 text-white nav-user-name">
+                  Hi, {shopowner.firstName}
+                </h5>
+              </div>
               <Link to="shopowner/shoponwer-dashboard" type="submit">
-                <button class="">Profile</button>
+                <button class="">
+                  {" "}
+                  <UilUser
+                    className="icons"
+                    style={{
+                      marginTop: "4px",
+                      marginRight: "2px",
+                      width: "20%",
+                    }}
+                  />
+                  Profile
+                </button>
               </Link>
               <br />
-              {/* <Link to="/logout" type="submit" class=""> */}
-              <button class="" onClick={handleLogout}>
-                Logout
-              </button>
-              {/* </Link> */}
+              <Link to="/logout" type="submit" class="">
+                <button class="" onClick={handleLogout}>
+                  <UilSignout
+                    style={{
+                      marginTop: "4px",
+                      marginRight: "2px",
+                      width: "20%",
+                    }}
+                    className="icons"
+                  />
+                  Logout
+                </button>
+              </Link>
             </div>
           </div>
         )}

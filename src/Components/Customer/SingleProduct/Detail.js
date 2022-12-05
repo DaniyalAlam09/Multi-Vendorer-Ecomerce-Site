@@ -12,9 +12,11 @@ import HeroSection from "../../Customer/HomePage/HeroSection";
 import SingleShopHero from "../../Customer/Images/SingleShopHero.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Rating from "@mui/material/Rating";
 function Detail() {
   let { productId } = useParams();
   const [product, setProduct] = React.useState({});
+  const [shop, setShop] = React.useState({});
   const [counter, setCounter] = React.useState(1);
   const { _id } = useParams();
 
@@ -80,6 +82,7 @@ function Detail() {
         .get("http://localhost:4000/shops/" + productId)
         .then((res) => {
           setProduct(res.data);
+          console.log(res.data);
           window.scrollTo(0, 0);
           // console.log(res.data);
           // console.log(product);
@@ -94,6 +97,7 @@ function Detail() {
   const [state, setState] = useState({
     comment: "",
     name: "",
+    rating: "",
   });
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -105,6 +109,7 @@ function Detail() {
     const formData = new FormData();
     formData.append("name", state.name);
     formData.append("comment", state.comment);
+    formData.append("rating", state.rating);
     // formData.append("product_sku", state.color);
     const config = {
       headers: {
@@ -124,7 +129,7 @@ function Detail() {
         }
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error.response.data);
       });
   };
 
@@ -279,7 +284,13 @@ function Detail() {
                       onChange={handleChange}
                       value={state.comment}
                     ></textarea>
+                    <Rating
+                      defaultValue={0}
+                      onChange={handleChange}
+                      value={state.rating}
+                    />
                   </div>
+
                   <button
                     type="submit"
                     className="buttons btn text-white btn-primary mt-3"

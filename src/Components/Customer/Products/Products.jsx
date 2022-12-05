@@ -337,7 +337,7 @@ function Products() {
                   type="button"
                   className="btn btn-danger disabled"
                 >
-                   No More Items
+                  No More Items
                 </button>
               </div>
             ) : (

@@ -124,3 +124,51 @@ li:hover {
   flex-direction: row; */
   background-color: #eaeef3;
 }
+
+.featured-services .service-item {
+  padding: 30px;
+  transition: all ease-in-out 0.4s;
+  background: var(--color-white);
+  height: 100%;
+}
+
+.featured-services .service-item .icon {
+  margin-bottom: 10px;
+}
+
+.featured-services .service-item .icon i {
+  color: blue;
+  font-size: 36px;
+  transition: 0.3s;
+}
+
+.featured-services .service-item h4 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.featured-services .service-item h4 a {
+  color: red;
+  transition: ease-in-out 0.3s;
+}
+
+.featured-services .service-item p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.block {
+  transition: 0.5s;
+  cursor: pointer;
+}
+.block:hover {
+  /* opacity: 0.1; */
+  /* filter: blur(0.08rem); */
+  /* opacity: 0.5; */
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  /* box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em; */
+}

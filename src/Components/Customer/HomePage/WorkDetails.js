@@ -12,7 +12,7 @@ function WorkDetails() {
       <div className="heading container pt-4">
         <h3>How Its works</h3>
         <div className="container heading2 row text-center justify-content-center">
-          <div className="col-xl-4 col-sm-6 mb-5">
+          <div className="col-xl-4 col-sm-6 mb-5 block">
             <UilTruck className="icons" />
             <div className="ship-style">
               <h6>Shipping</h6>
@@ -22,7 +22,7 @@ function WorkDetails() {
               </a>
             </div>
           </div>
-          <div className=" col-xl-4 col-sm-6 mb-5">
+          <div className=" col-xl-4 col-sm-6 mb-5 block">
             <UilTransaction className="icons" />
             <div className="ship-style">
               <h6>Safe Payment</h6>
@@ -32,7 +32,7 @@ function WorkDetails() {
               </a>
             </div>
           </div>
-          <div className="col-xl-4 col-sm-6 mb-5">
+          <div className="col-xl-4 col-sm-6 mb-5 block">
             <UilHeadphonesAlt className="icons" />
             <div className="ship-style">
               <h6>Take Virtual Tour</h6>
