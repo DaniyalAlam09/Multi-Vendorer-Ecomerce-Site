@@ -43,6 +43,7 @@ import AllCatagoreyPage from "./Components/Customer/Category/AllCatagoreyPage";
 import Error from "./Components/Error";
 import { Divider } from "@material-ui/core";
 import EmailVerify from "./Components/ShopOwner/Verify";
+import Navbar2 from "./Components/Navbar/Navbar2";
 
 function App() {
   const { productItem } = data;
@@ -65,7 +66,9 @@ function App() {
     <>
       <Router>
         <div className="App">
+          {/* <Navbar2 /> */}
           <Navbar />
+
           <Routes>
             <Route
               productItem={productItem}
@@ -90,7 +93,10 @@ function App() {
             <Route path="/create-account" element={<Signup />} />
             <Route path="/reset-password" element={<ForgotPassword />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/singleProduct/:productId" element={<Detail />} />
+            <Route
+              path="/singleProduct/:productId/:shopId"
+              element={<Detail />}
+            />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/products" element={<Products />} />
             <Route path="/checkout" element={<Checkout />} />

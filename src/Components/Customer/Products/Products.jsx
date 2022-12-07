@@ -67,6 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Products() {
   const [value, setValue] = React.useState([]);
   const [product, setProduct] = React.useState([]);
+  const [reviews, setReviews] = React.useState([]);
   const [catagories, setCatagories] = React.useState([]);
   const [searchCatagories, setSearchCatagories] = React.useState("");
   const [loading, setLoading] = React.useState(true);
@@ -85,7 +86,7 @@ function Products() {
 
   const loadMore = () => {
     setIndex(index + 8);
-    console.log(index);
+
     if (index >= product.length) {
       setIsCompleted(true);
     } else {
@@ -97,7 +98,6 @@ function Products() {
       .get("http://localhost:4000/category")
       .then((res) => {
         setCatagories(res.data.categories);
-        console.log(res.data.categories);
       })
       .catch((err) => {
         console.log(err);
@@ -108,7 +108,6 @@ function Products() {
       .get("http://localhost:4000/shops?category=" + searchCatagories)
       .then((res) => {
         setProduct(res.data.products);
-        console.log(res.data.products);
         setLoading(false);
       })
       .catch((err) => {
@@ -126,12 +125,31 @@ function Products() {
         console.log(err);
       });
   };
+  const bestFilter = reviews.filter((filterdata) => {
+    return filterdata.comment == "Good One";
+  });
+  const filterGood = () => {
+    setProduct(bestFilter);
+  };
+  // const filterGood = product.filter((filterdata) => {
+  //   setProduct(filterdata.reviews.comment == "Good One");
+  // });
+  // console.log(bestFilter);
+
+  // let filterGood = () => {
+  //   const good = product.filter((auto) => auto.reviews.comment == "Good One");
+  //   // const fordAutos = autoData.filter( (auto) => auto.title.includes("Ford"));
+
+  //   setProduct(good);
+  // };
+  // console.log(filterGood);
   React.useEffect(
     function () {
       axios
         .get("http://localhost:4000/shopowners/viewProducts")
         .then((res) => {
           setProduct(res.data);
+          setReviews(product.reviews[0]);
           setLoading(false);
         })
         .catch((err) => {
@@ -144,27 +162,7 @@ function Products() {
 
     [searchCatagories]
   );
-
-  const apple = () => {
-    {
-      product
-        .filter((pro) => {
-          return pro.product_brand === "Apple";
-        })
-        .map((pro, index) => {
-          return (
-            <div key={index}>
-              <h2>name: {pro.product_name}</h2>
-              {/* <h2>country: {employee.country}</h2> */}
-              {console.log(pro.product_name)}
-
-              <hr />
-            </div>
-          );
-        });
-    }
-  };
-
+  // console.log(reviews);
   return (
     <div>
       <HeroSection
@@ -204,6 +202,13 @@ function Products() {
           >
             All Products
           </button>
+          <button
+            onClick={filterGood}
+            className="btn btn-primary signin ml-2"
+            // style={{ width: "10rem" }}
+          >
+            Comment
+          </button>
           {catagories?.map((catagory, index) => {
             return (
               <div
@@ -226,9 +231,36 @@ function Products() {
           <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
           <div>
             {loading ? (
-              <>
-                <Skeleton variant="rectangular" width={210} height={280} />
-              </>
+              <div className="d-flex justify-content-around">
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+              </div>
             ) : (
               <section>
                 <div class="container">
@@ -250,7 +282,7 @@ function Products() {
                         <div key={index} class=" col-md-6 col-lg-3">
                           <Link
                             key={index}
-                            to={`../singleProduct/${product._id}`}
+                            to={`../singleProduct/${product._id}/${product.owner}`}
                           >
                             <div
                               class="border mb-4 p-3 card-hover"

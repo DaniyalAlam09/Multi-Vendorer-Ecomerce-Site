@@ -14,7 +14,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Rating from "@mui/material/Rating";
 function Detail() {
-  let { productId } = useParams();
+  let { productId, shopId } = useParams();
+
   const [product, setProduct] = React.useState({});
   const [shop, setShop] = React.useState({});
   const [counter, setCounter] = React.useState(1);
@@ -90,8 +91,19 @@ function Detail() {
         .catch((err) => {
           console.log(err);
         });
+      axios
+        .get("http://localhost:4000/shopowners/" + shopId)
+        .then((res) => {
+          setShop(res.data);
+          console.log(shopId);
+          console.log(res.data);
+          console.log(shop);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
     },
-    [productId]
+    [productId, shopId]
   );
 
   const [state, setState] = useState({
@@ -142,9 +154,16 @@ function Detail() {
         className="shopimage"
       />
       <div className="container">
-        <div className=" d-flex justify-content-center mb-4 mt-4">
-          <h1>Here Your Product</h1>
-        </div>
+        {/* <div className=" d-flex justify-content-around mb-4 mt-4"> */}
+        <h6>
+          Shop Owner Name {shop.firstName} {shop.lastName}
+        </h6>
+        <h6>Shop Name {shop.shopName}</h6>
+        <h6>Shop Number {shop.shopNo}</h6>
+        <h6>Shop Phone Number {shop.phone}</h6>
+        <h6>Shop Floor {shop.floor}</h6>
+
+        {/* </div> */}
         <div className="card">
           <div className="container-fliud">
             <div className="wrapper row">
@@ -175,32 +194,6 @@ function Detail() {
                 <div className=" row">
                   <h4 className="colors col-6 col-sm-4">Price:</h4>
                   <h5 className="col-6 col-sm-4">RS.{product.product_price}</h5>
-                </div>
-                <div className=" row mt-3">
-                  <h5 className="colors col-6 col-sm-4">Colors</h5>
-                  <FormControl className="col-6 col-sm-4">
-                    <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue="female"
-                      name="radio-buttons-group"
-                    >
-                      <FormControlLabel
-                        value="Red"
-                        control={<Radio />}
-                        label="Red"
-                      />
-                      <FormControlLabel
-                        value="Green"
-                        control={<Radio />}
-                        label="Green"
-                      />
-                      <FormControlLabel
-                        value="Blue"
-                        control={<Radio />}
-                        label="Blue"
-                      />
-                    </RadioGroup>
-                  </FormControl>
                 </div>
                 <div className=" d-flex justify-content-between mt-4">
                   <ButtonGroup

@@ -124,8 +124,17 @@ function SingleShop() {
       <div className="container">
         <div className=" d-flex justify-content-center mb-5 mt-5">
           <h1>{shopName}</h1>
+
           {/* <h1>{ShopId}</h1> */}
         </div>
+        <h6>
+          Shop Owner Name {shop.firstName} {shop.lastName}
+        </h6>
+        <h6>Shop Name {shop.shopName}</h6>
+        <h6>Shop Number {shop.shopNo}</h6>
+        <h6>Shop Phone Number {shop.phone}</h6>
+        <h6>Shop Floor {shop.floor}</h6>
+        <h6>Total Available Products {user.length}</h6>
         <div class=" container d-flex justify-content-center">
           <div className="">
             <Box>

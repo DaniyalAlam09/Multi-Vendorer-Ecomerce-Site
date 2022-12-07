@@ -5,6 +5,7 @@ import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Divider } from "@mui/material";
+import Box from "@mui/material/Box";
 
 function HotCollection() {
   const [value, setValue] = React.useState([]);
@@ -50,7 +51,36 @@ function HotCollection() {
         <div>
           {loading ? (
             <>
-              <Skeleton variant="rectangular" width={210} height={280} />
+              <div className="d-flex justify-content-around">
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+                <div>
+                  <Skeleton variant="rectangular" width={210} height={200} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton width={210} />
+                    <Skeleton width={210} />
+                  </Box>
+                </div>
+              </div>
             </>
           ) : (
             <section>
@@ -62,7 +92,10 @@ function HotCollection() {
                     .slice(0, 4)
                     .map((product, index) => (
                       <div key={index} class=" col-md-6 col-lg-3">
-                        <Link key={index} to={`singleProduct/${product._id}`}>
+                        <Link
+                          key={index}
+                          to={`singleProduct/${product._id}/${product.owner}`}
+                        >
                           <div
                             class="border mb-4 p-3 card-hover"
                             style={{
