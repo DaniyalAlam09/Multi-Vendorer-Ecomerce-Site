@@ -16,6 +16,7 @@ const AddProduct = () => {
   const [image, setImage] = React.useState("");
   const [loading, setLoading] = useState(false);
   const [catagories, setCatagories] = React.useState([]);
+  const [brands, setBrands] = React.useState([]);
   const [progress, setProgess] = React.useState(0);
   const [sending, setSending] = React.useState(false);
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -53,8 +54,20 @@ const AddProduct = () => {
         console.log(err);
       });
   };
+  const getBrands = () => {
+    axios
+      .get("http://localhost:4000/brand")
+      .then((res) => {
+        setBrands(res.data.brand);
+        console.log(res.data.brand);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   React.useEffect(function () {
     getCategory();
+    getBrands();
   }, []);
 
   const handleSubmit = (e) => {
@@ -149,11 +162,32 @@ const AddProduct = () => {
             ))}
           </select>
         </div>
+        <div className="col-md-3 form-group required">
+          <label for="" class="control-label">
+            Select Brand
+          </label>
+          <br />
+          <select
+            name="brand"
+            className="form-select"
+            onChange={(e) => {
+              setState((prev) => ({ ...prev, brand: e.target.value }));
+            }}
+          >
+            <option selected> Choose...</option>
+            {brands?.map((brand, index) => (
+              <option key={index} value={brand.name}>
+                {brand.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <div>
           <div className="ml-3 mt-3 form-group required">
             <label class="control-label" for="customFile">
               Add Product Cover Image
             </label>
+
             <input
               type="file"
               onChange={(e) => {
@@ -166,6 +200,7 @@ const AddProduct = () => {
           </div>
           <br />
         </div>
+
         <div className="col-12 mt-3 form-group required">
           <label for="inputAddress" className="form-label">
             Product Description
@@ -199,6 +234,7 @@ const AddProduct = () => {
           <input
             name="brand"
             type="text"
+            disabled
             className="form-control"
             placeholder="Brand"
             onChange={handleChange}

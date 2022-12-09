@@ -215,7 +215,8 @@ const Navbar = () => {
           OVM
         </a> */}
         <Link to="/" className="navbar-brand">
-          <img src="/images/logo.jpg" alt="" width="100" height="40" />
+          {/* <img src="/images/logo.jpg" alt="" width="100" height="40" /> */}
+          OVM
         </Link>
         <button
           class="navbar-toggler"

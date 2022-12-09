@@ -17,6 +17,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const ShopOwnerEditProfile = () => {
   let { itemId } = useParams();
   const [image, setImage] = React.useState("");
+
+  const [catagories, setCatagories] = React.useState([]);
+
   const navigate = useNavigate();
   const [state, setState] = useState({
     name: "",
@@ -44,6 +47,17 @@ const ShopOwnerEditProfile = () => {
     setError(false);
   };
 
+  const getCategory = () => {
+    axios
+      .get("http://localhost:4000/category")
+      .then((res) => {
+        setCatagories(res.data.categories);
+        console.log(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
     console.log(state);
@@ -55,6 +69,7 @@ const ShopOwnerEditProfile = () => {
     const formData = new FormData();
     formData.append("product_name", state.name);
     formData.append("product_price", state.price);
+    formData.append("categorey", state.category);
     formData.append("product_description", state.description);
     formData.append("product_color", state.color);
     formData.append("product_brand", state.brand);
@@ -141,6 +156,7 @@ const ShopOwnerEditProfile = () => {
         .catch((err) => {
           console.log(err);
         });
+      getCategory();
     },
     [itemId]
   );
@@ -161,17 +177,24 @@ const ShopOwnerEditProfile = () => {
             value={state.name}
           />
         </div>
-        <div className="col-md-3">
-          <label for="" className="form-label">
+        <div className="col-md-3 form-group required">
+          <label for="" class="control-label">
             Select Catagory
           </label>
           <br />
-          <select className="form-select">
+          <select
+            name="category"
+            className="form-select"
+            onChange={(e) => {
+              setState((prev) => ({ ...prev, category: e.target.value }));
+            }}
+          >
             <option selected> Choose...</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Moiles">Moiles</option>
-            <option value="Laptops">Laptops</option>
-            <option value="Tabetes">Tabetes</option>
+            {catagories?.map((catagory, index) => (
+              <option key={index} value={catagory.name}>
+                {catagory.name}
+              </option>
+            ))}
           </select>
         </div>
         <div>

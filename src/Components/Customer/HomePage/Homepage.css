@@ -4,7 +4,7 @@
   background-color: #eaeef3;
 }
 .button {
-  background-color: #1da599;
+  background-color: #0071dc;
   /* margin-left: 0.5em; */
   outline: none;
   border: none;
@@ -13,7 +13,7 @@
 }
 .button:hover {
   cursor: pointer;
-  background-color: #0f615a;
+  background-color: #004f9a;
 }
 
 /* 
@@ -45,13 +45,13 @@ p {
   color: #1b1d21;
 }
 .shop {
-  background-color: #1da599;
+  background-color: #0071dc;
   margin-left: 0.5rem;
   outline: none;
   border: none;
 }
 .shop:hover {
-  background-color: #0f615a;
+  background-color: #004f9a;
 }
 
 .main-bestdeals {
@@ -136,12 +136,12 @@ p {
 /* Responsiveess____________________________________________ */
 
 .icons {
-  color: #1da599;
+  color: #0071dc;
   margin-left: 0.5rem;
   cursor: pointer;
 }
 .icons:hover {
-  color: #0f615a;
+  color: #004f9a;
 }
 
 /* .shipping{
@@ -159,7 +159,7 @@ margin-left: 3rem
 } */
 .learn-more {
   font-weight: 500;
-  color: #1da599;
+  color: #0071dc;
 }
 
 /* _____________________________Featured */
@@ -174,7 +174,7 @@ margin-left: 3rem
 
 .see-all {
   margin-left: 1rem;
-  color: #1da599;
+  color: #0071dc;
   font-weight: 500;
 }
 
@@ -204,7 +204,7 @@ margin-left: 3rem
 .product-price {
   font-size: 14px;
   font-weight: 500;
-  color: #1da599;
+  color: #0071dc;
   /* margin-left: 2rem; */
 }
 .product-name {

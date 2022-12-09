@@ -6,7 +6,7 @@ body {
   background-color: rgb(255, 255, 255);
 }
 .buttons {
-  background-color: #1da599;
+  background-color: #0071dc;
   margin-left: 0.5em;
   outline: none;
   border: none;
@@ -14,16 +14,16 @@ body {
 .buttons:hover,
 .buttons:focus {
   cursor: pointer;
-  background-color: #0f615a;
+  background-color: #004f9a;
 }
 a,
 .small-link {
-  color: #1da599;
+  color: #0071dc;
 }
 a:hover,
 Link:hover {
   text-decoration: none;
-  color: #0f615a;
+  color: #004f9a;
 }
 
 .heading {
@@ -56,21 +56,21 @@ main {
   padding: 20px;
 }
 .sidebar {
-  background: #1da599;
+  background: #0071dc;
   color: #fff;
   height: 100vh;
   width: 200px;
   transition: all 0.5s;
 }
 .logoututtoosidebar {
-  /* background: #1da599; */
+  /* background: #0071dc; */
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
 }
 .logoututtoosidebar:hover {
   background: #fff;
-  color: #1da599;
+  color: #0071dc;
   transition: all 0.5s;
 }
 .top_section {
@@ -95,12 +95,12 @@ main {
 }
 .link:hover {
   background: #fff;
-  color: #1da599;
+  color: #0071dc;
   transition: all 0.5s;
 }
 .active {
   background: #fff;
-  color: #1da599;
+  color: #0071dc;
 }
 .icon {
   font-size: 20px;
@@ -129,7 +129,7 @@ main {
 }
 
 .nav-user-info {
-  background-color: #0f615a;
+  background-color: #004f9a;
   line-height: 1.4;
   padding: 12px;
   color: #fff;

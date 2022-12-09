@@ -20,7 +20,7 @@ import KeyboardDoubleArrowDownSharpIcon from "@mui/icons-material/KeyboardDouble
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { Divider } from "@mui/material";
-
+import "./styles.css";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -58,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("sm")]: {
       width: "50ch",
       "&:focus": {
-        width: "70ch",
+        width: "60ch",
       },
     },
   },
@@ -69,12 +69,12 @@ function Products() {
   const [product, setProduct] = React.useState([]);
   const [reviews, setReviews] = React.useState([]);
   const [catagories, setCatagories] = React.useState([]);
+  const [brands, setBrands] = React.useState([]);
   const [searchCatagories, setSearchCatagories] = React.useState("");
   const [loading, setLoading] = React.useState(true);
-  const [selectedBrand, setSelectedBrand] = useState("");
   const [search, setSearch] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
-  const [index, setIndex] = useState(8);
+  const [index, setIndex] = useState(9);
   const initialPosts = slice(product, 0, index);
   const [state, setState] = useState({
     name: "",
@@ -85,7 +85,7 @@ function Products() {
   const item = { _id };
 
   const loadMore = () => {
-    setIndex(index + 8);
+    setIndex(index + 9);
 
     if (index >= product.length) {
       setIsCompleted(true);
@@ -98,6 +98,16 @@ function Products() {
       .get("http://localhost:4000/category")
       .then((res) => {
         setCatagories(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getBrands = () => {
+    axios
+      .get("http://localhost:4000/brand")
+      .then((res) => {
+        setBrands(res.data.brand);
       })
       .catch((err) => {
         console.log(err);
@@ -153,10 +163,11 @@ function Products() {
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
         });
 
       getCategory();
+      getBrands();
       catagoryFilter();
     },
 
@@ -164,230 +175,369 @@ function Products() {
   );
   // console.log(reviews);
   return (
-    <div>
+    <>
       <HeroSection
         Name1={"All Products are available "}
-        Name2={"Camera Product"}
+        Name2={"Tech Products"}
         ImageSource="/images/ProductsHero.png"
       />
-      <div className="mt-3">
-        <div class=" container d-flex justify-content-center">
-          <div className="">
-            <Box>
-              <Toolbar>
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                    }}
-                  />
-                </Search>
-              </Toolbar>
-            </Box>
-          </div>
-        </div>
-        <div
-          className="container d-flex justify-content-center mt-4"
-          style={{ display: "flex", direction: "row" }}
-        >
-          <button
-            onClick={allProduct}
-            className="btn btn-primary signin ml-2"
-            // style={{ width: "10rem" }}
-          >
-            All Products
-          </button>
-          <button
-            onClick={filterGood}
-            className="btn btn-primary signin ml-2"
-            // style={{ width: "10rem" }}
-          >
-            Comment
-          </button>
-          {catagories?.map((catagory, index) => {
-            return (
-              <div
-                className="d-flex justify-content-around"
-                style={{ display: "flex", direction: "row" }}
-              >
-                <div key={index} className="">
-                  <button
-                    onClick={() => setSearchCatagories(catagory.name)}
-                    className="btn btn-primary signin ml-2"
+
+      <div class="container">
+        <div class="row">
+          <aside class="col-md-3">
+            <div class="border mb-4 p-3 mt-5">
+              <div>
+                <button
+                  onClick={allProduct}
+                  class="btn btn-danger mb-2"
+                  style={{ width: "70%" }}
+                >
+                  CLear All Filters
+                </button>
+              </div>
+              <article class="filter-group">
+                <header class="card-header">
+                  <a
+                    href="#"
+                    data-toggle="collapse"
+                    data-target="#collapse_1"
+                    aria-expanded="true"
+                    class=""
                   >
-                    {catagory.name}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="heading container">
-          <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
-          <div>
-            {loading ? (
-              <div className="d-flex justify-content-around">
-                <div>
-                  <Skeleton variant="rectangular" width={210} height={200} />
-                  <Box sx={{ pt: 0.5 }}>
-                    <Skeleton width={210} />
-                    <Skeleton width={210} />
-                  </Box>
-                </div>
-                <div>
-                  <Skeleton variant="rectangular" width={210} height={200} />
-                  <Box sx={{ pt: 0.5 }}>
-                    <Skeleton width={210} />
-                    <Skeleton width={210} />
-                  </Box>
-                </div>
-                <div>
-                  <Skeleton variant="rectangular" width={210} height={200} />
-                  <Box sx={{ pt: 0.5 }}>
-                    <Skeleton width={210} />
-                    <Skeleton width={210} />
-                  </Box>
-                </div>
-                <div>
-                  <Skeleton variant="rectangular" width={210} height={200} />
-                  <Box sx={{ pt: 0.5 }}>
-                    <Skeleton width={210} />
-                    <Skeleton width={210} />
-                  </Box>
-                </div>
-              </div>
-            ) : (
-              <section>
-                <div class="container">
-                  <div class="row">
-                    {/* <div class=" col-md-6 col-lg-4 mb-4 mb-md-0"> */}
-                    {initialPosts
-                      .filter((person) => {
-                        if (search == "") {
-                          return person;
-                        } else if (
-                          person.product_name
-                            .toLowerCase()
-                            .includes(search.toLowerCase())
-                        ) {
-                          return person;
-                        }
-                      })
-                      .map((product, index) => (
-                        <div key={index} class=" col-md-6 col-lg-3">
-                          <Link
-                            key={index}
-                            to={`../singleProduct/${product._id}/${product.owner}`}
-                          >
-                            <div
-                              class="border mb-4 p-3 card-hover"
-                              style={{
-                                height: "380px",
-                                borderRadius: "5px",
-                                // backgroundColor: " rgba(236, 235, 235, 0.137)",
-                              }}
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Catagories</h6>
+                  </a>
+                </header>
+                <div
+                  class="filter-content collapse show"
+                  id="collapse_1"
+                  // style=""
+                >
+                  <div class="card-body">
+                    {catagories?.map((catagory, index) => {
+                      return (
+                        <div
+                        // className="d-flex justify-content-around"
+                        // style={{ display: "flex", direction: "row" }}
+                        >
+                          <div key={index} className="">
+                            <button
+                              onClick={() => setSearchCatagories(catagory.name)}
+                              className="btn btn-primary signin mt-2"
+                              style={{ width: "80%" }}
                             >
-                              <div className="text -center">
-                                <div></div>
-                                <img
-                                  src={`http://localhost:4000/${product.product_image}`}
-                                  style={{
-                                    height: "200px",
-                                    width: "200px",
-                                  }}
-                                  class="product-image"
-                                  alt="Laptop"
-                                />
-                              </div>
-
-                              <div class="negativemargine">
-                                <div class="d-flex justify-content-between">
-                                  <p class="small">
-                                    <a class="text-muted">
-                                      {`${product.product_brand}`}
-                                    </a>
-                                  </p>
-                                  <p class="small text-danger">
-                                    <s
-                                      style={{ textDecoration: "line-through" }}
-                                    >{`${product.product_price}`}</s>
-                                  </p>
-                                </div>
-                                <Divider />
-                                <div class="d-flex justify-content-between mb-3">
-                                  <p
-                                    className="product-name"
-                                    // class="mb-0"
-                                  >{`${product.product_name}`}</p>
-                                  <p
-                                    className="product-price"
-                                    // class="text-dark mb-0"
-                                  >{`${product.product_price}`}</p>
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                  <p class="rating text-muted">
-                                    Stoke: {`${product.product_stoke}`}
-                                  </p>
-                                  <div class="rating">
-                                    {product.reviews
-                                      ? product.reviews?.map((rew) => (
-                                          <Rating
-                                            size="small"
-                                            value={rew.rating}
-                                            readOnly
-                                          />
-                                        ))
-                                      : "kj"}
-                                    {/* {product.reviews.rating ?(
-                                  <p>oid</p>)
-                                  : <p>dsk</p>} */}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
+                              {catagory.name}
+                            </button>
+                          </div>
                         </div>
-                      ))}
-                    {/* </div> */}
+                      );
+                    })}
                   </div>
                 </div>
-              </section>
-            )}
-          </div>
-          <div className="d-grid mt-3 mb-5">
-            {isCompleted ? (
-              <div class="text-center">
-                {" "}
-                <button
-                  onClick={loadMore}
-                  type="button"
-                  className="btn btn-danger disabled"
+              </article>
+              <article class="filter-group">
+                <header class="card-header">
+                  <a
+                    href="#"
+                    data-toggle="collapse"
+                    data-target="#collapse_2"
+                    aria-expanded="true"
+                    class=""
+                  >
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Brands </h6>
+                  </a>
+                </header>
+                <div
+                  class="filter-content collapse show"
+                  id="collapse_2"
+                  // style=""
                 >
-                  No More Items
-                </button>
-              </div>
-            ) : (
-              <div class="text-center">
-                <button
-                  onClick={loadMore}
-                  type="button"
-                  class="btn btn-primary signin ml-2"
+                  <div class="card-body">
+                    {brands?.map((brands, index) => {
+                      return (
+                        <div
+                        // className="d-flex justify-content-around"
+                        // style={{ display: "flex", direction: "row" }}
+                        >
+                          <div key={index} className="">
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="flexCheckChecked"
+                              />
+                              <label
+                                class="form-check-label"
+                                for="flexCheckChecked"
+                              >
+                                {brands.name}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </article>
+              <article class="filter-group">
+                <header class="card-header">
+                  <a
+                    href="#"
+                    data-toggle="collapse"
+                    data-target="#collapse_3"
+                    aria-expanded="true"
+                    class=""
+                  >
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Price range </h6>
+                  </a>
+                </header>
+                <div
+                  class="filter-content collapse show"
+                  id="collapse_3"
+                  // style=""
                 >
-                  Load More
-                  {/* <KeyboardDoubleArrowDownSharpIcon /> */}
-                </button>
+                  <div class="card-body">
+                    <input
+                      type="range"
+                      class="custom-range"
+                      min="0"
+                      max="10000"
+                      name=""
+                    />
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Min</label>
+                        <input
+                          class="form-control"
+                          placeholder="RS.0"
+                          type="number"
+                        />
+                      </div>
+                      <div class="form-group text-right col-md-6">
+                        <label>Max</label>
+                        <input
+                          class="form-control"
+                          placeholder="RS. 1,0000"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                    <button class="btn btn-block btn-primary">Apply</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </aside>
+          <main class="col-md-9 mt-2">
+            <header class="border-bottom mb-4 pb-3">
+              <div class="form-inline">
+                <span class="mr-md-auto">{product.length} Items found </span>
+                <Box>
+                  <Toolbar>
+                    <Search>
+                      <SearchIconWrapper>
+                        <SearchIcon />
+                      </SearchIconWrapper>
+                      <StyledInputBase
+                        placeholder="Search…"
+                        inputProps={{ "aria-label": "search" }}
+                        onChange={(e) => {
+                          setSearch(e.target.value);
+                        }}
+                      />
+                    </Search>
+                  </Toolbar>
+                </Box>
               </div>
-            )}
-          </div>
+            </header>
+
+            <div className="heading container">
+              <h2>
+                {!loading && product.length === 0 && <h1>No Products</h1>}
+              </h2>
+              <div>
+                {loading ? (
+                  <div className="d-flex justify-content-around">
+                    <div>
+                      <Skeleton
+                        variant="rectangular"
+                        width={210}
+                        height={200}
+                      />
+                      <Box sx={{ pt: 0.5 }}>
+                        <Skeleton width={210} />
+                        <Skeleton width={210} />
+                      </Box>
+                    </div>
+                    <div>
+                      <Skeleton
+                        variant="rectangular"
+                        width={210}
+                        height={200}
+                      />
+                      <Box sx={{ pt: 0.5 }}>
+                        <Skeleton width={210} />
+                        <Skeleton width={210} />
+                      </Box>
+                    </div>
+                    <div>
+                      <Skeleton
+                        variant="rectangular"
+                        width={210}
+                        height={200}
+                      />
+                      <Box sx={{ pt: 0.5 }}>
+                        <Skeleton width={210} />
+                        <Skeleton width={210} />
+                      </Box>
+                    </div>
+                    <div>
+                      <Skeleton
+                        variant="rectangular"
+                        width={210}
+                        height={200}
+                      />
+                      <Box sx={{ pt: 0.5 }}>
+                        <Skeleton width={210} />
+                        <Skeleton width={210} />
+                      </Box>
+                    </div>
+                  </div>
+                ) : (
+                  <section>
+                    <div class="container">
+                      <div class="row">
+                        {/* <div class=" col-md-6 col-lg-4 mb-4 mb-md-0"> */}
+                        {initialPosts
+                          .filter((person) => {
+                            if (search == "") {
+                              return person;
+                            } else if (
+                              person.product_name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                            ) {
+                              return person;
+                            }
+                          })
+                          .map((product, index) => (
+                            <div key={index} class=" col-md-6 col-lg-4">
+                              <Link
+                                key={index}
+                                to={`../singleProduct/${product._id}/${product.owner}`}
+                              >
+                                <div
+                                  class="border mb-4 p-3 card-hover"
+                                  style={{
+                                    height: "380px",
+                                    borderRadius: "5px",
+                                    // backgroundColor: " rgba(236, 235, 235, 0.137)",
+                                  }}
+                                >
+                                  <div className="text -center">
+                                    <div></div>
+                                    <img
+                                      src={`http://localhost:4000/${product.product_image}`}
+                                      style={{
+                                        height: "200px",
+                                        width: "200px",
+                                      }}
+                                      class="product-image"
+                                      alt="Laptop"
+                                    />
+                                  </div>
+
+                                  <div class="negativemargine">
+                                    <div class="d-flex justify-content-between">
+                                      <p class="small">
+                                        <a class="text-muted">
+                                          {`${product.product_brand}`}
+                                        </a>
+                                      </p>
+                                      <p class="small text-danger">
+                                        <s
+                                          style={{
+                                            textDecoration: "line-through",
+                                          }}
+                                        >{`${product.product_price}`}</s>
+                                      </p>
+                                    </div>
+                                    <Divider />
+                                    <div class="d-flex justify-content-between mb-3">
+                                      <p
+                                        className="product-name"
+                                        // class="mb-0"
+                                      >{`${product.product_name}`}</p>
+                                      <p
+                                        className="product-price"
+                                        // class="text-dark mb-0"
+                                      >{`${product.product_price}`}</p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                      <p class="rating text-muted">
+                                        Stoke: {`${product.product_stoke}`}
+                                      </p>
+                                      <div class="rating">
+                                        {product.reviews
+                                          ? product.reviews?.map((rew) => (
+                                              <Rating
+                                                size="small"
+                                                value={rew.rating}
+                                                readOnly
+                                              />
+                                            ))
+                                          : "kj"}
+                                        {/* {product.reviews.rating ?(
+                                  <p>oid</p>)
+                                  : <p>dsk</p>} */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          ))}
+                        {/* </div> */}
+                      </div>
+                    </div>
+                  </section>
+                )}
+              </div>
+              <div className="d-grid mt-3 mb-5">
+                {isCompleted ? (
+                  <div class="text-center">
+                    {" "}
+                    <button
+                      onClick={loadMore}
+                      type="button"
+                      className="btn btn-danger disabled"
+                    >
+                      No More Items
+                    </button>
+                  </div>
+                ) : (
+                  <div class="text-center">
+                    <button
+                      onClick={loadMore}
+                      type="button"
+                      class="btn btn-primary signin ml-2"
+                    >
+                      Load More
+                      {/* <KeyboardDoubleArrowDownSharpIcon /> */}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </main>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

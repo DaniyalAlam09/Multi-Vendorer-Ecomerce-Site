@@ -104,10 +104,10 @@ export default function Login() {
                     <h3>
                       Sign In to <strong>OVM</strong>
                     </h3>
-                    <p className="mb-4">
+                    {/* <p className="mb-4">
                       Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
                       consectetur adipisicing.
-                    </p>
+                    </p> */}
                     <Link
                       className="negative small-link "
                       to="/shopowner-login"

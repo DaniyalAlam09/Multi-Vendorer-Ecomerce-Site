@@ -244,8 +244,18 @@ function Detail() {
                         <div>
                           <p className="mt-3 ml-4 review-name">{`${product.name}`}</p>
                         </div>
-                        <div className="ml">
-                          <p className="ml-5 comment">{`${product.comment}`}</p>
+                        <div className="d-flex justify-content-start">
+                          <div className="ml">
+                            <p className="ml-5 comment">{`${product.comment}`}</p>
+                          </div>
+                          <div className="">
+                            <Rating
+                              className="ml-5"
+                              size="small"
+                              readOnly
+                              value={product.rating}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
