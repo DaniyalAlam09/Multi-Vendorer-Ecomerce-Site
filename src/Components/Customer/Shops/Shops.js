@@ -67,7 +67,6 @@ function Shops() {
     fetch("http://localhost:4000/admins/viewshopowners")
       .then((response) => response.json())
       .then((actualData) => {
-        console.log(actualData);
         setUser(actualData);
       })
       .catch((err) => {
@@ -76,12 +75,15 @@ function Shops() {
   }, []);
   const loadMore = () => {
     setIndex(index + 8);
-    console.log(index);
     if (index >= user.length) {
       setIsCompleted(true);
     } else {
       setIsCompleted(false);
     }
+  };
+  const sortAlpha = () => {
+    console.log(initialPosts.sort((a, b) => a.shopName - b.shopName));
+    setUser(initialPosts.sort((a, b) => a.shopName - b.shopName));
   };
   return (
     <Stack className="container heading " spacing={2}>
@@ -104,6 +106,14 @@ function Shops() {
             </Toolbar>
           </Box>
         </div>
+      </div>
+      <div className=" container d-flex flex-row-reverse">
+        <select className="col-md-2 flex-row-reverse">
+          <option value="">Choose...</option>
+          <option onClick={sortAlpha} value="Alphabets">
+            Alphabet
+          </option>
+        </select>
       </div>
       <div className="container products ">
         <div className="row text-center justify-content-start">
@@ -134,7 +144,6 @@ function Shops() {
                     }}
                     src={`http://localhost:4000${elem.shopImage}`}
                   />
-                  {console.log(elem)}
                   <p className="brand-name">Shop no {`${elem.shopNo}`}</p>
 
                   <p className="product-name">{`${elem.shopName}`}</p>
