@@ -85,7 +85,7 @@ const Dashboard = () => {
                 <div class="">
                   <div class="d-flex flex-row-reverse">
                     <button class="btn btn-primary signin ml-2">
-                      <Link to="../edit-profile" className="text-white">
+                      <Link to="user/edit-profile" className="text-white">
                         Edit Profile
                       </Link>
                     </button>

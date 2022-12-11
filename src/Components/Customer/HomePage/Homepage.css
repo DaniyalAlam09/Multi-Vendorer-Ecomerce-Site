@@ -33,6 +33,25 @@
   /* margin-left: 7rem; */
   padding-top: 5rem;
 }
+
+.clients {
+  padding: 0 0 60px 0;
+  cursor: pointer;
+}
+.swiper-slide img {
+  width: 70%;
+  cursor: pointer;
+}
+.clients .swiper-slide img {
+  opacity: 0.5;
+  transition: 0.3s;
+  filter: grayscale(100);
+}
+
+.clients .swiper-slide img:hover {
+  filter: none;
+  opacity: 1;
+}
 .hero {
   width: 100%;
   min-height: 60vh;

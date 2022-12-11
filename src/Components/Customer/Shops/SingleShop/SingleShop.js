@@ -178,7 +178,7 @@ function SingleShop() {
             })
             ?.map((product, index) => (
               <div key={index} className=" col-xl-3 col-sm-6 mb-5">
-                <Link to={`../singleProduct/${product._id}`}>
+                <Link to={`../singleProduct/${product._id}/${product.owner}`}>
                   <div className="thumbnail ">
                     <img
                       className="product-image rounded"

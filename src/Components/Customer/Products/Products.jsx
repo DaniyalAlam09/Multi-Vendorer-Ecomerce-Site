@@ -19,6 +19,7 @@ import TemporaryDrawer from "./Drawer";
 import KeyboardDoubleArrowDownSharpIcon from "@mui/icons-material/KeyboardDoubleArrowDownSharp";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Divider } from "@mui/material";
 import "./styles.css";
 const Search = styled("div")(({ theme }) => ({
@@ -206,13 +207,13 @@ function Products() {
                 >
                   CLear All Filters
                 </button>
-                <button
+                {/* <button
                   onClick={Rating4}
                   class="btn btn-danger mb-2"
                   style={{ width: "70%" }}
                 >
                   best
-                </button>
+                </button> */}
               </div>
               <article class="filter-group">
                 <header class="card-header">
@@ -223,7 +224,7 @@ function Products() {
                     aria-expanded="true"
                     class=""
                   >
-                    <i class="icon-control fa fa-chevron-down"></i>
+                    {/* <ExpandMoreIcon size="small" /> */}
                     <h6 class="title">Catagories</h6>
                   </a>
                 </header>
@@ -346,7 +347,9 @@ function Products() {
                         />
                       </div>
                     </div>
-                    <button class="btn btn-block btn-primary">Apply</button>
+                    <button class="btn btn-block btn-primary signin">
+                      Apply
+                    </button>
                   </div>
                 </div>
               </article>

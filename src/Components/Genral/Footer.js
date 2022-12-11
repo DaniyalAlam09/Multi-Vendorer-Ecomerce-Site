@@ -7,8 +7,12 @@ import {
   UilGithub,
 } from "@iconscout/react-unicons";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Footer() {
+  const { pathname } = useLocation();
+  console.log(pathname);
+  // if (pathname === "/") return null;
   return (
     <div class="hero pt-4">
       <div className="container footer-style">
