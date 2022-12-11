@@ -4,7 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import HeroSection from "../HomePage/HeroSection";
+import OtherHeroSections from "../HomePage/OtherHeroSections";
 import { styled, alpha } from "@mui/material/styles";
 import Hero from "../Images/Hero.png";
 import SearchIcon from "@material-ui/icons/Search";
@@ -71,6 +71,7 @@ function Products() {
   const [catagories, setCatagories] = React.useState([]);
   const [brands, setBrands] = React.useState([]);
   const [searchCatagories, setSearchCatagories] = React.useState("");
+  const [searchBrand, setSearchBrand] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
@@ -129,26 +130,37 @@ function Products() {
       .get("http://localhost:4000/shopowners/viewProducts")
       .then((res) => {
         setProduct(res.data);
+        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const bestFilter = reviews.filter((filterdata) => {
-    return filterdata.comment == "Good One";
-  });
-  const filterGood = () => {
-    setProduct(bestFilter);
-  };
-  // const filterGood = product.filter((filterdata) => {
-  //   setProduct(filterdata.reviews.comment == "Good One");
+  // const bestFilter = reviews?.filter((filterdata) => {
+  //   return filterdata.rating === 5;
   // });
-  // console.log(bestFilter);
+  // const filterGood = () => {
+  //   setProduct(bestFilter);
+  // };
+  const Rating4 = () => {
+    product.reviews.filter((person) => (person.rating = 4));
+    // product.map((item, index) => {
+    //   let person = item?.reviews.filter((person) => (person.rating = 4));
+    setProduct(product?.reviews?.filter((person) => (person.rating = 4)));
+    // console.log(person);
+    // });
+    // product.reviews.rating[0] == 4;
+  };
+  console.log(Rating4);
+  // const filterGood = product?.filter((filterdata) => {
+  //   setProduct(filterdata.reviews.rating[0] == 1);
+  // });
+  // console.log(filterGood);
 
   // let filterGood = () => {
   //   const good = product.filter((auto) => auto.reviews.comment == "Good One");
-  //   // const fordAutos = autoData.filter( (auto) => auto.title.includes("Ford"));
+  // const fordAutos = autoData.filter( (auto) => auto.title.includes("Ford"));
 
   //   setProduct(good);
   // };
@@ -159,7 +171,7 @@ function Products() {
         .get("http://localhost:4000/shopowners/viewProducts")
         .then((res) => {
           setProduct(res.data);
-          setReviews(product.reviews[0]);
+          setReviews(res.data.reviews);
           setLoading(false);
         })
         .catch((err) => {
@@ -173,15 +185,15 @@ function Products() {
 
     [searchCatagories]
   );
-  // console.log(reviews);
+
   return (
     <>
-      <HeroSection
+      {/* <HeroSection /> */}
+      <OtherHeroSections
         Name1={"All Products are available "}
         Name2={"Tech Products"}
         ImageSource="/images/ProductsHero.png"
       />
-
       <div class="container">
         <div class="row">
           <aside class="col-md-3">
@@ -193,6 +205,13 @@ function Products() {
                   style={{ width: "70%" }}
                 >
                   CLear All Filters
+                </button>
+                <button
+                  onClick={Rating4}
+                  class="btn btn-danger mb-2"
+                  style={{ width: "70%" }}
+                >
+                  best
                 </button>
               </div>
               <article class="filter-group">
@@ -267,6 +286,7 @@ function Products() {
                                 type="checkbox"
                                 value=""
                                 id="flexCheckChecked"
+                                name="brand"
                               />
                               <label
                                 class="form-check-label"

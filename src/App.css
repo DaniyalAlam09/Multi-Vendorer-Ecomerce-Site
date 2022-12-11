@@ -6,7 +6,7 @@ body {
   background-color: rgb(255, 255, 255);
 }
 .buttons {
-  background-color: #0071dc;
+  background-color: #0c8aa0;
   margin-left: 0.5em;
   outline: none;
   border: none;
@@ -14,16 +14,16 @@ body {
 .buttons:hover,
 .buttons:focus {
   cursor: pointer;
-  background-color: #004f9a;
+  background-color: #0ea2bd;
 }
 a,
 .small-link {
-  color: #0071dc;
+  color: #0c8aa0;
 }
 a:hover,
 Link:hover {
   text-decoration: none;
-  color: #004f9a;
+  color: #0ea2bd;
 }
 
 .heading {
@@ -56,21 +56,21 @@ main {
   padding: 20px;
 }
 .sidebar {
-  background: #0071dc;
+  background: #0c8aa0;
   color: #fff;
   height: 100vh;
   width: 200px;
   transition: all 0.5s;
 }
 .logoututtoosidebar {
-  /* background: #0071dc; */
+  /* background: #0c8aa0; */
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
 }
 .logoututtoosidebar:hover {
   background: #fff;
-  color: #0071dc;
+  color: #0c8aa0;
   transition: all 0.5s;
 }
 .top_section {
@@ -95,12 +95,12 @@ main {
 }
 .link:hover {
   background: #fff;
-  color: #0071dc;
+  color: #0c8aa0;
   transition: all 0.5s;
 }
 .active {
   background: #fff;
-  color: #0071dc;
+  color: #0c8aa0;
 }
 .icon {
   font-size: 20px;
@@ -129,7 +129,7 @@ main {
 }
 
 .nav-user-info {
-  background-color: #004f9a;
+  background-color: #0ea2bd;
   line-height: 1.4;
   padding: 12px;
   color: #fff;

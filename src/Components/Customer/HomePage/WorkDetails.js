@@ -8,7 +8,7 @@ import {
 
 function WorkDetails() {
   return (
-    <div className="hero">
+    <div className="">
       <div className="heading container pt-4">
         <h3>How Its works</h3>
         <div className="container heading2 row text-center justify-content-center">

@@ -48,21 +48,21 @@ li:hover {
   color: #3cffef;
 }
 .icons {
-  color: #0071dc;
+  color: #0ea2bd;
   margin-left: 0.5em;
   cursor: pointer;
 }
 .icons:hover {
-  color: #004f9a;
+  color: #0c8aa0;
 }
 .signin {
-  background-color: #0071dc;
+  background-color: #0ea2bd;
   /* margin-left: 0.5em; */
   outline: none;
   border: none;
 }
 .start {
-  background-color: #0071dc;
+  background-color: #0ea2bd;
   color: #fff;
   /* margin-left: 0.5em; */
   outline: none;
@@ -74,7 +74,7 @@ li:hover {
 .signin:hover,
 .start:hover {
   cursor: pointer;
-  background-color: #004f9a;
+  background-color: #0c8aa0;
 }
 /* ________________Subscribe */
 

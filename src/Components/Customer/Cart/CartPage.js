@@ -7,6 +7,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Divider } from "@material-ui/core";
+import OtherHeroSections from "../HomePage/OtherHeroSections";
 
 function CartPage() {
   const [products, setProducts] = React.useState([]);
@@ -123,11 +124,11 @@ function CartPage() {
 
   return (
     <>
-      <HeroSection
+      {/* <OtherHeroSections
         Name1={"Your Cart Is Here"}
         ImageSource={CartHero}
         className="shopimage"
-      />
+      /> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}

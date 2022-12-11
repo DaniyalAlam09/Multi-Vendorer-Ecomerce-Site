@@ -54,7 +54,7 @@ function FeaturedProducts() {
           All Offers
         </Link>
       </div>
-      <div className="heading container">
+      <div className=" container">
         <h2>{!loading && product.length === 0 && <h1>No Products</h1>}</h2>
         <div>
           {loading ? (

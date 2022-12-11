@@ -9,6 +9,7 @@ import HotCollection from "./HotCollection";
 import FeaturedCatagories from "./FeaturedCatagories";
 
 import Hero from "../Images/Hero.png";
+import Topbrands from "./Topbrands";
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function Home() {
       <FeaturedProducts />
       <FeaturedCatagories />
       <HotCollection />
+      <Topbrands />
       <Subscribe />
     </div>
   );

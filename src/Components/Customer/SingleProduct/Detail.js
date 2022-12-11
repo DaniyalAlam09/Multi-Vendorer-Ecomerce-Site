@@ -13,6 +13,7 @@ import SingleShopHero from "../../Customer/Images/SingleShopHero.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Rating from "@mui/material/Rating";
+import OtherHeroSections from "../HomePage/OtherHeroSections";
 function Detail() {
   let { productId, shopId } = useParams();
 
@@ -148,11 +149,7 @@ function Detail() {
   return (
     <div>
       <ToastContainer />
-      <HeroSection
-        Name1={"Single Product"}
-        ImageSource={SingleShopHero}
-        className="shopimage"
-      />
+      <OtherHeroSections Name1={"Shops"} ImageSource={SingleShopHero} />
       <div className="container">
         {/* <div className=" d-flex justify-content-around mb-4 mt-4"> */}
         <h6>

@@ -203,7 +203,7 @@ const Navbar = () => {
         </div>
       </header> */}
       <nav
-        className="navbar header fixed-top sticky-top navbar-expand-lg navbar-light ovm "
+        className=" navbar header fixed-top sticky-top navbar-expand-lg navbar-light ovm "
         style={
           {
             // position: "fixed",
