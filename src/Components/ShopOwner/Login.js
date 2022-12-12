@@ -108,10 +108,7 @@ export default function ShopOwnerLogin() {
                   <h3>
                     Sign In to <strong>OVM</strong>
                   </h3>
-                  <p className="mb-4">
-                    Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                    consectetur adipisicing.
-                  </p>
+
                   <Link className="negative small-link " to="/account">
                     Login as Customer?
                   </Link>
@@ -158,7 +155,7 @@ export default function ShopOwnerLogin() {
                     />
                   </div>
 
-                  <div className="d-flex mb-5 align-items-center">
+                  <div className="d-flex mb-2 align-items-center">
                     {/* <label className="control control--checkbox mb-0">
                         <span className="caption">Remember me</span>
                         <input type="checkbox" className="mr-3" />
@@ -166,8 +163,8 @@ export default function ShopOwnerLogin() {
                       </label> */}
                     <span className="ml-auto">
                       <Link
-                        to="/reset-password small-link "
-                        className="forgot-pass small-link"
+                        to="/shopowner-reset-password"
+                        className="forgot-pass small-link "
                       >
                         Forgot Password?
                       </Link>
@@ -199,20 +196,19 @@ export default function ShopOwnerLogin() {
                   </button>
                 </Link>
 
-                <span className="d-block text-left my-4 text-muted">
-                  {" "}
+                <span className="d-block text-right mt-2 text-muted">
                   or sign in with
                 </span>
 
-                <div className="social-login">
+                <div className="d-block text-right ">
                   <a href="#" className="facebook small-link ">
-                    <UilFacebookF className="mr-3" />
+                    <UilFacebookF className="ml-3" />
                   </a>
                   <a href="#" className="twitter small-link ">
-                    <UilTwitter className=" mr-3" />
+                    <UilTwitter className=" ml-3" />
                   </a>
                   <a href="#" className="google small-link ">
-                    <UilGoogle className=" mr-3" />
+                    <UilGoogle className=" ml-3" />
                   </a>
                 </div>
               </div>

@@ -1,0 +1,7 @@
+.order {
+  background-image: linear-gradient(120deg, #131f31 0%, #57bdc9 100%);
+}
+.order h5,
+.order p {
+  color: rgb(109, 185, 119);
+}

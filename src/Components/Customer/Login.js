@@ -127,7 +127,7 @@ export default function Login() {
                         value={state.email}
                       />
                     </div>
-                    <div className=" last mb-4 form-group required">
+                    <div className=" last mb-2 form-group required">
                       <InputLabel
                         htmlFor="standard-adornment-password"
                         class="control-label"
@@ -157,7 +157,7 @@ export default function Login() {
                       />
                     </div>
 
-                    <div className="d-flex mb-5 align-items-center">
+                    <div className="d-flex mb-1 align-items-center">
                       <span className="ml-auto">
                         <Link
                           to="/reset-password"
@@ -193,21 +193,19 @@ export default function Login() {
                     draggable
                     pauseOnHover
                   />
-
-                  <span className="d-block text-left text-muted">
-                    {" "}
+                  <span className="d-block text-right mt-2 text-muted">
                     or sign in with
                   </span>
 
-                  <div className="social-login">
+                  <div className="d-block text-right ">
                     <a href="#" className="facebook small-link ">
-                      <UilFacebookF className="mr-3" />
+                      <UilFacebookF className="ml-3" />
                     </a>
                     <a href="#" className="twitter small-link ">
-                      <UilTwitter className=" mr-3" />
+                      <UilTwitter className=" ml-3" />
                     </a>
                     <a href="#" className="google small-link ">
-                      <UilGoogle className=" mr-3" />
+                      <UilGoogle className=" ml-3" />
                     </a>
                   </div>
                 </div>

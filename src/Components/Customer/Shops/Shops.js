@@ -67,6 +67,7 @@ function Shops() {
     fetch("http://localhost:4000/admins/viewshopowners")
       .then((response) => response.json())
       .then((actualData) => {
+        window.scrollTo(0, 0);
         setUser(actualData);
       })
       .catch((err) => {

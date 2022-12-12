@@ -44,6 +44,7 @@ import Error from "./Components/Error";
 import { Divider } from "@material-ui/core";
 import EmailVerify from "./Components/ShopOwner/Verify";
 import Navbar2 from "./Components/Navbar/Navbar2";
+import ShopResetPassword from "./Components/ShopOwner/ShopResetPassword";
 
 function App() {
   const { productItem } = data;
@@ -92,6 +93,10 @@ function App() {
             <Route path="/account" element={<Login />} />
             <Route path="/create-account" element={<Signup />} />
             <Route path="/reset-password" element={<ForgotPassword />} />
+            <Route
+              path="/shopowner-reset-password"
+              element={<ShopResetPassword />}
+            />
             <Route path="/search" element={<Search />} />
             <Route
               path="/singleProduct/:productId/:shopId"

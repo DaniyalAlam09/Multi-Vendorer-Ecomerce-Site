@@ -9,7 +9,7 @@ import {
   FaThList,
 } from "react-icons/fa";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -59,8 +59,13 @@ const Sidebar = ({ children }) => {
     <div className="contain">
       <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
         <div className="top_section">
-          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
-            OVM
+          <h1
+            style={{ display: isOpen ? "block" : "none", cursor: "pointer" }}
+            className="logo"
+          >
+            <Link style={{ color: "white" }} to="/">
+              OVM
+            </Link>
           </h1>
           <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
             <ReorderIcon onClick={toggle} />

@@ -12,7 +12,22 @@ import { useLocation } from "react-router-dom";
 function Footer() {
   const { pathname } = useLocation();
   console.log(pathname);
-  // if (pathname === "/") return null;
+  if (pathname === "/user/customer-dashboard") return null;
+  if (pathname === "/user/customer-orders") return null;
+  if (pathname === "/user/edit-profile") return null;
+  if (pathname === "/user/logout") return null;
+  if (pathname === "/account") return null;
+  if (pathname === "/shopowner-login") return null;
+  if (pathname === "/create-account") return null;
+  if (pathname === "/shopowner-account") return null;
+  if (pathname === "/shopowner/shoponwer-dashboard") return null;
+  if (pathname === "/shopowner/manage-orders") return null;
+  if (pathname === "/shopowner/shoponwer-analytics") return null;
+  if (pathname === "/shopowner/edit-profile") return null;
+  if (pathname === "/shopowner/addproduct") return null;
+  if (pathname === "/shopowner/product-list") return null;
+  if (pathname === "/shopowner/logout") return null;
+  if (pathname === "/shopowner/edit-profile/:itemId") return null;
   return (
     <div class="hero pt-4">
       <div className="container footer-style">

@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Divider } from "@mui/material";
 import HeroSection from "../../HomePage/HeroSection";
 import ShopHero from "../../Images/ShopHero.png";
 import Toolbar from "@mui/material/Toolbar";
@@ -108,6 +108,7 @@ function SingleShop() {
         .catch((err) => {
           console.log(err);
         });
+      window.scrollTo(0, 0);
     },
 
     [shopId]
@@ -177,26 +178,74 @@ function SingleShop() {
               }
             })
             ?.map((product, index) => (
-              <div key={index} className=" col-xl-3 col-sm-6 mb-5">
-                <Link to={`../singleProduct/${product._id}/${product.owner}`}>
-                  <div className="thumbnail ">
-                    <img
-                      className="product-image rounded"
-                      src={`http://localhost:4000/${product.product_image}`}
-                    />
-                    <div>
-                      <p className="brand-name">{`${product.product_brand}`}</p>
-                      <p className="product-name">{`${product.product_name}`}</p>
-                      <p className="product-price">{`${product.product_price}`}</p>
-                      <p className="product-price">
-                        {product.reviews ? (
-                          product.reviews?.map((rew) => (
-                            <Rating value={rew.rating} readOnly />
-                          ))
-                        ) : (
-                          <Rating value={null} name="read-only" />
-                        )}
-                      </p>
+              <div key={index} class=" col-md-6 col-lg-3">
+                <Link
+                  key={index}
+                  to={`../singleProduct/${product._id}/${product.owner}`}
+                >
+                  <div
+                    class="border mb-4 p-3 card-hover"
+                    style={{
+                      height: "380px",
+                      borderRadius: "5px",
+                      // backgroundColor: " rgba(236, 235, 235, 0.137)",
+                    }}
+                  >
+                    <div className="text -center">
+                      <div></div>
+                      <img
+                        src={`http://localhost:4000/${product.product_image}`}
+                        style={{
+                          height: "200px",
+                          width: "200px",
+                        }}
+                        class="product-image"
+                        alt="Laptop"
+                      />
+                    </div>
+
+                    <div class="negativemargine">
+                      <div class="d-flex justify-content-between">
+                        <p class="small">
+                          <a class="text-muted">{`${product.product_brand}`}</a>
+                        </p>
+                        <p class="small text-danger">
+                          <s
+                            style={{ textDecoration: "line-through" }}
+                          >{`${product.product_price}`}</s>
+                        </p>
+                      </div>
+                      <Divider />
+                      <div class="d-flex justify-content-between mb-3">
+                        <p
+                          className="product-name"
+                          // class="mb-0"
+                        >{`${product.product_name}`}</p>
+                        <p
+                          className="product-price"
+                          // class="text-dark mb-0"
+                        >{`${product.product_price}`}</p>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <p class="rating text-muted">
+                          Stoke: {`${product.product_stoke}`}
+                        </p>
+                        <div class="rating">
+                          {product.reviews
+                            ? product.reviews?.map((rew) => (
+                                <Rating
+                                  size="small"
+                                  value={rew.rating}
+                                  readOnly
+                                />
+                              ))
+                            : "kj"}
+                          {/* {product.reviews.rating ?(
+                                  <p>oid</p>)
+                                  : <p>dsk</p>} */}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Link>

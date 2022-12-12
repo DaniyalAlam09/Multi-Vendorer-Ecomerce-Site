@@ -22,21 +22,21 @@ function FeaturedCatagories() {
   }, []);
   return (
     <div className="heading container">
-      <div className="featured-head">
+      <div className="featured-head mb-4">
         <h3>Featured Catagories</h3>
         <Link to="/allcatagories" class="link-secondary see-all">
           All Catagories
         </Link>
       </div>
-      <div className="">
+      <div className="mt-5">
         <div className="row text-center">
           {catagories?.slice(0, 4).map((categorey) => (
             <div
               key={catagories.indexOf(categorey)}
-              className="col-lg-3 col-md-6"
+              className="col-lg-3 col-md-6 mt-3"
             >
-              <div class="card shadow-sm border-0 rounded">
-                <div class="">
+              <div class=" border rounded p-3 block">
+                <Link to={`/allproducts/${categorey.name}`}>
                   <img
                     src={`http://localhost:4000/${categorey.imageUrl}`}
                     alt=""
@@ -45,11 +45,14 @@ function FeaturedCatagories() {
                   <div class="p-4">
                     <p class="mb-0">{`${categorey.name}`}</p>
                     {/* <p class="small text-muted">CEO - Consultant</p> */}
-                    <Link to="/allcatagories" class="small-link">
-                      Shop now
+                    <Link
+                      to={`/allproducts/${categorey.name}`}
+                      class="small-link text-right"
+                    >
+                      VISIT
                     </Link>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           ))}
