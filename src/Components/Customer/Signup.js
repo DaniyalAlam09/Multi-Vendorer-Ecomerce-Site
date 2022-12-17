@@ -2,13 +2,6 @@ import React, { Component } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import Navbar from "../Genral/Navbar";
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import Visibility from "@material-ui/icons/Visibility";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Input from "@material-ui/core/Input";
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -24,9 +17,6 @@ export default class SignUp extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // handleClickShowPassword = () => {
-  //   setState({ ...state, showPassword: !state.showPassword });
-  // };
   handleSubmit(e) {
     e.preventDefault();
     const {
@@ -133,7 +123,6 @@ export default class SignUp extends Component {
   render() {
     return (
       <div>
-        {/* <Navbar/> */}
         <div class="wrapper container heading">
           <div className="row">
             <div className="col-md-6 text-center">
@@ -236,10 +225,6 @@ export default class SignUp extends Component {
                     onChange={(e) => this.setState({ address: e.target.value })}
                   ></textarea>
                 </div>
-                {/* <div class="form-wrapper mb-2">
-                <label for="">Confirm Password</label>
-                <input type="password" class="form-control" />
-              </div> */}
                 <div class="checkbox mb-3">
                   <label>
                     <input type="checkbox" /> I accept the Terms of Use and
@@ -272,5 +257,3 @@ export default class SignUp extends Component {
     );
   }
 }
-
-// export default Signup;

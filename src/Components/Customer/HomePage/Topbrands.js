@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HeadPhone from "../Images/HeadPhone.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 import { Container } from "@material-ui/core";
 import hero from "./assets/img/clients/client-1.png";
 import hero2 from "./assets/img/clients/client-2.png";
@@ -48,10 +49,11 @@ function Topbrands() {
                     // class="product-image"
                     // style={{ width: "100%" }}
                   />
-                  <div class="p-4">
+
+                  {/* <div class="p-4">
                     <p class="mb-0">{`${brand.name}`}</p>
-                    {/* <p class="small text-muted">CEO - Consultant</p> */}
-                  </div>
+                    <p class="small text-muted">CEO - Consultant</p>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -21,6 +21,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Divider } from "@mui/material";
+import CountUp from "react-countup";
 import "./styles.css";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -145,11 +146,17 @@ function Products() {
   //   setProduct(bestFilter);
   // };
   const Rating4 = () => {
-    product.reviews.filter((person) => (person.rating = 4));
+    // product.reviews.filter((person) => (person.rating = 4));
     // product.map((item, index) => {
     //   let person = item?.reviews.filter((person) => (person.rating = 4));
-    setProduct(product?.reviews?.filter((person) => (person.rating = 4)));
-    // console.log(person);
+    // setProduct(product?.reviews?.filter((person) => (person.rating = 4)));
+    const samsung = product.filter(
+      (auto) =>
+        auto.product_name.includes("Apple") ||
+        auto.product_name.includes("Dell")
+    );
+    console.log(samsung);
+    setProduct(samsung);
     // });
     // product.reviews.rating[0] == 4;
   };
@@ -173,6 +180,7 @@ function Products() {
         .then((res) => {
           setProduct(res.data);
           setReviews(res.data.reviews);
+          window.scrollTo(0, 0);
           setLoading(false);
         })
         .catch((err) => {
@@ -207,13 +215,13 @@ function Products() {
                 >
                   CLear All Filters
                 </button>
-                {/* <button
+                <button
                   onClick={Rating4}
                   class="btn btn-danger mb-2"
                   style={{ width: "70%" }}
                 >
                   best
-                </button> */}
+                </button>
               </div>
               <article class="filter-group">
                 <header class="card-header">
@@ -358,7 +366,13 @@ function Products() {
           <main class="col-md-9 mt-2">
             <header class="border-bottom mb-4 pb-3">
               <div class="form-inline">
-                <span class="mr-md-auto">{product.length} Items found </span>
+                <span class="mr-md-auto">
+                  <strong>
+                    {" "}
+                    <CountUp end={product.length} duration={2} />
+                  </strong>{" "}
+                  Items found
+                </span>
                 <Box>
                   <Toolbar>
                     <Search>
@@ -384,7 +398,7 @@ function Products() {
               </h2>
               <div>
                 {loading ? (
-                  <div className="d-flex justify-content-around">
+                  <div className="d-flex col-md-3 justify-content-around">
                     <div>
                       <Skeleton
                         variant="rectangular"
