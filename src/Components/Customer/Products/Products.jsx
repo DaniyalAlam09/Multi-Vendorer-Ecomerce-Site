@@ -180,7 +180,7 @@ function Products() {
         .then((res) => {
           setProduct(res.data);
           setReviews(res.data.reviews);
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
           setLoading(false);
         })
         .catch((err) => {

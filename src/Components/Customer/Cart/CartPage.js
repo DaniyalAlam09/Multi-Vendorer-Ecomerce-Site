@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Divider } from "@material-ui/core";
 import OtherHeroSections from "../HomePage/OtherHeroSections";
+import Checkout from "./../Checkout/Checkout";
 
 function CartPage() {
   const [products, setProducts] = React.useState([]);
@@ -141,9 +142,7 @@ function CartPage() {
         pauseOnHover
       />
       {loadig && <h1>Loading ...</h1>}
-      {/* {products?.length <= 0 && (
-        <h1 className="container">No products to Show</h1>
-      )} */}
+
       {products?.length <= 0 ? (
         <div>
           <div class="container bootstrap snippets bootdey mb-5 mt-5">
@@ -355,6 +354,7 @@ function CartPage() {
           </section>
         </div>
       )}
+      <Checkout />
     </>
   );
 }
